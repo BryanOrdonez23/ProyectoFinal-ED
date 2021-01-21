@@ -363,7 +363,6 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     private javax.swing.JButton btn_sol_Prestamo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel panel_contenedor;
     private javax.swing.JPanel panel_trans;
