@@ -16,8 +16,18 @@ public class Persona {
     private  String correcoElectronico;
     private  String direccion;
     private  String edad;
+    private  String telefono;
     private Rol rol;
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+    
     public String getNombre() {
         return nombre;
     }
