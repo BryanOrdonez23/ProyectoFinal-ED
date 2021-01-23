@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Jean Agreda
+ * @author Jean Agreda,Rubier Padilla y Bryan Ordoñez
  */
 public class txt {
 

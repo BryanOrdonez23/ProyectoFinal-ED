@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author Jean Agreda
+ * @author Jean Agreda,Rubier Padilla y Bryan Ordoñez
  */
 public class Transaccion {
     

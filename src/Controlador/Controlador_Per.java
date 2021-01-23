@@ -9,7 +9,7 @@ import Modelo.Persona;
 
 /**
  *
- * @author Jean Agreda
+ * @author Jean Agreda,Rubier Padilla y Bryan Ordoñez
  */
 public class Controlador_Per {
     private Persona pers = new Persona();
