@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import Controlador.listaSA.ListaSimpleAvanzada;
 import java.util.Date;
 
 /**
@@ -16,16 +17,16 @@ public class Prestamo {
     private Double cuota_mensual;
     private Date fecha_inicio_prestamo;
     private Date fecha_final_prestamo;
+    private ListaSimpleAvanzada listaPagos;
+
+    public ListaSimpleAvanzada getListaPagos() {
+        return listaPagos;
+    }
+
+    public void setListaPagos(ListaSimpleAvanzada listaPagos) {
+        this.listaPagos = listaPagos;
+    }
     
-    private CuentaBancaria cuentaBancaria;
-
-    public CuentaBancaria getCuentaBancaria() {
-        return cuentaBancaria;
-    }
-
-    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
-        this.cuentaBancaria = cuentaBancaria;
-    }
 
     public Double getMonto_final() {
         return monto_final;
@@ -43,19 +44,19 @@ public class Prestamo {
         this.cuota_mensual = cuota_mensual;
     }
 
-    public Date getFecha_inicio() {
+    public Date getFecha_inicio_prestamo() {
         return fecha_inicio_prestamo;
     }
 
-    public void setFecha_inicio(Date fecha_inicio_prestamo) {
+    public void setFecha_inicio_prestamo(Date fecha_inicio_prestamo) {
         this.fecha_inicio_prestamo = fecha_inicio_prestamo;
     }
 
-    public Date getFecha_final() {
+    public Date getFecha_final_prestamo() {
         return fecha_final_prestamo;
     }
 
-    public void setFecha_final(Date fecha_final_prestamo) {
+    public void setFecha_final_prestamo(Date fecha_final_prestamo) {
         this.fecha_final_prestamo = fecha_final_prestamo;
     }
     

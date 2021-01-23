@@ -59,7 +59,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(40, 59, 224));
 
-        jLabel5.setFont(new java.awt.Font("Bungler Light", 1, 48)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Cooperativa de Ahorro y Credito cacic");
@@ -69,7 +69,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -82,6 +82,11 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         );
 
         btn_entrar.setText("Entrar");
+        btn_entrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_entrarActionPerformed(evt);
+            }
+        });
 
         btn_regresar.setText("Regresar");
         btn_regresar.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +156,12 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
        fpi.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_btn_regresarActionPerformed
+
+    private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
+      Frm_Cuenta_Cliente frm_Cuenta_Cliente = new Frm_Cuenta_Cliente();
+      frm_Cuenta_Cliente.setVisible(true);
+      dispose();
+    }//GEN-LAST:event_btn_entrarActionPerformed
 
     /**
      * @param args the command line arguments

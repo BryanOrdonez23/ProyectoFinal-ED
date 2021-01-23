@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import java.awt.Color;
 import vistas.Paneles_Cuenta_Cliente.Panel_Estado_Cuenta;
 import vistas.Paneles_Cuenta_Cliente.Panel_Inicio;
 import vistas.Paneles_Cuenta_Cliente.Panel_Perfil;
@@ -61,6 +62,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btn_cerrar_sesion = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         btn_EstadoCuenta = new javax.swing.JButton();
         btn_Transferencia = new javax.swing.JButton();
@@ -77,25 +79,51 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(40, 59, 224));
 
-        jLabel1.setFont(new java.awt.Font("Bungler Light", 1, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cooperativa de Ahorro y Credito cacic");
+
+        btn_cerrar_sesion.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cerrar_sesion.setText("Cerrar Sesion");
+        btn_cerrar_sesion.setBorderPainted(false);
+        btn_cerrar_sesion.setContentAreaFilled(false);
+        btn_cerrar_sesion.setFocusable(false);
+        btn_cerrar_sesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_cerrar_sesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_cerrar_sesionMouseExited(evt);
+            }
+        });
+        btn_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cerrar_sesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_cerrar_sesion)
+                        .addGap(19, 19, 19))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_cerrar_sesion)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -317,6 +345,20 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_TransaccionesActionPerformed
 
+    private void btn_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionActionPerformed
+      Frm_Principal_Info frm_Principal_Info = new Frm_Principal_Info();
+        frm_Principal_Info.setVisible(true);
+       dispose();
+    }//GEN-LAST:event_btn_cerrar_sesionActionPerformed
+
+    private void btn_cerrar_sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseEntered
+     btn_cerrar_sesion.setForeground(Color.CYAN);
+    }//GEN-LAST:event_btn_cerrar_sesionMouseEntered
+
+    private void btn_cerrar_sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseExited
+        btn_cerrar_sesion.setForeground(Color.WHITE);
+    }//GEN-LAST:event_btn_cerrar_sesionMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -358,6 +400,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     private javax.swing.JButton btn_Trans_ret;
     private javax.swing.JToggleButton btn_Transacciones;
     private javax.swing.JButton btn_Transferencia;
+    private javax.swing.JButton btn_cerrar_sesion;
     private javax.swing.JButton btn_mi_Perfil;
     private javax.swing.JButton btn_sol_Poliza;
     private javax.swing.JButton btn_sol_Prestamo;

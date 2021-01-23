@@ -18,10 +18,38 @@ public class CuentaBancaria {
     private boolean prestamo_yn;
     private boolean poliza_yn;
     private Persona persona;
+    private Poliza poliza;
+    private Transaccion transaccion;
+    private Prestamo prestamo;
     private ListaSimpleAvanzada Listatransacciones = new ListaSimpleAvanzada();
     private ListaSimpleAvanzada Listaprestamos = new ListaSimpleAvanzada();
     private ListaSimpleAvanzada Listapolizas = new ListaSimpleAvanzada();
 
+    public Poliza getPoliza() {
+        return poliza;
+    }
+
+    public void setPoliza(Poliza poliza) {
+        this.poliza = poliza;
+    }
+
+    public Transaccion getTransaccion() {
+        return transaccion;
+    }
+
+    public void setTransaccion(Transaccion transaccion) {
+        this.transaccion = transaccion;
+    }
+
+    public Prestamo getPrestamo() {
+        return prestamo;
+    }
+
+    public void setPrestamo(Prestamo prestamo) {
+        this.prestamo = prestamo;
+    }
+
+    
     public String getTipoCuenta() {
         return tipoCuenta;
     }
