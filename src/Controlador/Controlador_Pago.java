@@ -5,7 +5,7 @@ import Modelo.Pago;
 import Controlador.listaSA.ListaSimpleAvanzada;
 
 
-public class Controlador_Pago {
+public class Controlador_Pago { // trabajar con cola o pila
 
     private ListaSimpleAvanzada listaPrestamos = new ListaSimpleAvanzada();
     private Prestamo prestamo = new Prestamo();

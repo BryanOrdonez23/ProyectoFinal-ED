@@ -48,10 +48,8 @@ public class ListaSimple {
             System.out.println("La lista esta vacia");
         }
 
-    }
+    }  
     
-    
-
     public Object verdatoPosicio(int pos) {
         Object dato=null;
         if (!estaVAcia()&&pos >=0) {

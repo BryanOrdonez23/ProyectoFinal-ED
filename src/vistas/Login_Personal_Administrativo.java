@@ -5,11 +5,20 @@
  */
 package vistas;
 
+import Controlador.Controlador_Inicio_Sesion;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author usuario
  */
 public class Login_Personal_Administrativo extends javax.swing.JFrame {
+
+    Controlador_Inicio_Sesion control = new Controlador_Inicio_Sesion();
 
     /**
      * Creates new form Login_Personal_Administrativo
@@ -30,8 +39,8 @@ public class Login_Personal_Administrativo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txt_usuario = new javax.swing.JTextField();
+        txt_contra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btn_IniciarSesionAd = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -51,6 +60,11 @@ public class Login_Personal_Administrativo extends javax.swing.JFrame {
         jLabel3.setText("Inicio de Sesion");
 
         btn_IniciarSesionAd.setText("Iniciar Sesion");
+        btn_IniciarSesionAd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_IniciarSesionAdActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Regresar");
 
@@ -58,20 +72,26 @@ public class Login_Personal_Administrativo extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 52, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1)
-                                .addComponent(jLabel2)))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_IniciarSesionAd, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jButton1)
+                        .addGap(38, 38, 38)
+                        .addComponent(btn_IniciarSesionAd)
                         .addGap(34, 34, 34))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -85,11 +105,11 @@ public class Login_Personal_Administrativo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_IniciarSesionAd)
@@ -112,6 +132,42 @@ public class Login_Personal_Administrativo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void btn_IniciarSesionAdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarSesionAdActionPerformed
+        // TODO add your handling code here:
+        // Testeo de ingreso de cuantas de empleado
+        if (txt_usuario.getText().length() > 0 && txt_contra.getText().length() > 0) {
+            try {
+                if (control.InicioSesionEmpleado(txt_usuario.getText(), txt_contra.getText())) {
+                    if (control.getRol().equals("Atencion al publico")) {
+                        Frm_Atencion_publico frm = new Frm_Atencion_publico();
+                        dispose();
+                        frm.setVisible(true);
+                    } else {
+                        if (control.getRol().equals("Oficial de Creditos")) {//Oficial de Polizas                            
+                            Frm_Admin_Creditos frmc = new Frm_Admin_Creditos();
+                            dispose();
+                            frmc.setVisible(true);
+                        } else {
+                            if (control.getRol().equals("Oficial de Polizas")) {
+                                Frm_Admin_Poliza frmp = new Frm_Admin_Poliza ();
+                                dispose();
+                                frmp.setVisible(true);
+                            }
+                        }
+                    }
+                    JOptionPane.showMessageDialog(null, "Entraste al sistema");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe empleado");
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Login_Personal_Administrativo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Login_Personal_Administrativo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_btn_IniciarSesionAdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,7 +211,7 @@ public class Login_Personal_Administrativo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txt_contra;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

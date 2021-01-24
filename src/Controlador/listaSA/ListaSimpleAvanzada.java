@@ -152,16 +152,6 @@ public class ListaSimpleAvanzada extends ListaSimple {
         while (inf <= sup) {
             //    centro = (sup + inf) / 2;
             centro = (int) Math.floor((sup + inf) / 2);
-
-//            if ((String.valueOf(obtenerPorPosicion(centro))).equals(dato)) {          ((dato).compareTo(String.valueOf(obtenerPorPosicion(centro).toString())) == 0)
-//                return obtenerPorPosicion(centro);
-//            } else if (dato.compareTo(String.valueOf(obtenerPorPosicion(centro))) < 0) {
-//                sup = centro - 1;
-//                System.out.println(" sup " + sup);
-//            } else if (dato.compareTo(String.valueOf(obtenerPorPosicion(centro))) > 0){
-//                inf = centro + 1;
-//                System.out.println("inf " + inf);
-//            }
             System.out.println("centro " + centro + " ss " + String.valueOf(obtenerPorPosicion(centro)) + " saa " + dato);
 
             if (ds.equals(obtenerPorPosicion(centro))) { // (Integer.parseInt(dato) ==Integer.parseInt(String.valueOf((obtenerPorPosicion(centro)))))       (ds.equals(obtenerPorPosicion(centro)))
@@ -197,28 +187,7 @@ public class ListaSimpleAvanzada extends ListaSimple {
         }
     }
 
-    public void seleccion() {
-        int i, k, t, pos, /*aux,*/ cont = 0;
 
-        for (i = 0; i < tamano() - 1; i++) {
-            t = Integer.parseInt(String.valueOf(obtenerPorPosicion(i)));
-            pos = i;
-
-            for (k = i + 1; k < tamano(); k++) {
-                if (Integer.parseInt(String.valueOf(obtenerPorPosicion(k))) < t) {
-                    t = Integer.parseInt(String.valueOf(obtenerPorPosicion(k)));
-                    pos = k;
-                }
-                cont++;
-            }
-            //  if (pos != i) {
-            t = Integer.parseInt(String.valueOf(obtenerPorPosicion(i)));
-            //  array[i] = array[pos];
-            editarPorPosicion(i, Integer.parseInt(String.valueOf(obtenerPorPosicion(pos))));
-            editarPorPosicion(pos, t);
-            //  }
-        }
-    }
 
     public void ordenarMejoradoBurbuja() {
         int cont = 0;

@@ -5,8 +5,11 @@
  */
 package Controlador;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -15,7 +18,19 @@ import java.util.logging.Logger;
  *
  * @author Jean Agreda
  */
-public class Controlador_Inicio_Sesion {
+public class Controlador_Inicio_Sesion {  
+
+    
+    private String rol;
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+    
     
     /**
      * 
@@ -79,5 +94,33 @@ public class Controlador_Inicio_Sesion {
             System.out.println("se a leido datos");
         }
         return rol;
+    }
+    
+    /**
+     * 
+     * @param usuario  
+     * @param contrasena
+     * @return  Validamos el inicio de sesion de el empleado al sistema
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
+    public boolean InicioSesionEmpleado(String usuario , String contrasena) throws FileNotFoundException, IOException{
+            File f = new File("Cuentas_Empleados.txt");
+            BufferedReader leer = new BufferedReader(new FileReader(f));
+            boolean entra = false;
+             String linea = "";
+            while ((linea = leer.readLine()) != null) { 
+                StringTokenizer st = new StringTokenizer(linea, ",");                
+                String uno_rol = st.nextToken();
+                String dos_us = st.nextToken();
+                String tres_contra = st.nextToken();                
+                if (dos_us.equals(usuario) && tres_contra.equals(contrasena)) {
+                    setRol(uno_rol);
+                    entra=true;
+                    break;
+                }
+            }
+            leer.close();
+            return entra;
     }
 }

@@ -32,6 +32,7 @@ public class txt {
     File archivo_Persona = new File("Personas.txt");
     File archivo_CBancaria = new File("Cuentas_Bancarias.txt");
     File archivo_CUsuario = new File("Cuentas_Usuario.txt");
+    File archivo_CEmpleados = new File("Cuentas_Empleados.txt");
     File archivo_Polizas = new File("Polizas.txt");
     File archivo_Prestamo = new File("Prestamos.txt");
      File archivo_Transacciones = new File("Transacciones.txt");
@@ -98,7 +99,27 @@ public class txt {
     public void guardar_CuentaUsuarioTxt(Persona p, CuentaUsuario cu) {
         try {
             try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CUsuario, true)))) {
-                String fila = p.getCedula() + ", " + cu.getUsuario()+ ", " + cu.getContraseña();
+                String fila = p.getCedula() + "," + cu.getUsuario()+ "," + cu.getContraseña();
+                Fescribe.write(fila);
+                Fescribe.write("\n");
+
+                System.out.println("El producto ha sido insertado en la base de datos");
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+    
+        /**
+         * Guardar en archivos a las cuentas de empleados
+         * @param rol
+         * @param usuario
+         * @param contra 
+         */
+        public void guardar_CuentaEmpleadoTxt(String rol, String usuario , String contra) {
+        try {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CEmpleados, true)))) {
+                String fila =rol+","+usuario+ "," + contra;
                 Fescribe.write(fila);
                 Fescribe.write("\n");
 

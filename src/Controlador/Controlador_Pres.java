@@ -13,11 +13,7 @@ public class Controlador_Pres {
             prestamo = new Prestamo();
         }
         return prestamo;
-    }
-    
-    
-    
-    
+    } 
 
     public void setPrestamo(Prestamo prestamo) {
         this.prestamo = prestamo;
