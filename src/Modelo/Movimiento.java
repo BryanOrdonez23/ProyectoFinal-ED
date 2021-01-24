@@ -15,7 +15,16 @@ public class Movimiento {
     private Date fechaMovimiento;
     private String num_Cuenta_Destino;
     private Double monto_mov;
+    private Transaccion transaccion;
 
+    public Transaccion getTransaccion() {
+        return transaccion;
+    }
+
+    public void setTransaccion(Transaccion transaccion) {
+        this.transaccion = transaccion;
+    }
+    
     public Date getFechaMovimiento() {
         return fechaMovimiento;
     }

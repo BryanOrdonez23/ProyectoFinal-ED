@@ -17,7 +17,16 @@ public class Prestamo {
     private Double cuota_mensual;
     private Date fecha_inicio_prestamo;
     private Date fecha_final_prestamo;
+    private CuentaBancaria cuentaBancaria;
     private ListaSimpleAvanzada listaPagos;
+
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
+    }
 
     public ListaSimpleAvanzada getListaPagos() {
         return listaPagos;

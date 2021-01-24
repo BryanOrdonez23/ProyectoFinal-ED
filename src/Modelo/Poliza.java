@@ -16,7 +16,6 @@ public class Poliza {
     private Date fehca_inicio_poliza;
     private Date fehca_final_poliza;
     private double monto_poliza;
-    
     private CuentaBancaria cuentaBancaria;
 
     public CuentaBancaria getCuentaBancaria() {

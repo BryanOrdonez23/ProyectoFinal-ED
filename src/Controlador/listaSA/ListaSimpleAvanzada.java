@@ -1,21 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador.listaSA;
 
 import Controlador.Utiles;
+import Modelo.CuentaBancaria;
 
-
-
-
-
-
-/**
- *
- * @author mac Jean Agreda
- */
 public class ListaSimpleAvanzada extends ListaSimple {
 
     public static final int ORDENAR_ASCENDENTE = -1;
@@ -195,29 +182,29 @@ public class ListaSimpleAvanzada extends ListaSimple {
     //insercion con listas
     public void insercionListas() {
         int cont = 0;
-        for(int i = 1; i < tamano(); i++) {
-            int j = i -1;
+        for (int i = 1; i < tamano(); i++) {
+            int j = i - 1;
             int t = Integer.parseInt(String.valueOf(obtenerPorPosicion(i)));
-            while (j >= 0 && t < Integer.parseInt(String.valueOf(obtenerPorPosicion(j)))) {                
-               // datos.getVector()[j + 1] = datos.getVector()[j];
-                editarPorPosicion(j+1, Integer.parseInt(String.valueOf(obtenerPorPosicion(j))));
-                j--;                
+            while (j >= 0 && t < Integer.parseInt(String.valueOf(obtenerPorPosicion(j)))) {
+                // datos.getVector()[j + 1] = datos.getVector()[j];
+                editarPorPosicion(j + 1, Integer.parseInt(String.valueOf(obtenerPorPosicion(j))));
+                j--;
                 cont++;
             }
-           // datos.getVector()[j+1] = t;
-            editarPorPosicion(j+1, t);
+            // datos.getVector()[j+1] = t;
+            editarPorPosicion(j + 1, t);
             cont++;
         }
     }
-    
-     public void seleccion() {
+
+    public void seleccion() {
         int i, k, t, pos, /*aux,*/ cont = 0;
 
         for (i = 0; i < tamano() - 1; i++) {
             t = Integer.parseInt(String.valueOf(obtenerPorPosicion(i)));
             pos = i;
 
-            for (k = i + 1; k <tamano(); k++) {
+            for (k = i + 1; k < tamano(); k++) {
                 if (Integer.parseInt(String.valueOf(obtenerPorPosicion(k))) < t) {
                     t = Integer.parseInt(String.valueOf(obtenerPorPosicion(k)));
                     pos = k;
@@ -225,26 +212,26 @@ public class ListaSimpleAvanzada extends ListaSimple {
                 cont++;
             }
             //  if (pos != i) {
-            t =Integer.parseInt(String.valueOf(obtenerPorPosicion(i)));
-          //  array[i] = array[pos];
+            t = Integer.parseInt(String.valueOf(obtenerPorPosicion(i)));
+            //  array[i] = array[pos];
             editarPorPosicion(i, Integer.parseInt(String.valueOf(obtenerPorPosicion(pos))));
             editarPorPosicion(pos, t);
             //  }
-        } 
+        }
     }
-     
-      public void ordenarMejoradoBurbuja() {
+
+    public void ordenarMejoradoBurbuja() {
         int cont = 0;
         int l = 1;
-        int r = tamano()- 1;
+        int r = tamano() - 1;
         int k = tamano() - 1;
         do {
             for (int j = r; j >= l; j--) {
-                if (Integer.parseInt(String.valueOf(obtenerPorPosicion(j-1))) > Integer.parseInt(String.valueOf(obtenerPorPosicion(j)))) {
-                    int aux = Integer.parseInt(String.valueOf(obtenerPorPosicion(j-1)));
-                   // numeros[j - 1] = numeros[j];
-                    editarPorPosicion(j-1, Integer.parseInt(String.valueOf(obtenerPorPosicion(j))));
-                  //  numeros[j] = aux;
+                if (Integer.parseInt(String.valueOf(obtenerPorPosicion(j - 1))) > Integer.parseInt(String.valueOf(obtenerPorPosicion(j)))) {
+                    int aux = Integer.parseInt(String.valueOf(obtenerPorPosicion(j - 1)));
+                    // numeros[j - 1] = numeros[j];
+                    editarPorPosicion(j - 1, Integer.parseInt(String.valueOf(obtenerPorPosicion(j))));
+                    //  numeros[j] = aux;
                     editarPorPosicion(j, aux);
                     k = j;
                 }
@@ -252,9 +239,9 @@ public class ListaSimpleAvanzada extends ListaSimple {
             }
             l = k + 1;
             for (int j = l; j <= r; j++) {
-                if (Integer.parseInt(String.valueOf(obtenerPorPosicion(j-1))) > Integer.parseInt(String.valueOf(obtenerPorPosicion(j)))) {
-                    int aux =Integer.parseInt(String.valueOf(obtenerPorPosicion(j-1)));
-                       editarPorPosicion(j-1, Integer.parseInt(String.valueOf(obtenerPorPosicion(j))));
+                if (Integer.parseInt(String.valueOf(obtenerPorPosicion(j - 1))) > Integer.parseInt(String.valueOf(obtenerPorPosicion(j)))) {
+                    int aux = Integer.parseInt(String.valueOf(obtenerPorPosicion(j - 1)));
+                    editarPorPosicion(j - 1, Integer.parseInt(String.valueOf(obtenerPorPosicion(j))));
                     editarPorPosicion(j, aux);
                     k = j;
                 }
@@ -263,7 +250,7 @@ public class ListaSimpleAvanzada extends ListaSimple {
             r = k - 1;
             cont++;
         } while (l < r);
-        System.out.println("Itero el mejorado "+cont);
+        System.out.println("Itero el mejorado " + cont);
     }
 
     public void shell() {
@@ -280,8 +267,7 @@ public class ListaSimpleAvanzada extends ListaSimple {
                 for (i = salto; i < tamano(); i++) {
 //((Propiedad)obtenerPorPosicion(i-salto)).getCod_catastro()
 
-
-                    if (Integer.parseInt(String.valueOf((obtenerPorPosicion(i-salto)))) > Integer.parseInt(String.valueOf((obtenerPorPosicion(i))))) {
+                    if (Integer.parseInt(String.valueOf((obtenerPorPosicion(i - salto)))) > Integer.parseInt(String.valueOf((obtenerPorPosicion(i))))) {
                         //System.out.println("--- " + obtenerPorPosicion((i - salto)) + "--- " + obtenerPorPosicion(i));
                         temp = Integer.parseInt(String.valueOf(obtenerPorPosicion((i))));
 
@@ -316,7 +302,6 @@ public class ListaSimpleAvanzada extends ListaSimple {
 
     }
 
-    
     public void verDatos() {
         if (!estaVAcia()) {
             Nodo tmp = inicio;
@@ -328,9 +313,8 @@ public class ListaSimpleAvanzada extends ListaSimple {
         }
         System.out.println("");
     }
-    
-    
-     public Boolean existe(String cod) {
+
+    public Boolean existe(String cod) {
         Boolean existe = false;
         if (!estaVAcia()) {
             Nodo tmp = inicio;
@@ -345,6 +329,22 @@ public class ListaSimpleAvanzada extends ListaSimple {
         }
         return existe;
 
+    }
+
+    public int buscarPorNroCuentaPos(String nro) {
+        int r = -1;
+        if (!estaVAcia()) {
+            Nodo temporal = inicio;
+            while (temporal != null) {
+                r++;
+                if (((CuentaBancaria) temporal.getDato()).getNum_Cuenta().equals(nro)) {
+                    break;
+                }
+                temporal = temporal.getSiguiente();
+            }
+        }
+
+        return r;
     }
 
 }

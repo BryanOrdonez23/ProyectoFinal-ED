@@ -17,8 +17,7 @@ public class Transaccion {
     private String tipo_trans;
     private Date fecha_trans;
     private Double monto_trans;
-    
-   // private CuentaBancaria cuentaBancaria;
+    private CuentaBancaria cuentaBancaria;
     private ListaSimpleAvanzada ListaMovimientos;
 
     public ListaSimpleAvanzada getListaMovimientos() {
@@ -30,13 +29,13 @@ public class Transaccion {
     }
     
 
-//    public CuentaBancaria getCuentaBancaria() {
-//        return cuentaBancaria;
-//    }
-//
-//    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
-//        this.cuentaBancaria = cuentaBancaria;
-//    }
+    public CuentaBancaria getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+        this.cuentaBancaria = cuentaBancaria;
+    }
 
     public String getTipo_trans() {
         return tipo_trans;

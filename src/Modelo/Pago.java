@@ -10,16 +10,18 @@ package Modelo;
  * @author Jean Agreda
  */
 public class Pago {
+
     private double interes_p_pago;
     private double interes_mora;
     private double monto_a_pagar;
+    private Prestamo prestamo = new Prestamo();
 
-    public double getInteres() {
-        return interes_p_pago;
+    public Prestamo getPrestamo() {
+        return prestamo;
     }
 
-    public void setInteres(double interes_p_pago) {
-        this.interes_p_pago = interes_p_pago;
+    public void setPrestamo(Prestamo prestamo) {
+        this.prestamo = prestamo;
     }
 
     public double getInteres_mora() {
@@ -30,6 +32,14 @@ public class Pago {
         this.interes_mora = interes_mora;
     }
 
+    public double getInteres_p_pago() {
+        return interes_p_pago;
+    }
+
+    public void setInteres_p_pago(double interes_p_pago) {
+        this.interes_p_pago = interes_p_pago;
+    }
+
     public double getMonto_a_pagar() {
         return monto_a_pagar;
     }
@@ -37,6 +47,5 @@ public class Pago {
     public void setMonto_a_pagar(double monto_a_pagar) {
         this.monto_a_pagar = monto_a_pagar;
     }
-    
-    
+
 }

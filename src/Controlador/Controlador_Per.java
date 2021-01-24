@@ -51,9 +51,8 @@ public class Controlador_Per {
        return  p;
    }
     
-      public boolean guardarPersona(){
+    public boolean guardarPersona(){
        try {
-           
              lspersona.insertar(clonar_Persona());
             setPers(null);
              return true;
@@ -62,6 +61,7 @@ public class Controlador_Per {
            return false;
        }
    }
+      
     public boolean ingresar_Persona(Persona p){
         boolean aux = false;
         if (p.getRol().getNombreRol().equals("EMPLEADO")) { // Atencion al Cliente      Oficial de Polizas     Oficiales de Prestamos
