@@ -11,7 +11,7 @@ package Modelo;
  */
 public class Persona {
     private  String nombre;
-    private  String apellido;
+    //private  String apellido;
     private  String cedula;
     private  String correcoElectronico;
     private  String direccion;
@@ -19,6 +19,20 @@ public class Persona {
     private  String telefono;
     private Rol rol;
 
+    public Persona() {
+    }
+
+    public Persona(String nombre, String cedula, String correcoElectronico, String direccion, String edad, String telefono, Rol rol) {
+        this.nombre = nombre;
+        this.cedula = cedula;
+        this.correcoElectronico = correcoElectronico;
+        this.direccion = direccion;
+        this.edad = edad;
+        this.telefono = telefono;
+        this.rol = rol;
+    }
+
+    
     public String getTelefono() {
         return telefono;
     }
@@ -35,13 +49,13 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
+//    public String getApellido() {
+//        return apellido;
+//    }
+//
+//    public void setApellido(String apellido) {
+//        this.apellido = apellido;
+//    }
 
     public String getCedula() {
         return cedula;

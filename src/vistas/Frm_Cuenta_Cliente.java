@@ -6,6 +6,9 @@
 package vistas;
 
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vistas.Paneles_Cuenta_Cliente.Panel_Estado_Cuenta;
 import vistas.Paneles_Cuenta_Cliente.Panel_Inicio;
 import vistas.Paneles_Cuenta_Cliente.Panel_Perfil;
@@ -21,24 +24,45 @@ import vistas.Paneles_Cuenta_Cliente.Panel_transferencia;
  */
 public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
+    String cedulap;
+
+    private Frm_Cuenta_Cliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+    public String getCedulap() {
+        return cedulap;
+    }
+
     /**
      * Creates new form Frm_Cuenta_Cliente
      */
-    Panel_Inicio p_inicio = new Panel_Inicio();
+    public void setCedulap(String cedulap) {    
+        this.cedulap = cedulap;
+    }
+
+    public Frm_Cuenta_Cliente(String cedula) {
+        initComponents();
+        this.setLocationRelativeTo(this);
+        panel_contenedor.add(p_inicio);
+        try {
+            p_inicio.CargarData(cedula);
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        panel_trans.setVisible(false);
+        setCedulap(cedula);
+    }
+
     Panel_Estado_Cuenta Est_Cuenta = new Panel_Estado_Cuenta();
+    Panel_Inicio p_inicio = new Panel_Inicio();
     Panel_trans_deposito p_transaccion_dep = new Panel_trans_deposito();
     Panel_trans_retiro p_transaccion_ret = new Panel_trans_retiro();
     Panel_transferencia p_transferencia = new Panel_transferencia();
     Panel_solicitar_prestamo p_solicitar_prestamo = new Panel_solicitar_prestamo();
     Panel_Perfil p_perfil = new Panel_Perfil();
     Panel_solicitar_poliza p_solicitar_poliza = new Panel_solicitar_poliza();
-
-    public Frm_Cuenta_Cliente() {
-        initComponents();
-        this.setLocationRelativeTo(this);
-        panel_contenedor.add(p_inicio);
-        panel_trans.setVisible(false);
-    }
 
     public void todo_False() {
         p_inicio.setVisible(false);
@@ -123,7 +147,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_cerrar_sesion)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -135,6 +159,11 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_EstadoCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_EstadoCuentaMousePressed(evt);
+            }
+        });
+        btn_EstadoCuenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EstadoCuentaActionPerformed(evt);
             }
         });
 
@@ -290,9 +319,14 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
     private void btn_EstadoCuentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_EstadoCuentaMousePressed
 
-        todo_False();
-        Est_Cuenta.setVisible(true);
-        panel_contenedor.add(Est_Cuenta);
+        try {
+            todo_False();
+            Est_Cuenta.setVisible(true);
+            panel_contenedor.add(Est_Cuenta);
+            Est_Cuenta.CargarData(getCedulap());
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btn_EstadoCuentaMousePressed
 
@@ -316,9 +350,14 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_sol_PrestamoMousePressed
 
     private void btn_mi_PerfilMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mi_PerfilMousePressed
-        todo_False();
-        p_perfil.setVisible(true);
-        panel_contenedor.add(p_perfil);
+        try {
+            todo_False();
+            p_perfil.setVisible(true);
+            panel_contenedor.add(p_perfil);
+            p_perfil.CargarData(getCedulap());
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_mi_PerfilMousePressed
 
     private void btn_Trans_depMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Trans_depMousePressed
@@ -346,18 +385,22 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_TransaccionesActionPerformed
 
     private void btn_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionActionPerformed
-      Frm_Principal_Info frm_Principal_Info = new Frm_Principal_Info();
+        Frm_Principal_Info frm_Principal_Info = new Frm_Principal_Info();
         frm_Principal_Info.setVisible(true);
-       dispose();
+        dispose();
     }//GEN-LAST:event_btn_cerrar_sesionActionPerformed
 
     private void btn_cerrar_sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseEntered
-     btn_cerrar_sesion.setForeground(Color.CYAN);
+        btn_cerrar_sesion.setForeground(Color.CYAN);
     }//GEN-LAST:event_btn_cerrar_sesionMouseEntered
 
     private void btn_cerrar_sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseExited
         btn_cerrar_sesion.setForeground(Color.WHITE);
     }//GEN-LAST:event_btn_cerrar_sesionMouseExited
+
+    private void btn_EstadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EstadoCuentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_EstadoCuentaActionPerformed
 
     /**
      * @param args the command line arguments

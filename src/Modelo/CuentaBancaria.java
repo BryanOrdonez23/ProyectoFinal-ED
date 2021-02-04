@@ -17,12 +17,21 @@ public class CuentaBancaria {
     private Double saldo;
     private boolean prestamo_yn;
     private boolean poliza_yn;
-    private Persona persona;
-    private ListaSimpleAvanzada Listatransacciones = new ListaSimpleAvanzada();
-    private ListaSimpleAvanzada Listaprestamos = new ListaSimpleAvanzada();
-    private ListaSimpleAvanzada Listapolizas = new ListaSimpleAvanzada();
+//    private Persona persona;
+//    private ListaSimpleAvanzada Listatransacciones = new ListaSimpleAvanzada();
+//    private ListaSimpleAvanzada Listaprestamos = new ListaSimpleAvanzada();
+//    private ListaSimpleAvanzada Listapolizas = new ListaSimpleAvanzada();
 
+    public CuentaBancaria() {
+    }
 
+    public CuentaBancaria(String tipoCuenta, String num_Cuenta, Double saldo, boolean prestamo_yn, boolean poliza_yn) {
+        this.tipoCuenta = tipoCuenta;
+        this.num_Cuenta = num_Cuenta;
+        this.saldo = saldo;
+        this.prestamo_yn = prestamo_yn;
+        this.poliza_yn = poliza_yn;
+    }   
     
     public String getTipoCuenta() {
         return tipoCuenta;
@@ -64,37 +73,37 @@ public class CuentaBancaria {
         this.poliza_yn = poliza_yn;
     }
 
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public ListaSimpleAvanzada getListatransacciones() {
-        return Listatransacciones;
-    }
-
-    public void setListatransacciones(ListaSimpleAvanzada Listatransacciones) {
-        this.Listatransacciones = Listatransacciones;
-    }
-
-    public ListaSimpleAvanzada getListaprestamos() {
-        return Listaprestamos;
-    }
-
-    public void setListaprestamos(ListaSimpleAvanzada Listaprestamos) {
-        this.Listaprestamos = Listaprestamos;
-    }
-
-    public ListaSimpleAvanzada getListapolizas() {
-        return Listapolizas;
-    }
-
-    public void setListapolizas(ListaSimpleAvanzada Listapolizas) {
-        this.Listapolizas = Listapolizas;
-    }
-    
+//    public Persona getPersona() {
+//        return persona;
+//    }
+//
+//    public void setPersona(Persona persona) {
+//        this.persona = persona;
+//    }
+//
+//    public ListaSimpleAvanzada getListatransacciones() {
+//        return Listatransacciones;
+//    }
+//
+//    public void setListatransacciones(ListaSimpleAvanzada Listatransacciones) {
+//        this.Listatransacciones = Listatransacciones;
+//    }
+//
+//    public ListaSimpleAvanzada getListaprestamos() {
+//        return Listaprestamos;
+//    }
+//
+//    public void setListaprestamos(ListaSimpleAvanzada Listaprestamos) {
+//        this.Listaprestamos = Listaprestamos;
+//    }
+//
+//    public ListaSimpleAvanzada getListapolizas() {
+//        return Listapolizas;
+//    }
+//
+//    public void setListapolizas(ListaSimpleAvanzada Listapolizas) {
+//        this.Listapolizas = Listapolizas;
+//    }
+//    
     
 }

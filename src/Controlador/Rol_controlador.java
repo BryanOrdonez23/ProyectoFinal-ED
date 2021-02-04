@@ -41,7 +41,6 @@ public class Rol_controlador {
      */
    public Rol clonar_Roles(){
        Rol r = new Rol();
-       r.setIdRol(rol.getIdRol());
        r.setNombreRol(rol.getNombreRol());
        return  r;
    }

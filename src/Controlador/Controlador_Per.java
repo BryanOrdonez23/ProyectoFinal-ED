@@ -6,6 +6,8 @@
 package Controlador;
 import Controlador.listaSA.ListaSimpleAvanzada;
 import Modelo.Persona;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  *
@@ -41,7 +43,6 @@ public class Controlador_Per {
     public Persona clonar_Persona(){
        Persona p = new Persona();
        p.setNombre(pers.getNombre());
-       p.setApellido(pers.getApellido());
        p.setCedula(pers.getCedula());
        p.setCorrecoElectronico(pers.getCorrecoElectronico());
        p.setDireccion(pers.getDireccion());
@@ -54,7 +55,7 @@ public class Controlador_Per {
     public boolean guardarPersona(){
        try {
              lspersona.insertar(clonar_Persona());
-            setPers(null);
+            //setPers(null);
              return true;
        } catch (Exception e) {
            System.out.println("error al guardar P"+ e);
@@ -68,9 +69,10 @@ public class Controlador_Per {
            //crear nuevo persona cliente
            aux = guardarPersona();
         }
-        return aux;
-    
+        return aux;    
     }
+    
+
     
     
 }

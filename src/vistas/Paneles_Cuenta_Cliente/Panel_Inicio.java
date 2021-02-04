@@ -5,18 +5,30 @@
  */
 package vistas.Paneles_Cuenta_Cliente;
 
+import Controlador.txt;
+import Modelo.CuentaBancaria;
+import Modelo.Persona;
+import java.io.IOException;
+
 /**
  *
  * @author mac
  */
 public class Panel_Inicio extends javax.swing.JPanel {
-
+    txt controltxt = new txt();
     /**
      * Creates new form Panel_Inicio
      */
     public Panel_Inicio() {
         initComponents();
     }
+        public void CargarData(String cedula) throws IOException {
+        Object[] obj = controltxt.BusquedaCuentasCedula(cedula);
+        CuentaBancaria c = (CuentaBancaria) obj[0];
+        Persona p = (Persona) obj[1];
+        lbl_name_titular.setText(p.getNombre());
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

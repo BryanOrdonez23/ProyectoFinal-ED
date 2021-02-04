@@ -10,16 +10,16 @@ package Modelo;
  * @author Jean Agreda
  */
 public class Rol {
-    private String IdRol;
+
     private String nombreRol;
 
-    public String getIdRol() {
-        return IdRol;
+    public Rol(String nombreRol) {
+        this.nombreRol = nombreRol;
     }
 
-    public void setIdRol(String IdRol) {
-        this.IdRol = IdRol;
-    }
+    public Rol() {
+    }   
+    
 
     public String getNombreRol() {
         return nombreRol;

@@ -5,16 +5,33 @@
  */
 package vistas.Paneles_Cuenta_Cliente;
 
+import Controlador.txt;
+import Modelo.CuentaBancaria;
+import Modelo.Persona;
+import java.io.IOException;
+import vistas.Frm_Cuenta_Cliente;
+
 /**
  *
  * @author mac
  */
-public class Panel_Estado_Cuenta extends javax.swing.JPanel {
+public class Panel_Estado_Cuenta extends javax.swing.JPanel{
 
+    txt controltxt = new txt();
     /**
      * Creates new form Estado_Cuenta
      */
-    public Panel_Estado_Cuenta() {
+    public void CargarData(String cedula) throws IOException {
+        Object[] obj = controltxt.BusquedaCuentasCedula(cedula);
+        CuentaBancaria c = (CuentaBancaria) obj[0];
+        Persona p = (Persona) obj[1];
+        lbl_titular.setText(p.getNombre());
+        lbl_saldo_disponible.setText(String.valueOf(c.getSaldo()));
+        lbl_nro_cuenta.setText(c.getNum_Cuenta());
+        
+    }
+
+    public Panel_Estado_Cuenta()  {
         initComponents();
     }
 

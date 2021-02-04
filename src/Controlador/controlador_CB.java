@@ -17,7 +17,7 @@ public class controlador_CB {
 
     private CuentaBancaria cuentaB = new CuentaBancaria();
     private ListaSimpleAvanzada lista_Cb = new ListaSimpleAvanzada();
-    private Persona persona = new Persona();
+//    private Persona persona = new Persona();
 
     public CuentaBancaria getCuentaB() {
         if (cuentaB==null) {
@@ -37,18 +37,6 @@ public class controlador_CB {
     public void setLista_Cb(ListaSimpleAvanzada lista_Cb) {
         this.lista_Cb = lista_Cb;
     }
-
-    public Persona getPersona() {
-        if (persona == null) {
-            persona = new Persona();
-        }
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
     
     /**
      * 
@@ -57,7 +45,7 @@ public class controlador_CB {
     public boolean guardarCB() {
         try {
             lista_Cb.insertar(ClonarCB());
-            setCuentaB(null);
+            //setCuentaB(null);
             return true;
         } catch (Exception e) {
             System.out.println("error al guardar P" + e);
@@ -71,16 +59,21 @@ public class controlador_CB {
      */
     public CuentaBancaria ClonarCB() {
         CuentaBancaria aux = new CuentaBancaria();
-        aux.setListapolizas(cuentaB.getListapolizas());
-        aux.setListaprestamos(cuentaB.getListaprestamos());
-        aux.setListatransacciones(cuentaB.getListatransacciones());
         aux.setNum_Cuenta(cuentaB.getNum_Cuenta());
-        aux.setPersona(cuentaB.getPersona());
+        //aux.setPersona(cuentaB.getPersona());
         aux.setPoliza_yn(cuentaB.isPoliza_yn());
         aux.setPrestamo_yn(cuentaB.isPrestamo_yn());
         aux.setSaldo(cuentaB.getSaldo());
         aux.setTipoCuenta(cuentaB.getTipoCuenta());
         return aux;
+    }
+    
+    public String generarBmroCuenta(){
+        String num1 = "11"+(int)(Math.random()*100)+(int)(Math.random()*1000001);
+        while (num1.length()<10) {
+            num1 = "11"+(int)(Math.random()*100)+(int)(Math.random()*1000001);
+        }
+        return num1;
     }
     
 

@@ -5,18 +5,27 @@
  */
 package vistas;
 
+import Controlador.Controlador_Inicio_Sesion;
+import Controlador.txt;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author mac
  */
 public class Frm_Login_Cliente extends javax.swing.JFrame {
 
+    Controlador_Inicio_Sesion control = new Controlador_Inicio_Sesion();
+    txt controltxt = new txt();
     /**
      * Creates new form Frm_Login_Cliente
      */
     public Frm_Login_Cliente() {
         initComponents();
-          this.setLocationRelativeTo(this);
+        this.setLocationRelativeTo(this);
     }
 
     /**
@@ -31,8 +40,8 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txt_usuario = new javax.swing.JTextField();
+        txt_contra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -112,8 +121,8 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btn_entrar)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
@@ -131,11 +140,11 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_regresar)
@@ -152,15 +161,29 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarActionPerformed
-       Frm_Principal_Info fpi = new Frm_Principal_Info();
-       fpi.setVisible(true);
-       this.dispose();
+        Frm_Principal_Info fpi = new Frm_Principal_Info();
+        fpi.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_regresarActionPerformed
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
-      Frm_Cuenta_Cliente frm_Cuenta_Cliente = new Frm_Cuenta_Cliente();
-      frm_Cuenta_Cliente.setVisible(true);
-      dispose();
+        if (txt_usuario.getText().length() > 0 && txt_contra.getText().length() > 0) {
+            try {
+                if (control.InicioSesionCliente(txt_usuario.getText(), txt_contra.getText())) {
+                    
+                    JOptionPane.showMessageDialog(null,"Bienvenido");
+                    String cedu = controltxt.BusquedaCuentasaux(txt_usuario.getText(), txt_contra.getText());
+                    Frm_Cuenta_Cliente frm_Cuenta_Cliente = new Frm_Cuenta_Cliente(cedu);
+                    frm_Cuenta_Cliente.setVisible(true);
+                    dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null,"Credenciales de acceso invalidas");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Frm_Login_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }//GEN-LAST:event_btn_entrarActionPerformed
 
     /**
@@ -208,7 +231,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txt_contra;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

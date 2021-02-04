@@ -13,6 +13,10 @@ public class CuentaUsuario {
     private String usuario;
     private String contraseña;
 
+    public CuentaUsuario(String usuario, String contraseña) {
+        this.usuario = usuario;
+        this.contraseña = contraseña;
+    }  
     public String getUsuario() {
         return usuario;
     }

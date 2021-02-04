@@ -5,17 +5,36 @@
  */
 package vistas.Paneles_Cuenta_Cliente;
 
+import Controlador.txt;
+import Modelo.CuentaBancaria;
+import Modelo.Persona;
+import java.io.IOException;
+
 /**
  *
  * @author mac
  */
 public class Panel_Perfil extends javax.swing.JPanel {
 
+    txt controltxt = new txt();
+
     /**
      * Creates new form Panel_Perfil
      */
     public Panel_Perfil() {
         initComponents();
+    }
+
+    public void CargarData(String cedula) throws IOException {
+        Object[] obj = controltxt.BusquedaCuentasCedula(cedula);
+        CuentaBancaria c = (CuentaBancaria) obj[0];
+        Persona p = (Persona) obj[1];
+        lbl_nombres.setText(p.getNombre());        
+        lbl_nro_cuenta.setText(c.getNum_Cuenta());
+        lbl_edad.setText(p.getEdad());
+        lbl_nmro.setText(c.getNum_Cuenta());
+        lbl_cedula.setText(p.getCedula());
+        lbl_direccion.setText(p.getDireccion());       
     }
 
     /**
@@ -36,11 +55,11 @@ public class Panel_Perfil extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lbl_nombres = new javax.swing.JLabel();
+        lbl_nmro = new javax.swing.JLabel();
+        lbl_cedula = new javax.swing.JLabel();
+        lbl_direccion = new javax.swing.JLabel();
+        lbl_edad = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btn_cambiar_contraseña = new javax.swing.JButton();
@@ -93,15 +112,15 @@ public class Panel_Perfil extends javax.swing.JPanel {
 
         jLabel7.setText("Nro Cuenta:");
 
-        jLabel8.setText("-----------------------");
+        lbl_nombres.setText("-----------------------");
 
-        jLabel9.setText("-----------------------");
+        lbl_nmro.setText("-----------------------");
 
-        jLabel10.setText("------------------------");
+        lbl_cedula.setText("------------------------");
 
-        jLabel11.setText("-----------------------");
+        lbl_direccion.setText("-----------------------");
 
-        jLabel12.setText("-----------------------");
+        lbl_edad.setText("-----------------------");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,23 +159,23 @@ public class Panel_Perfil extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbl_nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbl_nmro, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -167,23 +186,23 @@ public class Panel_Perfil extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel8))
+                    .addComponent(lbl_nombres))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel10))
+                    .addComponent(lbl_cedula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel11))
+                    .addComponent(lbl_direccion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel12))
+                    .addComponent(lbl_edad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addComponent(lbl_nmro))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -196,20 +215,20 @@ public class Panel_Perfil extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cambiar_contraseña;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbl_cedula;
+    private javax.swing.JLabel lbl_direccion;
+    private javax.swing.JLabel lbl_edad;
+    private javax.swing.JLabel lbl_nmro;
+    private javax.swing.JLabel lbl_nombres;
     private javax.swing.JLabel lbl_nro_cuenta;
     // End of variables declaration//GEN-END:variables
 }

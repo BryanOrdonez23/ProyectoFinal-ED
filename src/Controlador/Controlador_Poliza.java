@@ -71,25 +71,25 @@ public class Controlador_Poliza {
      * 
      * @return Guardamos la poliza en una lista simple
      */
-    public Boolean guardarPoliza() {
-        boolean band = true;
-        try {
-            CuentaBancaria cuenta = this.cuentaBancaria;
-            cuenta.setSaldo(cuenta.getSaldo() + (poliza.getMonto_poliza() + (poliza.getMonto_poliza() * poliza.getInteres_poliza() / 100)));
-
-            if (band) {
-                cuenta.getListapolizas().insertar(clonarPoliza());
-                int pos = listaCuentaBancariaPolizas.buscarPorNroCuentaPos(cuenta.getNum_Cuenta());
-                listaCuentaBancariaPolizas.editarPorPosicion(pos, cuenta);
-                setCuentaBancaria(null);
-                setPoliza(null);
-            }
-        } catch (Exception e) {
-            System.out.println("Hubo un error en guardar transaccion");
-            band = false;
-        }
-        return band;
-    }
+//    public Boolean guardarPoliza() {
+//        boolean band = true;
+//        try {
+//            CuentaBancaria cuenta = this.cuentaBancaria;
+//            cuenta.setSaldo(cuenta.getSaldo() + (poliza.getMonto_poliza() + (poliza.getMonto_poliza() * poliza.getInteres_poliza() / 100)));
+//
+//            if (band) {
+//                cuenta.getListapolizas().insertar(clonarPoliza());
+//                int pos = listaCuentaBancariaPolizas.buscarPorNroCuentaPos(cuenta.getNum_Cuenta());
+//                listaCuentaBancariaPolizas.editarPorPosicion(pos, cuenta);
+//                setCuentaBancaria(null);
+//                setPoliza(null);
+//            }
+//        } catch (Exception e) {
+//            System.out.println("Hubo un error en guardar transaccion");
+//            band = false;
+//        }
+//        return band;
+//    }
     
     /**
      * Guardamos la cuenta bancaria en la lista
