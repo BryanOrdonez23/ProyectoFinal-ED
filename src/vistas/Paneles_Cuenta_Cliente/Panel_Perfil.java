@@ -23,6 +23,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
      */
     public Panel_Perfil() {
         initComponents();
+        
     }
 
     public void CargarData(String cedula) throws IOException {

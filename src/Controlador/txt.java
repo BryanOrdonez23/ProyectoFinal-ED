@@ -24,6 +24,8 @@ import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 /**
  *
@@ -85,7 +87,7 @@ public class txt {
      */
     public void guardar_PersonaTxt(Persona p) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Persona, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Persona, true)))) {
                 String fila = p.getCedula() + "," + p.getRol().getNombreRol() + "," + p.getCorrecoElectronico() + "," + p.getNombre()
                         + "," + p.getTelefono() + "," + p.getEdad() + "," + p.getDireccion();
 
@@ -109,7 +111,7 @@ public class txt {
      */
     public void guardar_CuentaUsuarioTxt(Persona p, String contra) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CUsuario, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CUsuario, true)))) {
                 String fila = p.getCedula() + "," + p.getCorrecoElectronico() + "," + contra;
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -129,7 +131,7 @@ public class txt {
      */
     public void guardar_CuentaEmpleadoTxt(String rol, String usuario, String contra) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CEmpleados, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CEmpleados, true)))) {
                 String fila = rol + "," + usuario + "," + contra;
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -150,7 +152,7 @@ public class txt {
      */
     public void guardar_CuentaBancariaTxt(Persona p, CuentaBancaria cb) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CBancaria, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CBancaria, true)))) {
                 String fila = p.getCedula() + "," + cb.getTipoCuenta() + "," + cb.getNum_Cuenta() + "," + cb.getSaldo()
                         + "," + cb.isPoliza_yn() + "," + cb.isPrestamo_yn();
                 //1 cuenta, 2 tipo 3 numeroCuenta 4 Saldo, 5 poliza, 6 prestamo
@@ -173,7 +175,7 @@ public class txt {
      */
     public void guardar_PrestamosTxt(Prestamo pre, CuentaBancaria cb) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Prestamo, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Prestamo, true)))) {
                 String fila = cb.getNum_Cuenta() + "," + pre.getMonto_final() + "," + pre.getCuota_mensual() + ", " + pre.getFecha_inicio_prestamo() + ", " + pre.getFecha_final_prestamo();
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -194,7 +196,7 @@ public class txt {
      */
     public void guardar_PolizasTxt(Poliza pol, CuentaBancaria cb) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Polizas, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Polizas, true)))) {
                 String fila = cb.getNum_Cuenta() + ", " + pol.getMonto_poliza() + ", " + pol.getInteres_poliza() + ", " + pol.getFehca_inicio_poliza() + ", " + pol.getFehca_final_poliza();
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -213,10 +215,10 @@ public class txt {
      * @param tra
      * @param cb
      */
-    public void guardar_TransaccionesTxt(Transaccion tra, CuentaBancaria cb) {
+    public void guardar_TransaccionesTxt(Transaccion tra) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Transacciones, true)))) {
-                String fila = cb.getNum_Cuenta() + ", " + tra.getTipo_trans() + ", " + tra.getMonto_trans() + ", " + tra.getFecha_trans();
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Transacciones, true)))) {
+                String fila = tra.getExternal_NumCuenta() + ", " + tra.getTipo_trans() + ", " + tra.getMonto_trans() + ", " + tra.getFecha_trans();
                 Fescribe.write(fila);
                 Fescribe.write("\n");
 
@@ -227,13 +229,14 @@ public class txt {
         }
     }//1.cedula,2.Rol,3.correo,4.nombre,5.telefono,6.edad,7.direccion
 //1 cuenta, 2 tipo 3 numeroCuenta 4 Saldo, 5 poliza, 6 prestamo
-    
+
     /**
-     * 
+     *
      * @param NumeroCuenta
-     * @return los objetos persona y cunta bancaria encontrados con el criterio de busqueda de un numero de cuenta bancaria
+     * @return los objetos persona y cunta bancaria encontrados con el criterio
+     * de busqueda de un numero de cuenta bancaria
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public Object[] BusquedaCuentas(String NumeroCuenta) throws FileNotFoundException, IOException {
         Object[] aux = new Object[2];
@@ -275,14 +278,14 @@ public class txt {
 
         return aux;
     }
-    
-    
+
     /**
-     * 
+     *
      * @param cedula
-     * @return los objetos persona y cunta bancaria encontrados con el criterio de busqueda de una cedula
+     * @return los objetos persona y cunta bancaria encontrados con el criterio
+     * de busqueda de una cedula
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public Object[] BusquedaCuentasCedula(String cedula) throws FileNotFoundException, IOException {
         Object[] aux = new Object[2];
@@ -326,13 +329,13 @@ public class txt {
     }
 
     /**
-     * 
+     *
      * @param cedula
      * @return Busco el numero de cedula del usuario que ingreso al sistema
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
-    public String BusquedaCuentasaux(String us , String contr) throws FileNotFoundException, IOException {
+    public String BusquedaCuentasaux(String us, String contr) throws FileNotFoundException, IOException {
         String aux = "";
         BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario));
         String linea = "";
@@ -341,7 +344,7 @@ public class txt {
             String uno_ced = st.nextToken();
             String usuario = st.nextToken().toString();
             String contrasena = st.nextToken().toString();
-            if (us.equals(usuario)&& contr.equals(contrasena)) {
+            if (us.equals(usuario) && contr.equals(contrasena)) {
                 aux = uno_ced;
             }
 
@@ -351,4 +354,144 @@ public class txt {
         return aux;
     }
 
+    ///////Actualizar
+    /**
+     * Se lee el archivo de las cuentas bancarias, en el momento de que se encuentre la cuenta buscada, se le guarda su nuevo saldo, ya sea sumando el deposito o restando el retiro
+     * @param cuentaBancaria El Nro de la cuenta bancaria que se desea encontrar
+     * @param trans el monto de la transaccion
+     * @param tipo_Trans    el tipo de transaccion - DEPOSITO - RETIRO
+     * @throws IOException 
+     */
+    public void cuentaBancariaSaldo(String cuentaBancaria, String trans, String tipo_Trans) throws IOException {
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria));
+        //Dar limite al arreglo dependiendo de el numero de cuentas registradas
+        BufferedReader ler = new BufferedReader(new FileReader(archivo_CBancaria));
+        String linea = "";
+        String le= "";
+        double c = 0.0;
+        System.out.println("ss");
+        int i = 0;
+        //   String[] l;
+        int j = 0;
+        while ((le = ler.readLine()) != null) {
+        i++;
+           // System.out.println("i"+i);
+        }
+        String[] l = new String[i];
+        while ((linea = leer.readLine()) != null) {
+         
+            /*  cedula  tipo_Cuenta  Num_Cuenta  Saldo  poliza  prestamo */
+            StringTokenizer st = new StringTokenizer(linea, ",");
+            String cedula = st.nextToken();
+            String tipo_Cuenta = st.nextToken();
+            String num_Cuenta = st.nextToken();
+            String Saldo = st.nextToken();
+            String poliza = st.nextToken();
+            String prestamo = st.nextToken();
+
+            if (cuentaBancaria.equals(num_Cuenta)) {
+                linea  = null;
+                if (tipo_Trans.equals("DEPOSITO")) {
+                    c = Double.parseDouble(Saldo) + Double.parseDouble(trans);
+                }
+                if (tipo_Trans.equals("RETIRO")) {
+                    c = Double.parseDouble(Saldo) - Double.parseDouble(trans);
+                }
+                System.out.println(" salto final " + c);
+                linea = cedula + "," + tipo_Cuenta + "," + num_Cuenta + "," + c + "," + poliza + "," + prestamo;
+
+                //  System.out.println("lin "+ linea);
+            }
+
+           // System.out.println("lin " + linea);
+            l[j] = linea;
+            System.out.println("lin "+ l[j]);
+           // i++;
+           j++;
+
+        }
+       grabar_txt_actualizarSaldoCuentaBancaria(l);
+       leer.close();
+        // return c;
+    }
+
+    /**
+     * Actualiza el archivo de las cuentas bancarias, actualizando solo el saldo de la cuenta bancaria en la cual se ha iniciado sesion
+     * @param linea Se le pasa un arreglo de Strings el cual contiene todas las cuentas bancarias junto con la cuenta actualizada
+     */
+    public void grabar_txt_actualizarSaldoCuentaBancaria(String [] linea) {
+        FileWriter fws;
+        PrintWriter pw;
+
+        try {
+            fws = new FileWriter(archivo_CBancaria);
+            pw = new PrintWriter(fws);
+            // pw = new PrintWriter( new FileWriter("Numero.txt"));
+             for (int i = 0; i < linea.length; i++) {
+                String acumulada = linea[i];
+                pw.println(acumulada);
+            }       
+            
+           
+         //   pw.println(linea);
+            pw.close();
+        } catch (IOException ex) {
+            System.out.println("Error al grabar archivo: " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
+    }
+    /**
+     * El metodo busca por el numero de cuenta Bancaria y extrae el saldo actual de esa cuenta
+     * @param nroCuenta  
+     * @return el saldo actual de la cuentaBancaria buscada
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
+     public String buscarNroCuenta(String nroCuenta) throws FileNotFoundException, IOException {
+     String saldo ="0.0";
+        BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria));
+        String linea = "";
+        while ((linea = leer.readLine()) != null) {
+            StringTokenizer st = new StringTokenizer(linea, ",");
+            String uno_ced = st.nextToken();
+            String dos_tipo = st.nextToken();
+            String tres_numeroCuenta = st.nextToken();
+            String cuatro_Saldo = st.nextToken();
+            String cinco_poliza = st.nextToken();
+            String seis_prestamo = st.nextToken();
+            if (nroCuenta.equals(tres_numeroCuenta)) {
+                saldo =cuatro_Saldo;
+            }
+        }
+        leer.close();
+        return saldo;
+    }
+    /**
+     * El metodo verifica si la cuenta Bancaria existe
+     * @param nroCuenta
+     * @return true si la cuenta bancaria existe, false si la cuenta bancaria no existe
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */ 
+    public boolean existeCuenta(String nroCuenta) throws FileNotFoundException, IOException {
+     boolean bol =false;
+        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                String uno_ced = st.nextToken();
+                String dos_tipo = st.nextToken();
+                String tres_numeroCuenta = st.nextToken();
+                String cuatro_Saldo = st.nextToken();
+                String cinco_poliza = st.nextToken();
+                String seis_prestamo = st.nextToken();
+                if (nroCuenta.equals(tres_numeroCuenta)) {
+                    System.out.println("encotrada");
+                    bol = true;
+                }
+            }
+        }
+        return bol;
+    }
 }

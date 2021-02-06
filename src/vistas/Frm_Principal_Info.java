@@ -7,8 +7,6 @@ package vistas;
 
 import java.awt.Color;
 
-
-
 /**
  *
  * @author mac
@@ -20,7 +18,7 @@ public class Frm_Principal_Info extends javax.swing.JFrame {
      */
     public Frm_Principal_Info() {
         initComponents();
-       this.setLocationRelativeTo(this);
+        this.setLocationRelativeTo(this);
     }
 
     /**
@@ -301,15 +299,15 @@ public class Frm_Principal_Info extends javax.swing.JFrame {
         // TODO add your handling code here:
         Frm_Login_Cliente frm_Login_Cliente = new Frm_Login_Cliente();
         frm_Login_Cliente.setVisible(true);
-       dispose();
+        dispose();
     }//GEN-LAST:event_btn_inciar_sesionActionPerformed
 
     private void btn_inciar_sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_inciar_sesionMouseEntered
-     btn_inciar_sesion.setForeground(Color.CYAN);
+        btn_inciar_sesion.setForeground(Color.CYAN);
     }//GEN-LAST:event_btn_inciar_sesionMouseEntered
 
     private void btn_inciar_sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_inciar_sesionMouseExited
-    btn_inciar_sesion.setForeground(Color.WHITE);
+        btn_inciar_sesion.setForeground(Color.WHITE);
     }//GEN-LAST:event_btn_inciar_sesionMouseExited
 
     /**

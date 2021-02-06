@@ -5,17 +5,117 @@
  */
 package vistas.Paneles_Cuenta_Cliente;
 
+import Controlador.Controlador_Transaccion;
+import Controlador.txt;
+import Modelo.CuentaBancaria;
+import Modelo.Persona;
+import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+
 /**
  *
  * @author mac
  */
 public class Panel_transferencia extends javax.swing.JPanel {
 
+    private Controlador_Transaccion controTrans = new Controlador_Transaccion();
+    private txt controlTxt = new txt();
+
     /**
      * Creates new form Panel_transferencia
      */
     public Panel_transferencia() {
         initComponents();
+    }
+
+    /**
+     * Se le manda la cedula del frame principal y se carga los datos de acuerdo a esa cedula
+     * @param cedula
+     * @throws IOException
+     */
+    public void CargarData(String cedula) throws IOException {
+        Object[] obj = controlTxt.BusquedaCuentasCedula(cedula);
+        CuentaBancaria c = (CuentaBancaria) obj[0];
+        Persona p = (Persona) obj[1];
+        lbl_nombres.setText(p.getNombre());
+        lbl_nro_cuenta.setText(c.getNum_Cuenta());
+        lbl_cedula.setText(p.getCedula());
+
+    }
+    /**
+     * Se busca la cuenta en el txt 
+     * Se invoca al metodo para guardar la transaccion en caso de no haber ningun error 
+     * Se invoca al metodo para guardar Cuenta Bancaria, en este se actualiza el saldo sumando el deposito
+     */
+    private void ok_guardarDeposito() {
+        controTrans.setTrans(null);
+        String tipo = "DEPOSITO";
+        //nro de cuenta a transferir
+        controTrans.getTrans().setExternal_NumCuenta(txt_nro_cuenta_transferir.getText());
+        controTrans.getTrans().setFecha_trans(new Date());
+        controTrans.getTrans().setTipo_trans(tipo);
+        controTrans.getTrans().setMonto_trans(Double.parseDouble(txt_monto_transferir.getText()));
+        System.out.println("antes");
+        if (controTrans.guardarTrans()) {
+            try {
+                System.out.println("ingreso");
+                // JOptionPane.showMessageDialog(null, " Se ha registrado su transaccion");
+                controlTxt.guardar_TransaccionesTxt(controTrans.getTrans());
+                controlTxt.cuentaBancariaSaldo(txt_nro_cuenta_transferir.getText(), txt_monto_transferir.getText(), tipo);
+                //agregar limpiar
+            } catch (IOException ex) {
+                Logger.getLogger(Panel_trans_deposito.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+    /**
+     * Se busca la cuenta en el txt 
+     * se invoca al metodo para guardar la transaccion en caso de no haber ningun error 
+     * Se invoca al metodo para guardar Cuenta Bancaria, en este se actualiza el saldo restando el retiro
+     */
+    private void ok_guardar_Retiro() {
+        try {
+            //cuenta que transfiere
+            String saldoAux = controlTxt.buscarNroCuenta(lbl_nro_cuenta.getText());
+            if (Double.parseDouble(txt_monto_transferir.getText()) <= Double.parseDouble(saldoAux)) {
+                //doble confirmacion
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de realizar esta TRANSFERENCIA ?", "YES-NO", YES_NO_OPTION);//En caso de ser Yes sera = 0
+                if (opcion == 0) {
+                    controTrans.setTrans(null);
+                    String tipo = "RETIRO";
+                    controTrans.getTrans().setExternal_NumCuenta(lbl_nro_cuenta.getText());
+                    controTrans.getTrans().setFecha_trans(new Date());
+                    controTrans.getTrans().setTipo_trans(tipo);
+                    controTrans.getTrans().setMonto_trans(Double.parseDouble(txt_monto_transferir.getText()));
+                    System.out.println("antes");
+                    if (controTrans.guardarTrans()) {
+                        try {
+                            System.out.println("ingreso");
+                            JOptionPane.showMessageDialog(null, " Se ha registrado su TRANSFERENCIA");
+                            controlTxt.guardar_TransaccionesTxt(controTrans.getTrans());
+                            controlTxt.cuentaBancariaSaldo(lbl_nro_cuenta.getText(), txt_monto_transferir.getText(), tipo);
+                            //agregar limpiar
+                        } catch (IOException ex) {
+                            Logger.getLogger(Panel_trans_retiro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Su TRANSFERENCIA a sido cancelada, con exito!");
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No puede realizar esta TRANSFERENCIA \nSu saldo actual es menor a la cantidad que se desea transferir", "WARNING", WARNING_MESSAGE);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Panel_trans_retiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -83,6 +183,11 @@ public class Panel_transferencia extends javax.swing.JPanel {
         );
 
         btn_ok.setText("OK");
+        btn_ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_okActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Monto a Transferir :");
 
@@ -156,6 +261,23 @@ public class Panel_transferencia extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okActionPerformed
+        if (!txt_monto_transferir.getText().equals("") && !txt_monto_transferir.getText().equals("")) {
+            try {
+                if (controlTxt.existeCuenta(txt_nro_cuenta_transferir.getText())) {
+                    ok_guardar_Retiro();
+                    ok_guardarDeposito();
+                }else{JOptionPane.showMessageDialog(null, "La Cuenta Bancaria a transferir no existe\nCompruebe los datos ingresados","WARNING",WARNING_MESSAGE);}
+            } catch (IOException ex) {
+                Logger.getLogger(Panel_transferencia.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar loa campoa para realizar la TRANSFERENCIA", "WARNING", WARNING_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btn_okActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

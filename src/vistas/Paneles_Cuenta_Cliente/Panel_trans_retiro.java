@@ -5,17 +5,90 @@
  */
 package vistas.Paneles_Cuenta_Cliente;
 
+import Controlador.Controlador_Transaccion;
+import Controlador.txt;
+import Modelo.CuentaBancaria;
+import Modelo.Persona;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
+
 /**
  *
  * @author mac
  */
 public class Panel_trans_retiro extends javax.swing.JPanel {
 
+    private Controlador_Transaccion controTrans = new Controlador_Transaccion();
+    private txt controlTxt = new txt();
+
     /**
      * Creates new form Panel_trans_retiro
      */
     public Panel_trans_retiro() {
         initComponents();
+    }
+
+    /**
+     * Se le manda la cedula del frame principal y se carga los datos de acuerdo a esa cedula
+     * @param cedula
+     * @throws IOException
+     */
+    public void CargarData(String cedula) throws IOException {
+        Object[] obj = controlTxt.BusquedaCuentasCedula(cedula);
+        CuentaBancaria c = (CuentaBancaria) obj[0];
+        Persona p = (Persona) obj[1];
+        lbl_nombres.setText(p.getNombre());
+        lblNroCuenta.setText(c.getNum_Cuenta());
+        lbl_cedula.setText(p.getCedula());
+
+    }
+
+    /**
+     * Se busca la cuenta en el txt se invoca al metodo para guardar la
+     * transaccion en caso de no haber ningun error Se invoca al metodo para
+     * guardar Cuenta Bancaria, en este se actualiza el saldo restando el retiro
+     */
+    private void ok_guardar_Retiro() {
+        try {
+            String saldoAux = controlTxt.buscarNroCuenta(lblNroCuenta.getText());
+            if (Double.parseDouble(txt_monto_retiro.getText()) <= Double.parseDouble(saldoAux)) {
+                //doble confirmacion
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de realizar este retiro?", "YES-NO", YES_NO_OPTION);//En caso de ser Yes sera = 0
+                if (opcion == 0) {
+                    controTrans.setTrans(null);
+                    String tipo = "RETIRO";
+                    controTrans.getTrans().setExternal_NumCuenta(lblNroCuenta.getText());
+                    controTrans.getTrans().setFecha_trans(new Date());
+                    controTrans.getTrans().setTipo_trans(tipo);
+                    controTrans.getTrans().setMonto_trans(Double.parseDouble(txt_monto_retiro.getText()));
+                    System.out.println("antes");
+                    if (controTrans.guardarTrans()) {
+                        try {
+                            System.out.println("ingreso");
+                            JOptionPane.showMessageDialog(null, " Se ha registrado su transaccion");
+                            controlTxt.guardar_TransaccionesTxt(controTrans.getTrans());
+                            controlTxt.cuentaBancariaSaldo(lblNroCuenta.getText(), txt_monto_retiro.getText(), tipo);
+                            //agregar limpiar
+                        } catch (IOException ex) {
+                            Logger.getLogger(Panel_trans_retiro.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Su transaccion a sido cancelada, con exito!");
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No puede realizar este retiro \nSu saldo actual es menor a la cantidad que se desea retirar", "WARNING", WARNING_MESSAGE);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Panel_trans_retiro.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -29,7 +102,7 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblNroCuenta = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_monto_retiro = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -47,8 +120,8 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("--RETIRO");
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("--------");
+        lblNroCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        lblNroCuenta.setText("--------");
 
         jLabel2.setText("Nro Cuenta:");
 
@@ -59,11 +132,11 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 320, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addComponent(lblNroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,11 +148,17 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(lblNroCuenta))
                 .addContainerGap())
         );
 
-        jLabel4.setText("Monto a Depositar :");
+        txt_monto_retiro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_monto_retiroKeyTyped(evt);
+            }
+        });
+
+        jLabel4.setText("Monto a Retirar :");
 
         jLabel6.setText("Cedula:");
 
@@ -90,69 +169,93 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
         jLabel5.setText("Nombres:");
 
         btn_ok.setText("OK");
+        btn_ok.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_okActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(55, 55, 55)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel6))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lbl_nombres)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lbl_cedula)
-                                    .addGap(138, 138, 138)
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txt_monto_retiro, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(55, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_nombres)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbl_cedula)
+                        .addGap(141, 141, 141)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_monto_retiro, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(178, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btn_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 261, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(127, 127, 127)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_nombres)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(txt_monto_retiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel6)
-                                .addComponent(lbl_cedula)
-                                .addComponent(txt_monto_retiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel4)))
-                        .addComponent(lbl_nombres, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addGap(65, 65, 65)
-                    .addComponent(btn_ok)
-                    .addContainerGap(38, Short.MAX_VALUE)))
+                                .addComponent(lbl_cedula)))))
+                .addGap(54, 54, 54)
+                .addComponent(btn_ok))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_okActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_okActionPerformed
+        //doble confirmacion
+        if (!txt_monto_retiro.getText().equals("")) {
+            ok_guardar_Retiro();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar el campo para realizar la transaccion","WARNING",WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_okActionPerformed
+
+    private void txt_monto_retiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_monto_retiroKeyTyped
+        char car = evt.getKeyChar();
+
+        if (((!Character.isDigit(car))) && (txt_monto_retiro.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_monto_retiroKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ok;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblNroCuenta;
     private javax.swing.JLabel lbl_cedula;
     private javax.swing.JLabel lbl_nombres;
     private javax.swing.JTextField txt_monto_retiro;

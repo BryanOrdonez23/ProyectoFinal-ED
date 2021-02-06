@@ -331,9 +331,14 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_EstadoCuentaMousePressed
 
     private void btn_TransferenciaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TransferenciaMousePressed
-        todo_False();
-        p_transferencia.setVisible(true);
-        panel_contenedor.add(p_transferencia);
+        try {
+            todo_False();
+            p_transferencia.setVisible(true);
+            panel_contenedor.add(p_transferencia);
+            p_transferencia.CargarData(getCedulap());
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btn_TransferenciaMousePressed
 
@@ -361,16 +366,26 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_mi_PerfilMousePressed
 
     private void btn_Trans_depMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Trans_depMousePressed
-        todo_False();
-        p_transaccion_dep.setVisible(true);
-        panel_contenedor.add(p_transaccion_dep);
+        try {
+            todo_False();
+            p_transaccion_dep.setVisible(true);
+            panel_contenedor.add(p_transaccion_dep);
+            p_transaccion_dep.CargarData(cedulap);
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_btn_Trans_depMousePressed
 
     private void btn_Trans_retMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Trans_retMousePressed
-        todo_False();
-        p_transaccion_ret.setVisible(true);
-        panel_contenedor.add(p_transaccion_ret);
+        try {
+            todo_False();
+            p_transaccion_ret.setVisible(true);
+            panel_contenedor.add(p_transaccion_ret);
+            p_transaccion_ret.CargarData(cedulap);
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_Trans_retMousePressed
 
     private void btn_TransaccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TransaccionesActionPerformed
@@ -399,7 +414,8 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cerrar_sesionMouseExited
 
     private void btn_EstadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EstadoCuentaActionPerformed
-        // TODO add your handling code here:
+     
+        
     }//GEN-LAST:event_btn_EstadoCuentaActionPerformed
 
     /**
@@ -431,6 +447,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Frm_Cuenta_Cliente().setVisible(true);
             }

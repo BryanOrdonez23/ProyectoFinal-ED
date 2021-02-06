@@ -5,7 +5,6 @@
  */
 package Modelo;
 
-import Controlador.listaSA.ListaSimpleAvanzada;
 import java.util.Date;
 
 /**
@@ -17,26 +16,18 @@ public class Transaccion {
     private String tipo_trans;
     private Date fecha_trans;
     private Double monto_trans;
-    private CuentaBancaria cuentaBancaria;
-    private ListaSimpleAvanzada ListaMovimientos;
-
-    public ListaSimpleAvanzada getListaMovimientos() {
-        return ListaMovimientos;
-    }
-
-    public void setListaMovimientos(ListaSimpleAvanzada ListaMovimientos) {
-        this.ListaMovimientos = ListaMovimientos;
-    }
+    private String external_NumCuenta;
     
+//    private CuentaBancaria cuentaBancaria;
+//    private ListaSimpleAvanzada ListaMovimientos;
 
-    public CuentaBancaria getCuentaBancaria() {
-        return cuentaBancaria;
+    public String getExternal_NumCuenta() {
+        return external_NumCuenta;
     }
 
-    public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
-        this.cuentaBancaria = cuentaBancaria;
+    public void setExternal_NumCuenta(String external_NumCuenta) {
+        this.external_NumCuenta = external_NumCuenta;
     }
-
     public String getTipo_trans() {
         return tipo_trans;
     }

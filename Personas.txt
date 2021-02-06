@@ -1,3 +1,4 @@
 112202020, Cliente, brayan@gmail.com, Bryan Jaramillo, 12322224, 20, catamayo
 1145674747,Cliente,jean@gmail.com,Jean Agreda,09808929,79,Loja
 23432432432,Cliente,rubier@gmail.com,Rubier Padilla,0920202223,19,Loja
+1150472668,Cliente,juan@gmail.com,Juan Merino,5555,45,Loja
