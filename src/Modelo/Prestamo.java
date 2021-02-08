@@ -13,10 +13,20 @@ import java.util.Date;
  * @author Jean Agreda
  */
 public class Prestamo {
+
     private Double monto_final;
     private Double cuota_mensual;
     private Date fecha_inicio_prestamo;
     private Date fecha_final_prestamo;
+    private Double tasa;
+
+    public Double getTasa() {
+        return tasa;
+    }
+
+    public void setTasa(Double tasa) {
+        this.tasa = tasa;
+    }
     private CuentaBancaria cuentaBancaria;
     private ListaSimpleAvanzada listaPagos;
 
@@ -35,7 +45,6 @@ public class Prestamo {
     public void setListaPagos(ListaSimpleAvanzada listaPagos) {
         this.listaPagos = listaPagos;
     }
-    
 
     public Double getMonto_final() {
         return monto_final;
@@ -68,5 +77,5 @@ public class Prestamo {
     public void setFecha_final_prestamo(Date fecha_final_prestamo) {
         this.fecha_final_prestamo = fecha_final_prestamo;
     }
-    
+
 }

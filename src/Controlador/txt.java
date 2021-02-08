@@ -26,6 +26,10 @@ import java.util.logging.Logger;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -41,6 +45,7 @@ public class txt {
     File archivo_Polizas = new File("Polizas.txt");
     File archivo_Prestamo = new File("Prestamos.txt");
     File archivo_Transacciones = new File("Transacciones.txt");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * Metodo para crear el archivo en directorio en caso de que no hayan sido
@@ -356,11 +361,14 @@ public class txt {
 
     ///////Actualizar
     /**
-     * Se lee el archivo de las cuentas bancarias, en el momento de que se encuentre la cuenta buscada, se le guarda su nuevo saldo, ya sea sumando el deposito o restando el retiro
+     * Se lee el archivo de las cuentas bancarias, en el momento de que se
+     * encuentre la cuenta buscada, se le guarda su nuevo saldo, ya sea sumando
+     * el deposito o restando el retiro
+     *
      * @param cuentaBancaria El Nro de la cuenta bancaria que se desea encontrar
      * @param trans el monto de la transaccion
-     * @param tipo_Trans    el tipo de transaccion - DEPOSITO - RETIRO
-     * @throws IOException 
+     * @param tipo_Trans el tipo de transaccion - DEPOSITO - RETIRO
+     * @throws IOException
      */
     public void cuentaBancariaSaldo(String cuentaBancaria, String trans, String tipo_Trans) throws IOException {
 
@@ -368,19 +376,19 @@ public class txt {
         //Dar limite al arreglo dependiendo de el numero de cuentas registradas
         BufferedReader ler = new BufferedReader(new FileReader(archivo_CBancaria));
         String linea = "";
-        String le= "";
+        String le = "";
         double c = 0.0;
         System.out.println("ss");
         int i = 0;
         //   String[] l;
         int j = 0;
         while ((le = ler.readLine()) != null) {
-        i++;
-           // System.out.println("i"+i);
+            i++;
+            // System.out.println("i"+i);
         }
         String[] l = new String[i];
         while ((linea = leer.readLine()) != null) {
-         
+
             /*  cedula  tipo_Cuenta  Num_Cuenta  Saldo  poliza  prestamo */
             StringTokenizer st = new StringTokenizer(linea, ",");
             String cedula = st.nextToken();
@@ -391,7 +399,7 @@ public class txt {
             String prestamo = st.nextToken();
 
             if (cuentaBancaria.equals(num_Cuenta)) {
-                linea  = null;
+                linea = null;
                 if (tipo_Trans.equals("DEPOSITO")) {
                     c = Double.parseDouble(Saldo) + Double.parseDouble(trans);
                 }
@@ -404,23 +412,26 @@ public class txt {
                 //  System.out.println("lin "+ linea);
             }
 
-           // System.out.println("lin " + linea);
+            // System.out.println("lin " + linea);
             l[j] = linea;
-            System.out.println("lin "+ l[j]);
-           // i++;
-           j++;
+            System.out.println("lin " + l[j]);
+            // i++;
+            j++;
 
         }
-       grabar_txt_actualizarSaldoCuentaBancaria(l);
-       leer.close();
+        grabar_txt_actualizarSaldoCuentaBancaria(l);
+        leer.close();
         // return c;
     }
 
     /**
-     * Actualiza el archivo de las cuentas bancarias, actualizando solo el saldo de la cuenta bancaria en la cual se ha iniciado sesion
-     * @param linea Se le pasa un arreglo de Strings el cual contiene todas las cuentas bancarias junto con la cuenta actualizada
+     * Actualiza el archivo de las cuentas bancarias, actualizando solo el saldo
+     * de la cuenta bancaria en la cual se ha iniciado sesion
+     *
+     * @param linea Se le pasa un arreglo de Strings el cual contiene todas las
+     * cuentas bancarias junto con la cuenta actualizada
      */
-    public void grabar_txt_actualizarSaldoCuentaBancaria(String [] linea) {
+    public void grabar_txt_actualizarSaldoCuentaBancaria(String[] linea) {
         FileWriter fws;
         PrintWriter pw;
 
@@ -428,28 +439,30 @@ public class txt {
             fws = new FileWriter(archivo_CBancaria);
             pw = new PrintWriter(fws);
             // pw = new PrintWriter( new FileWriter("Numero.txt"));
-             for (int i = 0; i < linea.length; i++) {
+            for (int i = 0; i < linea.length; i++) {
                 String acumulada = linea[i];
                 pw.println(acumulada);
-            }       
-            
-           
-         //   pw.println(linea);
+            }
+
+            //   pw.println(linea);
             pw.close();
         } catch (IOException ex) {
             System.out.println("Error al grabar archivo: " + ex.getMessage());
             System.out.println(ex.getMessage());
         }
     }
+
     /**
-     * El metodo busca por el numero de cuenta Bancaria y extrae el saldo actual de esa cuenta
-     * @param nroCuenta  
+     * El metodo busca por el numero de cuenta Bancaria y extrae el saldo actual
+     * de esa cuenta
+     *
+     * @param nroCuenta
      * @return el saldo actual de la cuentaBancaria buscada
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
-     public String buscarNroCuenta(String nroCuenta) throws FileNotFoundException, IOException {
-     String saldo ="0.0";
+    public String buscarNroCuenta(String nroCuenta) throws FileNotFoundException, IOException {
+        String saldo = "0.0";
         BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria));
         String linea = "";
         while ((linea = leer.readLine()) != null) {
@@ -461,22 +474,25 @@ public class txt {
             String cinco_poliza = st.nextToken();
             String seis_prestamo = st.nextToken();
             if (nroCuenta.equals(tres_numeroCuenta)) {
-                saldo =cuatro_Saldo;
+                saldo = cuatro_Saldo;
             }
         }
         leer.close();
         return saldo;
     }
+
     /**
      * El metodo verifica si la cuenta Bancaria existe
+     *
      * @param nroCuenta
-     * @return true si la cuenta bancaria existe, false si la cuenta bancaria no existe
+     * @return true si la cuenta bancaria existe, false si la cuenta bancaria no
+     * existe
      * @throws FileNotFoundException
-     * @throws IOException 
-     */ 
+     * @throws IOException
+     */
     public boolean existeCuenta(String nroCuenta) throws FileNotFoundException, IOException {
-     boolean bol =false;
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
+        boolean bol = false;
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -494,4 +510,32 @@ public class txt {
         }
         return bol;
     }
+
+    public List<Prestamo> leerPrestamos() throws IOException, ParseException {
+        List<Prestamo> lista = new ArrayList<>();
+
+        try ( BufferedReader reader = new BufferedReader(new FileReader(archivo_Prestamo))) {
+            String linea;
+
+            while ((linea = reader.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+
+                Prestamo prm = new Prestamo();
+                CuentaBancaria cuenta = new CuentaBancaria();
+
+                cuenta.setNum_Cuenta(st.nextToken());
+                prm.setCuentaBancaria(cuenta);
+                prm.setMonto_final(Double.parseDouble(st.nextToken()));
+                prm.setCuota_mensual(Double.parseDouble(st.nextToken()));
+                prm.setTasa(Double.parseDouble(st.nextToken()));
+                prm.setFecha_inicio_prestamo(dateFormat.parse(st.nextToken()));
+                prm.setFecha_final_prestamo(dateFormat.parse(st.nextToken()));
+
+                lista.add(prm);
+            }
+        }
+
+        return lista;
+    }
+
 }
