@@ -32,11 +32,13 @@ public class Panel_trans_deposito extends javax.swing.JPanel {
     public Panel_trans_deposito() {
 
         initComponents();
-
+        limpiar();
     }
 
     /**
-     * Se le manda la cedula del frame principal y se carga los datos de acuerdo a esa cedula
+     * Se le manda la cedula del frame principal y se carga los datos de acuerdo
+     * a esa cedula
+     *
      * @param cedula
      * @return devuelve un arreglo de 2 objetos el 1ero CuentaB y el 2do Persona
      * @throws IOException
@@ -217,26 +219,30 @@ public class Panel_trans_deposito extends javax.swing.JPanel {
             int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de realizar este retiro?", "YES-NO", YES_NO_OPTION);
             if (opcion == 0) {
                 ok_guardarDeposito();
+                limpiar();
             } else {
                 JOptionPane.showMessageDialog(null, "Su transaccion a sido cancelada, con exito!", "Info", INFORMATION_MESSAGE);
+                limpiar();
             }
 
         } else {
             JOptionPane.showMessageDialog(null, "Debe llenar el campo para realizar la transaccion", "WARNING", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btn_okMousePressed
-
+    public void limpiar() {
+        txt_monto_depositar.setText("");
+    }
     private void txt_monto_depositarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_monto_depositarKeyTyped
         char car = evt.getKeyChar();
 
         if (((!Character.isDigit(car))) && (txt_monto_depositar.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
         } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txt_monto_depositarKeyTyped
 

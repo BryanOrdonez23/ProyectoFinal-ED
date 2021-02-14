@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Controlador.Pilas.Pila;
 import Modelo.CuentaBancaria;
 import Modelo.CuentaUsuario;
 import Modelo.Persona;
@@ -536,6 +537,217 @@ public class txt {
         }
 
         return lista;
+    }
+    
+     /**
+     * Del usuario ingresado, se extrae informacion de su cuenta y se la guarda
+     * en una PILA, dicha informacion se utilizara para realizar preguntas de
+     * rigor
+     *
+     * @param usuario
+     * @return una pila con las respuestas a las preguntas planteadas
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public Pila InicioSesionCliente(String usuario) throws FileNotFoundException, IOException {
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario)); // lee del archivo de las cuentas de usuario
+        BufferedReader leerDosCB = new BufferedReader(new FileReader(archivo_CBancaria)); // lee del archivo cuentas bancarias   
+        BufferedReader leerTresP = new BufferedReader(new FileReader(archivo_Persona)); // lee del archivo de personas
+
+        Pila p = new Pila(3);//en caso de querer aumentar el numero de preguntas, cambiar aqui el tamaño maximo
+        int tam = 0;
+        String cedula = "";
+        String linea = "";
+        String lineaDos = "";
+        String lineaTres = "";
+        while ((linea = leer.readLine()) != null) {
+            StringTokenizer st = new StringTokenizer(linea, ",");
+            String uno_ced = st.nextToken();
+            String dos_us = st.nextToken();
+            String tres_contra = st.nextToken();
+            if (dos_us.equals(usuario)) {
+
+                // cedula = uno_ced;
+                while ((lineaDos = leerDosCB.readLine()) != null) {
+                    StringTokenizer stCB = new StringTokenizer(lineaDos, ",");
+                    String ced_CB = stCB.nextToken();
+                    String dos_tipo = stCB.nextToken();
+                    String tres_numeroCuenta = stCB.nextToken();
+//                    String cuatro_Saldo = stCB.nextToken();
+//                    String cinco_poliza = stCB.nextToken();
+//                    String seis_prestamo = stCB.nextToken();
+                    if (uno_ced.equals(ced_CB)) {
+
+                        while ((lineaTres = leerTresP.readLine()) != null) {
+                            StringTokenizer stP = new StringTokenizer(lineaTres, ",");
+                            String un_ced = stP.nextToken();
+//                            String ds_rol = stP.nextToken();
+//                            String trs_correo = stP.nextToken();
+//                            String cua_nomb = stP.nextToken();
+//                            String cin_tlf = stP.nextToken();
+//                            String seis_edad = stP.nextToken();
+//                            String site_direccion = stP.nextToken();
+
+                            if (ced_CB.equals(un_ced)) {
+//Ultimos 4 digitos de la cedula
+                                tam = un_ced.length();
+                                int i = 0;
+                                int limit = 0;
+                                for (i = tam; i >= 0; i--) {
+                                    if (limit >= 4) {
+                                        break;
+                                    }
+                                    limit++;
+                                }
+                                cedula = un_ced.substring(i, tam);
+                                System.out.println("ced -- " + cedula);
+                                p.push(cedula);
+// Primeros dos digitos y ultimos dos digitos de la cedula
+                                i = 0;
+                                limit = 0;
+                                for (i = tam; i >= 0; i--) {
+                                    if (limit >= 2) {
+                                        break;
+                                    }
+                                    limit++;
+                                }
+                                cedula = "";
+                                cedula = un_ced.substring(0, 2) + un_ced.substring(i, tam);
+                                p.push(cedula);
+//5 Ultimos digitos de la Cuenta Bancaria
+                                i = 0;
+                                limit = 0;
+                                tam = tres_numeroCuenta.length();
+                                for (i = tam; i >= 0; i--) {
+                                    if (limit >= 5) {
+                                        break;
+                                    }
+                                    limit++;
+                                }
+                                String CB;
+                                CB = tres_numeroCuenta.substring(i, tam);
+                                p.push(CB);
+                            }
+                        }
+                    }
+
+                }
+
+                break;
+            }
+        }
+        leer.close();
+        return p;
+    }
+
+    ///////Actualizar
+    /**
+     * Se lee el archivo de las cuentas de usuario, en el momento de que se
+     * encuentre la cuenta buscada, se le guarda su nueva contraseña
+     *
+     * @param cuentaUsuario
+     * @param nuevaContrasena
+     * @throws IOException
+     */
+    public void cuentaUsuarioContraseña(String cuentaUsuario, String nuevaContrasena) throws IOException {
+
+        BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario));
+        //Dar limite al arreglo dependiendo de el numero de cuentas registradas
+        BufferedReader ler = new BufferedReader(new FileReader(archivo_CUsuario));
+        String linea = "";
+        String le = "";
+        int i = 0;
+        int j = 0;
+        while ((le = ler.readLine()) != null) {
+            i++;
+        }
+        String[] l = new String[i];
+        while ((linea = leer.readLine()) != null) {
+
+            /*  cedula  usuario  contraseña*/
+            StringTokenizer st = new StringTokenizer(linea, ",");
+            String cedula = st.nextToken();
+            String usuario = st.nextToken();
+            String contrasena = st.nextToken();
+            if (cuentaUsuario.equals(cedula)) { // por cedula
+                linea = null;
+                contrasena = nuevaContrasena;
+                System.out.println(" salto final " + nuevaContrasena + " " + contrasena);
+                linea = cedula + "," + usuario + "," + contrasena;
+            }
+            l[j] = linea;
+            System.out.println("lin " + l[j]);
+            // i++;
+            j++;
+
+        }
+        grabar_txt_actualizarContraseñaCuentaUsuario(l);
+        leer.close();
+        // return c;
+    }
+
+    /**
+     * Actualiza el archivo de las cuentas de usuario, actualizando solo la
+     * contraseña de la cuenta bancaria en la cual se ha iniciado sesion
+     *
+     * @param linea Se le pasa un arreglo de Strings el cual contiene todas las
+     * cuentas de usuario junto con la cuenta actualizada
+     */
+    public void grabar_txt_actualizarContraseñaCuentaUsuario(String[] linea) {
+        FileWriter fws;
+        PrintWriter pw;
+
+        try {
+            fws = new FileWriter(archivo_CUsuario);
+            pw = new PrintWriter(fws);
+            // pw = new PrintWriter( new FileWriter("Numero.txt"));
+            for (int i = 0; i < linea.length; i++) {
+                String acumulada = linea[i];
+                pw.println(acumulada);
+            }
+            pw.close();
+        } catch (IOException ex) {
+            System.out.println("Error al grabar archivo: " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    /**
+     * El metodo regresa la contraseña para validarla a lo que quiera cambiar la contraseña
+     * @param Ced
+     * @return 
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public String CuentaUsuario_Val_Contra(String Ced) throws FileNotFoundException, IOException {
+      
+        boolean b = false;
+         String cedu = "";
+          String ctr = "";
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario))) {
+            String linea = "";
+           
+            String us = "";
+           
+            while ((linea = leer.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                String cedula = st.nextToken();
+                String usuario = st.nextToken();
+                String contrasena = st.nextToken();
+                if (Ced.equals(cedula)) {
+                    System.out.println("encotrada");
+                    b = true;
+                    cedu = cedula;
+                    ctr = contrasena;
+                    
+                }
+            }
+          
+
+        }
+        System.out.println("ss "+ ctr);
+        return ctr;
     }
 
 }

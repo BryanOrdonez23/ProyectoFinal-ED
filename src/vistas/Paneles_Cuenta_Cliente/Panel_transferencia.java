@@ -9,11 +9,13 @@ import Controlador.Controlador_Transaccion;
 import Controlador.txt;
 import Modelo.CuentaBancaria;
 import Modelo.Persona;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static javax.swing.JOptionPane.WARNING_MESSAGE;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 
@@ -31,6 +33,7 @@ public class Panel_transferencia extends javax.swing.JPanel {
      */
     public Panel_transferencia() {
         initComponents();
+         limpiar();
     }
 
     /**
@@ -189,6 +192,12 @@ public class Panel_transferencia extends javax.swing.JPanel {
             }
         });
 
+        txt_monto_transferir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_monto_transferirKeyTyped(evt);
+            }
+        });
+
         jLabel4.setText("Monto a Transferir :");
 
         jLabel5.setText("Nombres:");
@@ -198,6 +207,12 @@ public class Panel_transferencia extends javax.swing.JPanel {
         lbl_cedula.setText("--------------");
 
         jLabel7.setText("Nro Cuenta:");
+
+        txt_nro_cuenta_transferir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nro_cuenta_transferirKeyTyped(evt);
+            }
+        });
 
         jLabel8.setForeground(new java.awt.Color(255, 51, 51));
         jLabel8.setText("*Le recordamos a nuestros usuarios que solo es posible realizar transferencias entre cuentas de esta Cooperativa");
@@ -268,6 +283,7 @@ public class Panel_transferencia extends javax.swing.JPanel {
                 if (controlTxt.existeCuenta(txt_nro_cuenta_transferir.getText())) {
                     ok_guardar_Retiro();
                     ok_guardarDeposito();
+                     limpiar();
                 }else{JOptionPane.showMessageDialog(null, "La Cuenta Bancaria a transferir no existe\nCompruebe los datos ingresados","WARNING",WARNING_MESSAGE);}
             } catch (IOException ex) {
                 Logger.getLogger(Panel_transferencia.class.getName()).log(Level.SEVERE, null, ex);
@@ -279,7 +295,34 @@ public class Panel_transferencia extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btn_okActionPerformed
 
+    private void txt_nro_cuenta_transferirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nro_cuenta_transferirKeyTyped
+         char car = evt.getKeyChar();
 
+        if (((!Character.isDigit(car))) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros","ERROR",WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_nro_cuenta_transferirKeyTyped
+
+    private void txt_monto_transferirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_monto_transferirKeyTyped
+      char car = evt.getKeyChar();
+
+        if (((!Character.isDigit(car))) && (txt_monto_transferir.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_monto_transferirKeyTyped
+
+public void limpiar(){
+    txt_monto_transferir.setText("");
+    txt_nro_cuenta_transferir.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ok;
     private javax.swing.JLabel jLabel1;

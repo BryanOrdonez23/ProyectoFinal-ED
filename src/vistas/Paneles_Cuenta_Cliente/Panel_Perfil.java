@@ -8,7 +8,16 @@ package vistas.Paneles_Cuenta_Cliente;
 import Controlador.txt;
 import Modelo.CuentaBancaria;
 import Modelo.Persona;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -23,6 +32,25 @@ public class Panel_Perfil extends javax.swing.JPanel {
      */
     public Panel_Perfil() {
         initComponents();
+        
+        limpiar();
+
+        ImageIcon verNuevaContra = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+        Icon fondo1 = new ImageIcon(verNuevaContra.getImage().getScaledInstance(btnT_newC.getWidth(), btnT_newC.getHeight(), Image.SCALE_DEFAULT));
+        btnT_newC.setIcon(fondo1);
+        this.repaint();
+
+        ImageIcon verCContra = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+        Icon fondo2 = new ImageIcon(verCContra.getImage().getScaledInstance(btnT_CA.getWidth(), btnT_CA.getHeight(), Image.SCALE_DEFAULT));
+        btnT_CA.setIcon(fondo2);
+        this.repaint();
+
+        ImageIcon verAContra = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+        Icon fondo3 = new ImageIcon(verAContra.getImage().getScaledInstance(btnT_CC.getWidth(), btnT_CC.getHeight(), Image.SCALE_DEFAULT));
+        btnT_CC.setIcon(fondo3);
+        this.repaint();
+
+        panel_cambioContrasena.setVisible(false);
         
     }
 
@@ -61,9 +89,18 @@ public class Panel_Perfil extends javax.swing.JPanel {
         lbl_cedula = new javax.swing.JLabel();
         lbl_direccion = new javax.swing.JLabel();
         lbl_edad = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        btn_cambiar_contraseña = new javax.swing.JButton();
+        btn_Toggle_CambiarContra = new javax.swing.JToggleButton();
+        panel_cambioContrasena = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        btn_guardarCambio = new javax.swing.JButton();
+        txt_ContraAnterior = new javax.swing.JPasswordField();
+        txt_ContraNueva = new javax.swing.JPasswordField();
+        txt_ConfirmaContra = new javax.swing.JPasswordField();
+        btnT_newC = new javax.swing.JToggleButton();
+        btnT_CA = new javax.swing.JToggleButton();
+        btnT_CC = new javax.swing.JToggleButton();
 
         jPanel1.setBackground(new java.awt.Color(40, 59, 224));
 
@@ -83,7 +120,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_nro_cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,40 +160,107 @@ public class Panel_Perfil extends javax.swing.JPanel {
 
         lbl_edad.setText("-----------------------");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        btn_Toggle_CambiarContra.setText("Cambiar Contraseña");
+        btn_Toggle_CambiarContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Toggle_CambiarContraActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
 
-        btn_cambiar_contraseña.setText("Cambiar Contraseña");
+        panel_cambioContrasena.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambio de Contraseña"));
+        panel_cambioContrasena.setLayout(null);
+
+        jLabel9.setText("Contraseña Anterior:");
+        panel_cambioContrasena.add(jLabel9);
+        jLabel9.setBounds(20, 30, 140, 16);
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Nueva Contraseña:");
+        panel_cambioContrasena.add(jLabel10);
+        jLabel10.setBounds(220, 30, 130, 16);
+
+        jLabel11.setText("Confirma Contraseña:");
+        panel_cambioContrasena.add(jLabel11);
+        jLabel11.setBounds(210, 70, 137, 16);
+
+        btn_guardarCambio.setText("Guardar Cambios");
+        btn_guardarCambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarCambioActionPerformed(evt);
+            }
+        });
+        panel_cambioContrasena.add(btn_guardarCambio);
+        btn_guardarCambio.setBounds(440, 100, 140, 29);
+
+        txt_ContraAnterior.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ContraAnteriorKeyTyped(evt);
+            }
+        });
+        panel_cambioContrasena.add(txt_ContraAnterior);
+        txt_ContraAnterior.setBounds(20, 60, 130, 26);
+
+        txt_ContraNueva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ContraNuevaKeyTyped(evt);
+            }
+        });
+        panel_cambioContrasena.add(txt_ContraNueva);
+        txt_ContraNueva.setBounds(360, 30, 160, 26);
+
+        txt_ConfirmaContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ConfirmaContraKeyTyped(evt);
+            }
+        });
+        panel_cambioContrasena.add(txt_ConfirmaContra);
+        txt_ConfirmaContra.setBounds(360, 70, 160, 26);
+
+        btnT_newC.setBorderPainted(false);
+        btnT_newC.setContentAreaFilled(false);
+        btnT_newC.setFocusPainted(false);
+        btnT_newC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnT_newCActionPerformed(evt);
+            }
+        });
+        panel_cambioContrasena.add(btnT_newC);
+        btnT_newC.setBounds(530, 30, 40, 25);
+
+        btnT_CA.setBorderPainted(false);
+        btnT_CA.setContentAreaFilled(false);
+        btnT_CA.setFocusPainted(false);
+        btnT_CA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnT_CAActionPerformed(evt);
+            }
+        });
+        panel_cambioContrasena.add(btnT_CA);
+        btnT_CA.setBounds(150, 60, 40, 25);
+
+        btnT_CC.setBorderPainted(false);
+        btnT_CC.setContentAreaFilled(false);
+        btnT_CC.setFocusPainted(false);
+        btnT_CC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnT_CCActionPerformed(evt);
+            }
+        });
+        panel_cambioContrasena.add(btnT_CC);
+        btnT_CC.setBounds(530, 70, 40, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_cambiar_contraseña)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 578, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_Toggle_CambiarContra)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -178,6 +282,10 @@ public class Panel_Perfil extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lbl_nmro, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(panel_cambioContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,32 +312,216 @@ public class Panel_Perfil extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lbl_nmro))
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_cambiar_contraseña)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_Toggle_CambiarContra)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel_cambioContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_Toggle_CambiarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Toggle_CambiarContraActionPerformed
+        Seleccionar();
+    }//GEN-LAST:event_btn_Toggle_CambiarContraActionPerformed
+
+    private void btn_guardarCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarCambioActionPerformed
+        if (!String.valueOf(txt_ConfirmaContra.getPassword()).equals("") || !String.valueOf(txt_ContraAnterior.getPassword()).equals("") || !String.valueOf(txt_ContraNueva.getPassword()).equals("")) {
+            if (String.valueOf(txt_ConfirmaContra.getPassword()).length() >= 4 && String.valueOf(txt_ContraNueva.getPassword()).length() >= 4) {
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de realizar esta accion?", "YES-NO", YES_NO_OPTION);
+                if (opcion == 0) {
+                    try {
+
+                        boolean val = false;
+                        panel_cambioContrasena.setVisible(true);
+                        String validar_Contra = controltxt.CuentaUsuario_Val_Contra(lbl_cedula.getText());
+                        if (validar_Contra.equals(String.valueOf(txt_ContraAnterior.getPassword()))) {
+                            val = true;
+                            txt_ContraAnterior.setBackground(new Color(204, 255, 204, 255));
+                            if (String.valueOf(txt_ContraNueva.getPassword()).equals(String.valueOf(txt_ConfirmaContra.getPassword()))) {
+                                txt_ConfirmaContra.setBackground(new Color(204, 255, 204, 255));
+                                txt_ContraNueva.setBackground(new Color(204, 255, 204, 255));
+                                //Como ambas son correctas
+                                controltxt.cuentaUsuarioContraseña(lbl_cedula.getText(), String.valueOf(txt_ConfirmaContra.getPassword()));
+                                limpiar();
+                            } else {
+                                txt_ConfirmaContra.setBackground(new Color(255, 153, 153, 255));
+                                JOptionPane.showMessageDialog(null, "Verifique que los campos llenados sean identicos ", "ERROR", ERROR_MESSAGE);
+                            }
+                        } else {
+                            txt_ContraAnterior.setBackground(new Color(255, 153, 153, 255));
+                            JOptionPane.showMessageDialog(null, "La contraseña anterior no corresponde ", "ERROR", ERROR_MESSAGE);
+                        }
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(Panel_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Su pedido de cambio de contraseña a sido cancelado, con exito!", "INFO", INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El minimo de caracteres para la contrasena es ' 4 ' ", "INFO", INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar los campos\nPara poder realizar el cambio", "INFO", INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_guardarCambioActionPerformed
+
+    private void txt_ContraAnteriorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ContraAnteriorKeyTyped
+        char car = evt.getKeyChar();
+
+        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE)|| (car == (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_ContraAnteriorKeyTyped
+
+    private void txt_ContraNuevaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ContraNuevaKeyTyped
+        char car = evt.getKeyChar();
+
+        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE)|| (car == (char) KeyEvent.VK_SPACE) ) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_ContraNuevaKeyTyped
+
+    private void txt_ConfirmaContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ConfirmaContraKeyTyped
+        char car = evt.getKeyChar();
+
+        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios",  "AVISO", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_ConfirmaContraKeyTyped
+
+    private void btnT_newCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnT_newCActionPerformed
+        SeleccionarT();
+    }//GEN-LAST:event_btnT_newCActionPerformed
+
+    private void btnT_CAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnT_CAActionPerformed
+        SeleccionarButton_AnteriorC();
+    }//GEN-LAST:event_btnT_CAActionPerformed
+
+    private void btnT_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnT_CCActionPerformed
+        SeleccionarButton_ConfirmarContra();
+    }//GEN-LAST:event_btnT_CCActionPerformed
+  public void limpiar() {
+        txt_ConfirmaContra.setText("");
+        txt_ContraAnterior.setText("");
+        txt_ContraNueva.setText("");
+       txt_ConfirmaContra.setBackground(Color.white);
+        txt_ContraAnterior.setBackground(Color.white);
+        txt_ContraNueva.setBackground(Color.white);
+    }
+  
+   /**
+     *Usando un toggle botton, seteamos un icono que denote que se quiere ver la contraseña
+     * y viseversa de la Anterior contraseña
+     */
+    private void SeleccionarButton_AnteriorC() {
+        if (btnT_CA.isSelected()) {
+            ImageIcon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/ojoBloq.png"));
+            Icon fondo1 = new ImageIcon(imagen2.getImage().getScaledInstance(btnT_CA.getWidth(), btnT_CA.getHeight(), Image.SCALE_DEFAULT));
+            btnT_CA.setIcon(fondo1);
+            this.repaint();
+            txt_ContraAnterior.setEchoChar((char) 0);
+
+        } else {
+            ImageIcon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+            Icon fondo2 = new ImageIcon(imagen3.getImage().getScaledInstance(btnT_CA.getWidth(), btnT_CA.getHeight(), Image.SCALE_DEFAULT));
+            btnT_CA.setIcon(fondo2);
+            this.repaint();
+            txt_ContraAnterior.setEchoChar('*');
+        }
+
+    }
+     /**
+     *Usando un toggle botton, seteamos un icono que denote que se quiere ver la contraseña
+     * y viseversa de la confirmacion de la contraseña
+     */
+    private void SeleccionarButton_ConfirmarContra() {
+        if (btnT_CC.isSelected()) {
+            ImageIcon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/ojoBloq.png"));
+            Icon fondo1 = new ImageIcon(imagen2.getImage().getScaledInstance(btnT_CC.getWidth(), btnT_CC.getHeight(), Image.SCALE_DEFAULT));
+            btnT_CC.setIcon(fondo1);
+            this.repaint();
+            txt_ConfirmaContra.setEchoChar((char) 0);
+
+        } else {
+            ImageIcon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+            Icon fondo2 = new ImageIcon(imagen3.getImage().getScaledInstance(btnT_CC.getWidth(), btnT_CC.getHeight(), Image.SCALE_DEFAULT));
+            btnT_CC.setIcon(fondo2);
+            this.repaint();
+            txt_ConfirmaContra.setEchoChar('*');
+        }
+
+    }
+
+    /**
+     *Usando un toggle botton, seteamos un icono que denote que se quiere ver la contraseña
+     * y viseversa de la Nueva contraseña
+     */
+    private void SeleccionarT() {
+        if (btnT_newC.isSelected()) {
+            ImageIcon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/ojoBloq.png"));
+            Icon fondo1 = new ImageIcon(imagen2.getImage().getScaledInstance(btnT_newC.getWidth(), btnT_newC.getHeight(), Image.SCALE_DEFAULT));
+            btnT_newC.setIcon(fondo1);
+            this.repaint();
+            txt_ContraNueva.setEchoChar((char) 0);
+
+        } else {
+            ImageIcon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+            Icon fondo2 = new ImageIcon(imagen3.getImage().getScaledInstance(btnT_newC.getWidth(), btnT_newC.getHeight(), Image.SCALE_DEFAULT));
+            btnT_newC.setIcon(fondo2);
+            this.repaint();
+            txt_ContraNueva.setEchoChar('*');
+        }
+
+    }
+
+    /**
+     * Dado que se usa un toggle botton, cuando este seleccionado se mostrara el
+     * panel caso contrario no sera visible
+     */
+    private void Seleccionar() {
+        if (btn_Toggle_CambiarContra.isSelected()) {
+            panel_cambioContrasena.setVisible(true);
+           
+        } else {
+            panel_cambioContrasena.setVisible(false);
+        }
+        limpiar();
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_cambiar_contraseña;
+    private javax.swing.JToggleButton btnT_CA;
+    private javax.swing.JToggleButton btnT_CC;
+    private javax.swing.JToggleButton btnT_newC;
+    private javax.swing.JToggleButton btn_Toggle_CambiarContra;
+    private javax.swing.JButton btn_guardarCambio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_cedula;
     private javax.swing.JLabel lbl_direccion;
     private javax.swing.JLabel lbl_edad;
     private javax.swing.JLabel lbl_nmro;
     private javax.swing.JLabel lbl_nombres;
     private javax.swing.JLabel lbl_nro_cuenta;
+    private javax.swing.JPanel panel_cambioContrasena;
+    private javax.swing.JPasswordField txt_ConfirmaContra;
+    private javax.swing.JPasswordField txt_ContraAnterior;
+    private javax.swing.JPasswordField txt_ContraNueva;
     // End of variables declaration//GEN-END:variables
 }

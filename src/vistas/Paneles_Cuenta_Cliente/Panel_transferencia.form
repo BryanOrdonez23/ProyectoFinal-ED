@@ -167,6 +167,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_monto_transferir">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_monto_transferirKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -194,6 +197,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_nro_cuenta_transferir">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nro_cuenta_transferirKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>

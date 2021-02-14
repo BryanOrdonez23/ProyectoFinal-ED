@@ -6,6 +6,8 @@
 package vistas;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
@@ -296,10 +298,12 @@ public class Frm_Principal_Info extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_inciar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inciar_sesionActionPerformed
-        // TODO add your handling code here:
-        Frm_Login_Cliente frm_Login_Cliente = new Frm_Login_Cliente();
-        frm_Login_Cliente.setVisible(true);
-        dispose();
+       int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Iniciar Sesion?", "YES-NO", YES_NO_OPTION);
+        if (opcion == 0) {
+            Frm_Login_Cliente frm_Login_Cliente = new Frm_Login_Cliente();
+            frm_Login_Cliente.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btn_inciar_sesionActionPerformed
 
     private void btn_inciar_sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_inciar_sesionMouseEntered
@@ -339,6 +343,7 @@ public class Frm_Principal_Info extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Frm_Principal_Info().setVisible(true);
             }

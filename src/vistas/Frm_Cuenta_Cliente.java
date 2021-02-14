@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 import vistas.Paneles_Cuenta_Cliente.Panel_Estado_Cuenta;
 import vistas.Paneles_Cuenta_Cliente.Panel_Inicio;
 import vistas.Paneles_Cuenta_Cliente.Panel_Perfil;
@@ -159,11 +161,6 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_EstadoCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_EstadoCuentaMousePressed(evt);
-            }
-        });
-        btn_EstadoCuenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_EstadoCuentaActionPerformed(evt);
             }
         });
 
@@ -336,6 +333,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_transferencia.setVisible(true);
             panel_contenedor.add(p_transferencia);
             p_transferencia.CargarData(getCedulap());
+             p_transferencia.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -360,6 +358,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_perfil.setVisible(true);
             panel_contenedor.add(p_perfil);
             p_perfil.CargarData(getCedulap());
+               p_perfil.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -371,6 +370,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_transaccion_dep.setVisible(true);
             panel_contenedor.add(p_transaccion_dep);
             p_transaccion_dep.CargarData(cedulap);
+                p_transaccion_dep.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -383,6 +383,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_transaccion_ret.setVisible(true);
             panel_contenedor.add(p_transaccion_ret);
             p_transaccion_ret.CargarData(cedulap);
+              p_transaccion_ret.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -400,9 +401,12 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_TransaccionesActionPerformed
 
     private void btn_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionActionPerformed
-        Frm_Principal_Info frm_Principal_Info = new Frm_Principal_Info();
-        frm_Principal_Info.setVisible(true);
-        dispose();
+         int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Cerrar Sesion?", "YES-NO", YES_NO_OPTION);
+        if (opcion == 0) {
+            Frm_Principal_Info frm_Principal_Info = new Frm_Principal_Info();
+            frm_Principal_Info.setVisible(true);
+            this.dispose();
+        } 
     }//GEN-LAST:event_btn_cerrar_sesionActionPerformed
 
     private void btn_cerrar_sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseEntered
@@ -412,11 +416,6 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     private void btn_cerrar_sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseExited
         btn_cerrar_sesion.setForeground(Color.WHITE);
     }//GEN-LAST:event_btn_cerrar_sesionMouseExited
-
-    private void btn_EstadoCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EstadoCuentaActionPerformed
-     
-        
-    }//GEN-LAST:event_btn_EstadoCuentaActionPerformed
 
     /**
      * @param args the command line arguments

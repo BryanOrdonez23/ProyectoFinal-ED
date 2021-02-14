@@ -6,12 +6,20 @@
 package vistas;
 
 import Controlador.Controlador_Inicio_Sesion;
+import Controlador.Pilas.Pila;
 import Controlador.txt;
+import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
 /**
  *
  * @author mac
@@ -20,12 +28,21 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
 
     Controlador_Inicio_Sesion control = new Controlador_Inicio_Sesion();
     txt controltxt = new txt();
+    int intentos = 0;
     /**
      * Creates new form Frm_Login_Cliente
      */
     public Frm_Login_Cliente() {
         initComponents();
-        this.setLocationRelativeTo(this);
+     
+         setLocationRelativeTo(null);
+        setResizable(false);
+         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        ImageIcon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+        Icon fondo1 = new ImageIcon(imagen2.getImage().getScaledInstance(btn_ver.getWidth(), btn_ver.getHeight(), Image.SCALE_DEFAULT));
+        btn_ver.setIcon(fondo1);
+        this.repaint();
     }
 
     /**
@@ -40,14 +57,16 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_usuario = new javax.swing.JTextField();
-        txt_contra = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btn_entrar = new javax.swing.JButton();
         btn_regresar = new javax.swing.JButton();
+        txt_usuario = new javax.swing.JTextField();
+        lbl_mensajewarning = new javax.swing.JLabel();
+        btn_ver = new javax.swing.JToggleButton();
+        txt_contra = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +99,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,31 +123,66 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
             }
         });
 
+        txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_usuarioKeyTyped(evt);
+            }
+        });
+
+        lbl_mensajewarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_mensajewarning.setText("Señor Usuario cuenta,con 3 intentos para ingresar a su cuenta");
+
+        btn_ver.setBorderPainted(false);
+        btn_ver.setContentAreaFilled(false);
+        btn_ver.setFocusPainted(false);
+        btn_ver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_verActionPerformed(evt);
+            }
+        });
+
+        txt_contra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_contraKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(btn_regresar))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btn_entrar)))
+                        .addGap(15, 15, 15)
+                        .addComponent(lbl_mensajewarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btn_regresar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btn_entrar))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel1))
+                                        .addGap(32, 32, 32)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btn_ver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,22 +191,27 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btn_ver, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_regresar)
-                            .addComponent(btn_entrar)))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_entrar))))
                 .addGap(19, 19, 19)
                 .addComponent(jLabel4)
-                .addGap(40, 40, 40))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lbl_mensajewarning)
+                .addGap(12, 12, 12))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -161,30 +220,202 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarActionPerformed
-        Frm_Principal_Info fpi = new Frm_Principal_Info();
-        fpi.setVisible(true);
-        this.dispose();
+          int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Regresar a la pagina Principal?", "YES-NO", YES_NO_OPTION);
+        if (opcion == 0) {
+            Frm_Principal_Info fpi = new Frm_Principal_Info();
+            fpi.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_btn_regresarActionPerformed
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
-        if (txt_usuario.getText().length() > 0 && txt_contra.getText().length() > 0) {
+       if (txt_usuario.getText().length() > 0 && String.valueOf(txt_contra.getPassword()).length() > 0) {
             try {
-                if (control.InicioSesionCliente(txt_usuario.getText(), txt_contra.getText())) {
-                    
-                    JOptionPane.showMessageDialog(null,"Bienvenido");
-                    String cedu = controltxt.BusquedaCuentasaux(txt_usuario.getText(), txt_contra.getText());
-                    Frm_Cuenta_Cliente frm_Cuenta_Cliente = new Frm_Cuenta_Cliente(cedu);
-                    frm_Cuenta_Cliente.setVisible(true);
-                    dispose();
-                }else{
-                    JOptionPane.showMessageDialog(null,"Credenciales de acceso invalidas");
+                if (control.InicioSesionCliente(txt_usuario.getText(), String.valueOf(txt_contra.getPassword()))) {
+
+                    JOptionPane.showMessageDialog(null, "Bienvenido");
+                    String cedu = controltxt.BusquedaCuentasaux(txt_usuario.getText(), String.valueOf(txt_contra.getPassword()));
+                    Pila p = controltxt.InicioSesionCliente(txt_usuario.getText());
+
+                    Random preguntaAleatoria = new Random();
+                    int alePre = preguntaAleatoria.nextInt(3);
+                    System.out.println("ale " + alePre);
+                    switch (alePre) {
+                        case 0:
+                           try {
+                            String respuesta0 = JOptionPane.showInputDialog(null, "Digite los 5 ultimos digitos de su cuenta bancaria");
+                            String pre0 = String.valueOf(p.obtenerPorPosicion(0));
+                            if (!respuesta0.equals("") && respuesta0.equals(pre0)) {
+                                dispose();
+                                Frm_Cuenta_Cliente frm_Cuenta_Cliente = new Frm_Cuenta_Cliente(cedu);
+                                frm_Cuenta_Cliente.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "Datos ingresados son erroneos", "ERROR", ERROR_MESSAGE);
+                                intentos++;
+                                limpiar();
+//                             
+                            }
+
+                        } catch (NullPointerException e) {
+                            // System.out.println(" ERROR null " + e);
+                        }
+                        break;
+                        case 1:
+                            try {
+                            String respuesta1 = JOptionPane.showInputDialog(null, "Digite los 2 primeros y los 2 ultimos digitos de su cedula");
+                            String pre1 = String.valueOf(p.obtenerPorPosicion(1));
+                            if (!respuesta1.equals("") && respuesta1.equals(pre1)) {
+                                dispose();
+                                Frm_Cuenta_Cliente frm_Cuenta_Cliente = new Frm_Cuenta_Cliente(cedu);
+                                frm_Cuenta_Cliente.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "Datos ingresados son erroneos", "ERROR", ERROR_MESSAGE);
+                                intentos++;
+                                limpiar();
+
+                            }
+                        } catch (NullPointerException e) {
+                        }
+                        break;
+                        case 2:
+                            try {
+                            String respuesta2 = JOptionPane.showInputDialog(null, "Digite los 4 ultimos digitos de su cedula");
+                            String pre2 = String.valueOf(p.obtenerPorPosicion(2));
+                            if (!respuesta2.equals("") && respuesta2.equals(pre2)) {
+                                dispose();
+                                Frm_Cuenta_Cliente frm_Cuenta_Cliente = new Frm_Cuenta_Cliente(cedu);
+                                frm_Cuenta_Cliente.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "Datos ingresados son erroneos", "ERROR", ERROR_MESSAGE);
+                                intentos++;
+                                limpiar();
+
+                            }
+                        } catch (NullPointerException e) {
+                        }
+                        break;
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Credenciales de acceso invalidas", "ERROR DE INGRESO", ERROR_MESSAGE);
+                    intentos++;
+                    System.out.println(" wasd " + intentos);
+
+                }
+                if (intentos == 1) {
+                    lbl_mensajewarning.setText("Señor Usuario, cuenta con 2 intentos para ingresar a su cuenta");
+                }
+                if (intentos == 2) {
+                    lbl_mensajewarning.setText("Señor Usuario, cuenta con 1 intento para ingresar a su cuenta");
+                }
+                if (intentos == 3) {
+                    JOptionPane.showMessageDialog(null, "Se ha quedado sin intentos\nEspere el tiempo indicado", "INFO", INFORMATION_MESSAGE);
+                    lbl_mensajewarning.setText("Señor Usuario cuenta,con 1 intentos para ingresar a su cuenta");
+                }
+                if (intentos >= 3) {
+                    limpiar();
+                    lbl_mensajewarning.setText("Debe esperar un tiempo de 30s para volver a intentar");
+
+                    txt_contra.setEnabled(false);
+                    txt_usuario.setEnabled(false);
+                    btn_entrar.setEnabled(false);
+                    btn_regresar.setEnabled(false);
+                    btn_ver.setEnabled(false);
+                    tiempoespera();
                 }
             } catch (IOException ex) {
-                Logger.getLogger(Frm_Login_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(" ERROR " + ex);
+
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar los campos, para poder ingresar", "INFO", WARNING_MESSAGE);
+
         }
 
     }//GEN-LAST:event_btn_entrarActionPerformed
+
+    private void txt_usuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyTyped
+        char car = evt.getKeyChar();
+
+        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) para el usuario\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_usuarioKeyTyped
+
+    private void btn_verActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_verActionPerformed
+        Seleccionar();
+    }//GEN-LAST:event_btn_verActionPerformed
+
+    private void txt_contraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_contraKeyTyped
+        char car = evt.getKeyChar();
+
+        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_contraKeyTyped
+    private void limpiar() {
+        txt_contra.setText("");
+        txt_usuario.setText("");
+    }
+
+    private void Seleccionar() {
+        if (btn_ver.isSelected()) {
+            ImageIcon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/ojoBloq.png"));
+            Icon fondo1 = new ImageIcon(imagen2.getImage().getScaledInstance(btn_ver.getWidth(), btn_ver.getHeight(), Image.SCALE_DEFAULT));
+            btn_ver.setIcon(fondo1);
+            this.repaint();
+            txt_contra.setEchoChar((char) 0);
+
+        } else {
+            ImageIcon imagen3 = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
+            Icon fondo2 = new ImageIcon(imagen3.getImage().getScaledInstance(btn_ver.getWidth(), btn_ver.getHeight(), Image.SCALE_DEFAULT));
+            btn_ver.setIcon(fondo2);
+            this.repaint();
+            txt_contra.setEchoChar('*');
+        }
+
+    }
+
+    /**
+     * Se van a activar los campos para editar luego del tiempo que le
+     * ingresemos, ejemplo ==> 5000 ms es igual a 5 seg
+     */
+    private void tiempoespera() {
+        Timer timer = new Timer();
+
+        TimerTask id = new TimerTask() {
+            int i = 0;
+            boolean tt = false;
+            //String id = "hola";
+
+            @Override
+            public void run() {
+
+                if (intentos >= 3) {
+                    tt = true;
+                    //System.out.println(id);
+                    txt_contra.setEnabled(true);
+                    txt_usuario.setEnabled(true);
+                    btn_entrar.setEnabled(true);
+                    btn_regresar.setEnabled(true);
+                    btn_ver.setEnabled(true);
+                    intentos = 0;
+                    lbl_mensajewarning.setText("Señor Usuario cuenta,con 3 intentos para ingresar a su cuenta");
+                }
+
+            }
+
+        };
+        // retraso -- cada cuanto lo mando a imprimir
+
+        timer.schedule(id, 5000);// 5 segundos
+        //timer.schedule(id, 30000);// 30 seg
+    }
 
     /**
      * @param args the command line arguments
@@ -215,6 +446,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Frm_Login_Cliente().setVisible(true);
             }
@@ -224,6 +456,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_entrar;
     private javax.swing.JButton btn_regresar;
+    private javax.swing.JToggleButton btn_ver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -231,7 +464,8 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txt_contra;
+    private javax.swing.JLabel lbl_mensajewarning;
+    private javax.swing.JPasswordField txt_contra;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

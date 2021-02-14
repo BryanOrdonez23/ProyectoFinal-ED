@@ -31,10 +31,13 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
      */
     public Panel_trans_retiro() {
         initComponents();
+        limpiar();
     }
 
     /**
-     * Se le manda la cedula del frame principal y se carga los datos de acuerdo a esa cedula
+     * Se le manda la cedula del frame principal y se carga los datos de acuerdo
+     * a esa cedula
+     *
      * @param cedula
      * @throws IOException
      */
@@ -80,10 +83,11 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Su transaccion a sido cancelada, con exito!");
-
+                    limpiar();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "No puede realizar este retiro \nSu saldo actual es menor a la cantidad que se desea retirar", "WARNING", WARNING_MESSAGE);
+                limpiar();
             }
         } catch (IOException ex) {
             Logger.getLogger(Panel_trans_retiro.class.getName()).log(Level.SEVERE, null, ex);
@@ -227,22 +231,25 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
         //doble confirmacion
         if (!txt_monto_retiro.getText().equals("")) {
             ok_guardar_Retiro();
+            limpiar();
         } else {
-            JOptionPane.showMessageDialog(null, "Debe llenar el campo para realizar la transaccion","WARNING",WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe llenar el campo para realizar la transaccion", "WARNING", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btn_okActionPerformed
-
+    public void limpiar() {
+        txt_monto_retiro.setText("");
+    }
     private void txt_monto_retiroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_monto_retiroKeyTyped
         char car = evt.getKeyChar();
 
         if (((!Character.isDigit(car))) && (txt_monto_retiro.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
         } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal","ERROR",ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txt_monto_retiroKeyTyped
 
