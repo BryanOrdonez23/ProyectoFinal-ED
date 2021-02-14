@@ -1,4 +1,4 @@
 112202020,Ahorros,1234567890,20.0,false,false
-1145674747,Corriente,111111111,20.0,false,false
+1145674747,Corriente,111111111,40.0,false,false
 23432432432,Corriente,119292920202,20.0,false,false
 1150472668,Corriente,1139285413,20.0,false,false

@@ -21,12 +21,22 @@ public class Utiles {
             } else if (uno < dos) {
                 i = -1;
             }
-            
-            
-            
-            
+
         }
         return i;
 
+    }
+    /**
+     * Metodo para validar si un campo es un digito
+     * @param cadena
+     * @return 
+     */
+    public boolean isNumeric(String cadena) {
+        try {
+            Integer.parseInt(cadena);
+            return true;
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
     }
 }

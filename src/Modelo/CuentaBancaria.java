@@ -17,10 +17,6 @@ public class CuentaBancaria {
     private Double saldo;
     private boolean prestamo_yn;
     private boolean poliza_yn;
-//    private Persona persona;
-//    private ListaSimpleAvanzada Listatransacciones = new ListaSimpleAvanzada();
-//    private ListaSimpleAvanzada Listaprestamos = new ListaSimpleAvanzada();
-//    private ListaSimpleAvanzada Listapolizas = new ListaSimpleAvanzada();
 
     public CuentaBancaria() {
     }

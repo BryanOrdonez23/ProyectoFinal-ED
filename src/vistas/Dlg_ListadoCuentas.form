@@ -62,7 +62,7 @@
                   <EmptySpace min="-2" pref="270" max="-2" attributes="0"/>
                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jTextField9" min="-2" pref="185" max="-2" attributes="0"/>
+                  <Component id="txt_j" min="-2" pref="185" max="-2" attributes="0"/>
                   <EmptySpace pref="246" max="32767" attributes="0"/>
               </Group>
               <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
@@ -74,7 +74,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txt_j" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="189" max="-2" attributes="0"/>
@@ -115,10 +115,10 @@
             <Property name="text" type="java.lang.String" value="Filtrar:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="#cuenta"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="txt_j">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_jKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

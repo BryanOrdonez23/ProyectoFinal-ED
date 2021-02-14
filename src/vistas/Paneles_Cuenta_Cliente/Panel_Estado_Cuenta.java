@@ -9,15 +9,24 @@ import Controlador.txt;
 import Modelo.CuentaBancaria;
 import Modelo.Persona;
 import java.io.IOException;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 import vistas.Frm_Cuenta_Cliente;
+import vistas.modeloTablas.ModeloTabla;
+import vistas.modeloTablas.ModeloTablaT;
 
 /**
  *
  * @author mac
  */
 public class Panel_Estado_Cuenta extends javax.swing.JPanel{
+    
 
-    txt controltxt = new txt();
+    private ModeloTablaT tabla = new ModeloTablaT();
+    private ModeloTablaT dm = new ModeloTablaT();
+
+    private txt controltxt = new txt();
     /**
      * Creates new form Estado_Cuenta
      */
@@ -28,11 +37,25 @@ public class Panel_Estado_Cuenta extends javax.swing.JPanel{
         lbl_titular.setText(p.getNombre());
         lbl_saldo_disponible.setText(String.valueOf(c.getSaldo()));
         lbl_nro_cuenta.setText(c.getNum_Cuenta());
+        accion(c.getNum_Cuenta());
         
     }
 
     public Panel_Estado_Cuenta()  {
         initComponents();
+    }
+//        private void filtro(String consulta, JTable jtableBuscar) {
+//        dm = (ModeloTabla) jtableBuscar.getModel();
+//        TableRowSorter<ModeloTabla> tr = new TableRowSorter<>(dm);
+//        jtableBuscar.setRowSorter(tr);
+//        tr.setRowFilter(RowFilter.regexFilter(consulta));
+//    }
+
+    public void accion(String numero) throws IOException {
+        Object[] lista = controltxt.ListadoTransacciones(numero);
+        tabla.setLista(lista);
+        jTable1.setModel(tabla);
+        jTable1.updateUI();
     }
 
     /**

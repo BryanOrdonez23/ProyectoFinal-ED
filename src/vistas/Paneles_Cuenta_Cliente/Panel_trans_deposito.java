@@ -216,7 +216,7 @@ public class Panel_trans_deposito extends javax.swing.JPanel {
     private void btn_okMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_okMousePressed
         //doble confirmacion
         if (!txt_monto_depositar.getText().equals("")) {
-            int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de realizar este retiro?", "YES-NO", YES_NO_OPTION);
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro de realizar este deposito?", "YES-NO", YES_NO_OPTION);
             if (opcion == 0) {
                 ok_guardarDeposito();
                 limpiar();

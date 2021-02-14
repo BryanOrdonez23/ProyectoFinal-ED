@@ -5,21 +5,64 @@
  */
 package vistas;
 
+import Controlador.txt;
+import Modelo.CuentaBancaria;
+import java.io.IOException;
+import javax.swing.RowFilter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+//
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import vistas.modeloTablas.ModeloTabla;
+
 /**
  *
  * @author CNH
  */
 public class Dlg_ListadoCuentas extends javax.swing.JDialog {
 
+    private txt listado = new txt();
+    private ModeloTabla tabla = new ModeloTabla();
+    private ModeloTabla dm = new ModeloTabla();
+
     /**
      * Creates new form Dlg_ListadoCuentas
      */
     public Dlg_ListadoCuentas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-        this.setResizable(false);
+        try {
+            initComponents();
+            accion();
+            this.setResizable(false);
+        } catch (IOException ex) {
+            Logger.getLogger(Dlg_ListadoCuentas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //DefaultTableModel dm;
+
+    /**
+     * Filtro los datos segun lo que el usuario ingrese ej. Numero de cuenta , prestamos aprobados y tipo de cuenta
+     * @param consulta
+     * @param jtableBuscar 
+     */
+    private void filtro(String consulta, JTable jtableBuscar) {
+        dm = (ModeloTabla) jtableBuscar.getModel();
+        TableRowSorter<ModeloTabla> tr = new TableRowSorter<>(dm);
+        jtableBuscar.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(consulta));
     }
 
+    public void accion() throws IOException {
+        Object[] lista = listado.ListadoCuentas();
+        tabla.setLista(lista);
+        jTable1.setModel(tabla);
+        jTable1.updateUI();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +76,7 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txt_j = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -57,7 +100,11 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
         jLabel12.setForeground(new java.awt.Color(0, 0, 153));
         jLabel12.setText("Filtrar:");
 
-        jTextField9.setText("#cuenta");
+        txt_j.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_jKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,7 +114,7 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
                 .addGap(270, 270, 270)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_j, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(246, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
@@ -77,7 +124,7 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_j, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -121,6 +168,11 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txt_jKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_jKeyReleased
+        // TODO add your handling code here:
+        filtro(txt_j.getText().toUpperCase(), jTable1);
+    }//GEN-LAST:event_txt_jKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -147,18 +199,20 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(Dlg_ListadoCuentas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Dlg_ListadoCuentas dialog = new Dlg_ListadoCuentas(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                    Dlg_ListadoCuentas dialog = new Dlg_ListadoCuentas(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+
             }
         });
     }
@@ -169,6 +223,6 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt_j;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,10 +6,16 @@
 package vistas;
 
 import Controlador.Controlador_Per;
+import Controlador.Utiles;
 import Controlador.controlador_CB;
 import Controlador.txt;
 import Modelo.Rol;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
@@ -20,6 +26,8 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
     private Controlador_Per control = new Controlador_Per();
     private controlador_CB controlcb = new controlador_CB();
     private txt controltxt = new txt();
+    private Utiles ut = new Utiles();
+
     /**
      * Creates new form Dlg_Crear_newcuenta
      */
@@ -28,20 +36,28 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         initComponents();
         this.setResizable(false);
     }
-    
-    public boolean validarVacios(){
-        if (txt_nombre.getText().length()>0 && txt_correo.getText().length()>0 && txt_direccion.getText().length()>0 
-            && txt_edad.getText().length()>0 && txt_numeroCedula.getText().length()>0 && txt_telefono.getText().length()>0
-                && txt_numeroCuenta.getText().length()>0 && txt_saldoInicial.getText().length()>0 && txt_saldoInicial.getText().length()>0
-                && combo_tipoCuenta.getSelectedIndex()!=-1) {            
+
+    /**
+     * Metodo para validar espacios vacios
+     *
+     * @return
+     */
+    public boolean validarVacios() {
+        if (txt_nombre.getText().length() > 0 && txt_correo.getText().length() > 0 && txt_direccion.getText().length() > 0
+                && txt_edad.getText().length() > 0 && txt_numeroCedula.getText().length() > 0 && txt_telefono.getText().length() > 0
+                && txt_numeroCuenta.getText().length() > 0 && txt_saldoInicial.getText().length() > 0 && txt_saldoInicial.getText().length() > 0
+                && combo_tipoCuenta.getSelectedIndex() != -1) {
             return true;
-        }else{
-            JOptionPane.showMessageDialog(null,"Error , campos vacios");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error , campos vacios");
             return false;
         }
     }
-    
-    public void limpiar(){
+
+    /**
+     * Metodo para limpiar campos
+     */
+    public void limpiar() {
         txt_nombre.setText("");
         txt_correo.setText("");
         txt_edad.setText("");
@@ -102,6 +118,12 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         jLabel11.setForeground(new java.awt.Color(0, 0, 102));
         jLabel11.setText("Edad:");
 
+        txt_edad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_edadKeyTyped(evt);
+            }
+        });
+
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 102));
         jLabel12.setText("Coreo electronico:");
@@ -110,9 +132,21 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         jLabel13.setForeground(new java.awt.Color(0, 0, 102));
         jLabel13.setText("# de cedula:");
 
+        txt_numeroCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_numeroCedulaKeyTyped(evt);
+            }
+        });
+
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 102));
         jLabel18.setText("Telefono:");
+
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -197,6 +231,11 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         jLabel17.setText("Saldo incial:");
 
         txt_saldoInicial.setToolTipText("0.0");
+        txt_saldoInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_saldoInicialKeyTyped(evt);
+            }
+        });
 
         generar_nroCuenta.setText("Generar");
         generar_nroCuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +244,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
             }
         });
 
-        combo_tipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Ahorros", "Corriente", " " }));
+        combo_tipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "AHORROS", "CORRIENTE" }));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -305,34 +344,50 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Guardo los datos del cliente
+     *
+     * @param evt
+     */
     private void btn_GuardarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarClienteActionPerformed
-        // TODO add your handling code here:
-        if (validarVacios()) {
-            control.setPers(null);
-            control.getPers().setNombre(txt_nombre.getText());
-            control.getPers().setCedula(txt_numeroCedula.getText());
-            control.getPers().setCorrecoElectronico(txt_correo.getText());
-            control.getPers().setDireccion(txt_direccion.getText());
-            control.getPers().setEdad(txt_edad.getText());
-            control.getPers().setEdad(txt_edad.getText());
-            control.getPers().setTelefono(txt_telefono.getText());
-            control.getPers().setRol(new Rol("Cliente"));
-            
-            controlcb.setCuentaB(null);
-            controlcb.getCuentaB().setNum_Cuenta(txt_numeroCuenta.getText());
-            controlcb.getCuentaB().setTipoCuenta(combo_tipoCuenta.getSelectedItem().toString());
-            controlcb.getCuentaB().setSaldo(Double.parseDouble(txt_saldoInicial.getText()));
-            controlcb.getCuentaB().setPoliza_yn(false);
-            controlcb.getCuentaB().setPrestamo_yn(false);    
-            
-            if (control.guardarPersona() && controlcb.guardarCB()) {
-                JOptionPane.showMessageDialog(null,"Correcto , Cliente agregado");
-                controltxt.guardar_PersonaTxt(control.getPers());
-                controltxt.guardar_CuentaBancariaTxt(control.getPers(),controlcb.getCuentaB());
-                controltxt.guardar_CuentaUsuarioTxt(control.getPers(),"1234");
-                limpiar();
+        try {
+            // TODO add your handling code here:
+            if (!(controltxt.existeCuentaCedula(txt_numeroCedula.getText()))) {
+                if (validarVacios()) {
+                    if (!(combo_tipoCuenta.getSelectedItem().toString().equals("Seleccione un tipo"))) {
+                        control.setPers(null);
+                        control.getPers().setNombre(txt_nombre.getText());
+                        control.getPers().setCedula(txt_numeroCedula.getText());
+                        control.getPers().setCorrecoElectronico(txt_correo.getText());
+                        control.getPers().setDireccion(txt_direccion.getText());
+                        control.getPers().setEdad(txt_edad.getText());
+                        control.getPers().setEdad(txt_edad.getText());
+                        control.getPers().setTelefono(txt_telefono.getText());
+                        control.getPers().setRol(new Rol("Cliente"));
+
+                        controlcb.setCuentaB(null);
+                        controlcb.getCuentaB().setNum_Cuenta(txt_numeroCuenta.getText());
+                        controlcb.getCuentaB().setTipoCuenta(combo_tipoCuenta.getSelectedItem().toString());
+                        controlcb.getCuentaB().setSaldo(Double.parseDouble(txt_saldoInicial.getText()));
+                        controlcb.getCuentaB().setPoliza_yn(false);
+                        controlcb.getCuentaB().setPrestamo_yn(false);
+
+                        if (control.guardarPersona() && controlcb.guardarCB()) {
+                            JOptionPane.showMessageDialog(null, "Correcto , Cliente agregado");
+                            controltxt.guardar_PersonaTxt(control.getPers());
+                            controltxt.guardar_CuentaBancariaTxt(control.getPers(), controlcb.getCuentaB());
+                            controltxt.guardar_CuentaUsuarioTxt(control.getPers(), "1234");
+                            limpiar();
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error, debe seleccionar un tipo de cuenta");
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Error, usted ya tiene una cuenta registrada","ERROR",ERROR_MESSAGE);
             }
+        } catch (IOException ex) {
+            Logger.getLogger(Dlg_Crear_newcuenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_GuardarClienteActionPerformed
 
@@ -345,6 +400,84 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         // TODO add your handling code here:        
         txt_numeroCuenta.setText(controlcb.generarBmroCuenta());
     }//GEN-LAST:event_generar_nroCuentaActionPerformed
+
+    /**
+     * Validacion de que solo pueda ingresar numeros
+     *
+     * @param evt
+     */
+    private void txt_saldoInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_saldoInicialKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+
+        if (((!Character.isDigit(car))) && (txt_saldoInicial.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_saldoInicialKeyTyped
+    /**
+     * Validacion de que solo pueda ingresar numeros
+     *
+     * @param evt
+     */
+    private void txt_edadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_edadKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+
+        if (((!Character.isDigit(car))) && (txt_edad.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '3')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_edadKeyTyped
+
+    /**
+     * Validacion de que solo pueda ingresar numeros
+     *
+     * @param evt
+     */
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+
+        if (((!Character.isDigit(car))) && (txt_telefono.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    /**
+     * Validacion de que solo pueda ingresar numeros
+     *
+     * @param evt
+     */
+    private void txt_numeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numeroCedulaKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if (((!Character.isDigit(car))) && (txt_numeroCedula.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_numeroCedulaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -371,6 +504,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Dlg_Crear_newcuenta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */

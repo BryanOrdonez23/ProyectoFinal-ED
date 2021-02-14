@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
 /**
  *
@@ -30,7 +31,15 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
     private txt controltxt = new txt();
 
     public Frm_Atencion_publico() {
-        initComponents();
+        initComponents();        
+        txt_nmbreT.setEditable(false);
+        txt_cedula.setEditable(false);
+        txt_edad.setEditable(false);
+        txt_direccion.setEditable(false);
+        txt_tipoC.setEditable(false);
+        txt_saldo.setEditable(false);
+        txt_polisa.setEditable(false);
+        txt_pres.setEditable(false);
         this.setResizable(false);
     }
 
@@ -71,9 +80,8 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         txt_pres = new javax.swing.JTextField();
         txt_polisa = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btn_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ATENCION AL PUBLICO");
@@ -169,7 +177,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 153));
         jLabel4.setText("Numero de Cuenta: ");
 
-        txt_nmroCuenta.setText("#cuenta");
+        txt_nmroCuenta.setToolTipText("#cuenta");
 
         bttn_buscar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         bttn_buscar.setText("Buscar");
@@ -308,43 +316,45 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jButton6.setBackground(new java.awt.Color(255, 102, 0));
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Actualizar Cuenta");
-
         jButton1.setBackground(new java.awt.Color(255, 102, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Eliminar Cuenta");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jButton7.setBackground(new java.awt.Color(255, 102, 0));
-        jButton7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Imprimir");
+        btn_limpiar.setBackground(new java.awt.Color(255, 102, 0));
+        btn_limpiar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_limpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btn_limpiar.setText("Limpiar");
+        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_limpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap(58, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addGap(51, 51, 51)
+                .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -376,7 +386,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -409,8 +419,8 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 txt_tipoC.setText(cuenta.getTipoCuenta());
                 txt_saldo.setText(String.valueOf(cuenta.getSaldo()));
                 txt_polisa.setText(String.valueOf(cuenta.isPoliza_yn()));
-                txt_pres.setText(String.valueOf(cuenta.isPrestamo_yn()));
-            }else{
+                txt_pres.setText(String.valueOf(cuenta.isPrestamo_yn()));                
+            } else {
                 JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria");
             }
 
@@ -422,6 +432,47 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria");
         }
     }//GEN-LAST:event_bttn_buscarActionPerformed
+
+    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
+        // TODO add your handling code here:
+        txt_nmroCuenta.setText("");
+        txt_nmbreT.setText("");
+        txt_cedula.setText("");
+        txt_edad.setText("");
+        txt_direccion.setText("");
+        txt_tipoC.setText("");
+        txt_saldo.setText("");
+        txt_polisa.setText("");
+        txt_pres.setText("");
+    }//GEN-LAST:event_btn_limpiarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            if (controltxt.existeCuenta(txt_nmroCuenta.getText()) && txt_nmroCuenta.getText().length() > 0) {
+                try {
+                    controltxt.ActualizarDatosCuentaBancaria(controltxt.eliminarCuentas(txt_nmroCuenta.getText()));
+                    controltxt.ActualizarDatosCuentaUsuario(controltxt.eliminarCentasUsuario(txt_cedula.getText()));
+                    JOptionPane.showMessageDialog(null, "La cuenta a sido eliminada correctamente");
+                    txt_nmroCuenta.setText("");
+                    txt_nmbreT.setText("");
+                    txt_cedula.setText("");
+                    txt_edad.setText("");
+                    txt_direccion.setText("");
+                    txt_tipoC.setText("");
+                    txt_saldo.setText("");
+                    txt_polisa.setText("");
+                    txt_pres.setText("");
+                } catch (IOException ex) {
+                    Logger.getLogger(Frm_Atencion_publico.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"No se encontro numero de cuenta","ERROR", ERROR_MESSAGE);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Atencion_publico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -449,6 +500,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Frm_Atencion_publico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -459,10 +511,9 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton bttn_buscar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

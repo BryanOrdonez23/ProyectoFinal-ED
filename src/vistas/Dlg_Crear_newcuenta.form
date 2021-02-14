@@ -199,6 +199,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_edad">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_edadKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
@@ -225,6 +228,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_numeroCedula">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_numeroCedulaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
@@ -238,6 +244,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_telefono">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_telefonoKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -349,6 +358,9 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="0.0"/>
           </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_saldoInicialKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="generar_nroCuenta">
           <Properties>
@@ -361,11 +373,10 @@
         <Component class="javax.swing.JComboBox" name="combo_tipoCuenta">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="3">
                 <StringItem index="0" value="Seleccione un tipo"/>
-                <StringItem index="1" value="Ahorros"/>
-                <StringItem index="2" value="Corriente"/>
-                <StringItem index="3" value=" "/>
+                <StringItem index="1" value="AHORROS"/>
+                <StringItem index="2" value="CORRIENTE"/>
               </StringArray>
             </Property>
           </Properties>
