@@ -395,7 +395,10 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    /**
+     * Genera un numero de cuenta bancaria aleatorio
+     * @param evt 
+     */
     private void generar_nroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generar_nroCuentaActionPerformed
         // TODO add your handling code here:        
         txt_numeroCuenta.setText(controlcb.generarBmroCuenta());
