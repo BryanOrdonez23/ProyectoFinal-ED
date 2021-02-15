@@ -110,6 +110,12 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         jLabel5.setForeground(new java.awt.Color(0, 0, 102));
         jLabel5.setText("Nombre del Titular:");
 
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
+        });
+
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(0, 0, 102));
         jLabel10.setText("Direccion:");
@@ -383,8 +389,8 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(null, "Error, debe seleccionar un tipo de cuenta");
                     }
                 }
-            }else{
-                JOptionPane.showMessageDialog(null, "Error, usted ya tiene una cuenta registrada","ERROR",ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error, usted ya tiene una cuenta registrada", "ERROR", ERROR_MESSAGE);
             }
         } catch (IOException ex) {
             Logger.getLogger(Dlg_Crear_newcuenta.class.getName()).log(Level.SEVERE, null, ex);
@@ -397,7 +403,8 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
     /**
      * Genera un numero de cuenta bancaria aleatorio
-     * @param evt 
+     *
+     * @param evt
      */
     private void generar_nroCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generar_nroCuentaActionPerformed
         // TODO add your handling code here:        
@@ -481,6 +488,17 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txt_numeroCedulaKeyTyped
+
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if (!ut.isNumeric(String.valueOf(car))) {
+        } else {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores alfabeticos", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_nombreKeyTyped
 
     /**
      * @param args the command line arguments

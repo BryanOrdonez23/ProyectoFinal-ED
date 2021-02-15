@@ -10,12 +10,14 @@ import Controlador.controlador_CB;
 import Controlador.txt;
 import Modelo.CuentaBancaria;
 import Modelo.Persona;
+import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
@@ -31,7 +33,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
     private txt controltxt = new txt();
 
     public Frm_Atencion_publico() {
-        initComponents();        
+        initComponents();
         txt_nmbreT.setEditable(false);
         txt_cedula.setEditable(false);
         txt_edad.setEditable(false);
@@ -56,6 +58,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -100,6 +103,15 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("(Nombre del usuario)");
 
+        jButton2.setBackground(new java.awt.Color(255, 255, 51));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jButton2.setText("Cerrar Sesion");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,7 +120,9 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(243, 243, 243)
                 .addComponent(jLabel1)
@@ -124,6 +138,10 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Solicitudes de cuentas nuevas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -178,6 +196,11 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         jLabel4.setText("Numero de Cuenta: ");
 
         txt_nmroCuenta.setToolTipText("#cuenta");
+        txt_nmroCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nmroCuentaKeyTyped(evt);
+            }
+        });
 
         bttn_buscar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         bttn_buscar.setText("Buscar");
@@ -419,7 +442,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 txt_tipoC.setText(cuenta.getTipoCuenta());
                 txt_saldo.setText(String.valueOf(cuenta.getSaldo()));
                 txt_polisa.setText(String.valueOf(cuenta.isPoliza_yn()));
-                txt_pres.setText(String.valueOf(cuenta.isPrestamo_yn()));                
+                txt_pres.setText(String.valueOf(cuenta.isPrestamo_yn()));
             } else {
                 JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria");
             }
@@ -467,13 +490,37 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 } catch (IOException ex) {
                     Logger.getLogger(Frm_Atencion_publico.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else{
-                JOptionPane.showMessageDialog(null,"No se encontro numero de cuenta","ERROR", ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro numero de cuenta", "ERROR", ERROR_MESSAGE);
             }
         } catch (IOException ex) {
             Logger.getLogger(Frm_Atencion_publico.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_nmroCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nmroCuentaKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if (((!Character.isDigit(car))) && (txt_nmroCuenta.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_nmroCuentaKeyTyped
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Cerrar Sesion?", "YES-NO", YES_NO_OPTION);
+        if (opcion == 0) {
+            Login_Personal_Administrativo loginAdmin = new Login_Personal_Administrativo();
+            loginAdmin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -515,6 +562,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
     private javax.swing.JButton btn_limpiar;
     private javax.swing.JButton bttn_buscar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
