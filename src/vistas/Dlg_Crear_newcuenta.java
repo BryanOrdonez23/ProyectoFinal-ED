@@ -436,7 +436,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
             evt.consume();
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
-        } else if (((car < '0') || (car > '3')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);

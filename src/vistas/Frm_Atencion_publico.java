@@ -453,6 +453,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 try {
                     controltxt.ActualizarDatosCuentaBancaria(controltxt.eliminarCuentas(txt_nmroCuenta.getText()));
                     controltxt.ActualizarDatosCuentaUsuario(controltxt.eliminarCentasUsuario(txt_cedula.getText()));
+                    controltxt.ActualizarDatosPersonas(controltxt.eliminarPersonas(txt_cedula.getText()));
                     JOptionPane.showMessageDialog(null, "La cuenta a sido eliminada correctamente");
                     txt_nmroCuenta.setText("");
                     txt_nmbreT.setText("");

@@ -185,7 +185,6 @@ public class txt {
                 String fila = cb.getNum_Cuenta() + "," + pre.getMonto_final() + "," + pre.getCuota_mensual() + ", " + pre.getFecha_inicio_prestamo() + ", " + pre.getFecha_final_prestamo();
                 Fescribe.write(fila);
                 Fescribe.write("\n");
-
                 System.out.println("El producto ha sido insertado en la base de datos");
             }
         } catch (IOException e) {
@@ -852,11 +851,13 @@ public class txt {
         }
         return c;
     }
+
     /**
      * Elimina un registro de la base de datos local
+     *
      * @param cuenta
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     public String[] eliminarCuentas(String cuenta) throws IOException {
         boolean bol = false;
@@ -886,14 +887,15 @@ public class txt {
         }
         return lista;
     }
+
     /**
      * Actualiza los datos de la cuenta Bancaria luego de eliminar un registro
-     * @param linea 
+     *
+     * @param linea
      */
     public void ActualizarDatosCuentaBancaria(String[] linea) {
         FileWriter fws;
         PrintWriter pw;
-
         try {
             fws = new FileWriter(archivo_CBancaria);
             pw = new PrintWriter(fws);
@@ -910,11 +912,13 @@ public class txt {
             System.out.println(ex.getMessage());
         }
     }
+
     /**
      * Elimina un registro de las cuentas de usuario
+     *
      * @param cedula
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     public String[] eliminarCentasUsuario(String cedula) throws IOException {
         boolean bol = false;
@@ -941,9 +945,11 @@ public class txt {
         }
         return lista;
     }
+
     /**
      * Actualiza registros de las cuentas de usuario luego de ser eliminado.
-     * @param linea 
+     *
+     * @param linea
      */
     public void ActualizarDatosCuentaUsuario(String[] linea) {
         FileWriter fws;
@@ -965,11 +971,72 @@ public class txt {
         }
     }
     /**
-     * Metodo para validar si existe una cuenta bancaria por medio de un numero de cedula.
+     * Elimina una persona de los registros.
+     * @param cedula
+     * @return
+     * @throws IOException 
+     */
+    public String[] eliminarPersonas(String cedula) throws IOException {
+        int i = 0;
+        String[] lista = new String[ObtenerNumeroRegistros()];
+        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_Persona))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                String uno_ced = st.nextToken();
+                String dos_rol = st.nextToken();
+                String tres_correo = st.nextToken();
+                String cuatro_nombre = st.nextToken();
+                String cinco_telefono = st.nextToken();
+                String seis_edad = st.nextToken();
+                String siete_direccion = st.nextToken();
+                if (!(cedula.equals(uno_ced))) {
+                    lista[i] = uno_ced + "," + dos_rol + "," + tres_correo + "," + cuatro_nombre + "," + cinco_telefono
+                            + "," + seis_edad + "," + siete_direccion;
+                    i++;
+                } else {
+                    linea = null;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(txt.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(txt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+
+    /**
+     * Actualiza registros de las personas luego de ser eliminado.
+     *
+     * @param linea
+     */
+    public void ActualizarDatosPersonas(String[] linea) {
+        FileWriter fws;
+        PrintWriter pw;
+        try {
+            fws = new FileWriter(archivo_Persona);
+            pw = new PrintWriter(fws);
+            // pw = new PrintWriter( new FileWriter("Numero.txt"));
+            for (int i = 0; i < linea.length; i++) {
+                String acumulada = linea[i];
+                pw.println(acumulada);
+            }
+            pw.close();
+        } catch (IOException ex) {
+            System.out.println("Error al grabar archivo: " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    /**
+     * Metodo para validar si existe una cuenta bancaria por medio de un numero
+     * de cedula.
+     *
      * @param cedula
      * @return
      * @throws FileNotFoundException
-     * @throws IOException 
+     * @throws IOException
      */
     public boolean existeCuentaCedula(String cedula) throws FileNotFoundException, IOException {
         boolean bol = false;
