@@ -21,7 +21,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="451" max="-2" attributes="0"/>
-                      <Component id="btn_ok" min="-2" pref="120" max="-2" attributes="0"/>
+                      <Component id="buttomEnviar" min="-2" pref="120" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
@@ -35,28 +35,22 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txt_tiempo_devolucion" min="-2" pref="163" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Component id="txt_monto_prestamo" min="-2" pref="162" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_fecha" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="txt_tiempo_devolucion" min="-2" pref="163" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -82,7 +76,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_fecha" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -107,7 +101,7 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-              <Component id="btn_ok" min="-2" max="-2" attributes="0"/>
+              <Component id="buttomEnviar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -196,11 +190,17 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txt_monto_prestamo">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_monto_prestamoKeyTyped"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_ok">
+    <Component class="javax.swing.JButton" name="buttomEnviar">
       <Properties>
         <Property name="text" type="java.lang.String" value="ENVIAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttomEnviarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_tiempo_devolucion">
     </Component>
@@ -226,7 +226,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="txtDescripcion">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -244,7 +244,7 @@
         <Property name="text" type="java.lang.String" value="Fecha de Emision"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
+    <Component class="javax.swing.JLabel" name="lbl_fecha">
       <Properties>
         <Property name="text" type="java.lang.String" value="------"/>
       </Properties>

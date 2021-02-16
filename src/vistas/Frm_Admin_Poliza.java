@@ -5,8 +5,17 @@
  */
 package vistas;
 
+import Controlador.txt;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Modelo.Poliza;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.*;
+import vistas.modeloTablas.ModeloTablaPolizas;
 
 /**
  *
@@ -14,12 +23,37 @@ import static javax.swing.JOptionPane.YES_NO_OPTION;
  */
 public class Frm_Admin_Poliza extends javax.swing.JFrame {
 
+    ModeloTablaPolizas modelo = new ModeloTablaPolizas();
+    txt ControladorTxt = new txt();
+    private List<Poliza> poliza;
+    private SimpleDateFormat dateFormat;
+
+    public void cargarTabla() {
+        try {
+            modelo.setLista(ControladorTxt.ListadoSolicitudesPolizas());
+            jTable1.setModel(modelo);
+            jTable1.updateUI();
+
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Admin_Creditos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     /**
      * Creates new form Frm_Admin_Poliza
      */
     public Frm_Admin_Poliza() {
         initComponents();
         this.setResizable(false);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        cargarTabla();
+        textCuenta.setEditable(false);
+        textMonto.setEditable(false);
+        textTiempo.setEditable(false);
+        textTasa.setEditable(false);
+        textnombreTitular.setEditable(false);
+        txtDireccion.setEditable(false);
     }
 
     /**
@@ -38,29 +72,29 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
         btn_cerrarSesion = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtbuscarCuenta = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton4 = new javax.swing.JButton();
+        buttomSeleccionar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        textnombreTitular = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        textMonto = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        textTiempo = new javax.swing.JTextField();
+        textCuenta = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        textTasa = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        buttomAceptarPolizas = new javax.swing.JButton();
+        buttomRechazarPolizas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OFICIAL DE POLIZA");
@@ -126,7 +160,11 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(0, 0, 153));
         jLabel12.setText("Numero de Cuenta: ");
 
-        jTextField9.setText("#cuenta");
+        txtbuscarCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscarCuentaKeyTyped(evt);
+            }
+        });
 
         jButton9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jButton9.setText("Buscar");
@@ -159,7 +197,7 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jButton10))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtbuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton9)))
                 .addContainerGap(279, Short.MAX_VALUE))
@@ -170,7 +208,7 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbuscarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -202,10 +240,15 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jButton4.setBackground(new java.awt.Color(0, 153, 51));
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Seleccionar");
+        buttomSeleccionar.setBackground(new java.awt.Color(0, 153, 51));
+        buttomSeleccionar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttomSeleccionar.setForeground(new java.awt.Color(255, 255, 255));
+        buttomSeleccionar.setText("Seleccionar");
+        buttomSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttomSeleccionarActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion de la poliza  solicitada", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
@@ -243,29 +286,29 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(44, 44, 44)
-                        .addComponent(jTextField1))
+                        .addComponent(textCuenta))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(8, 8, 8)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textnombreTitular, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(60, 60, 60)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textTasa, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(34, 34, 34)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 24, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -273,36 +316,46 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textnombreTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textTasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 0));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 51, 153));
-        jButton3.setText("Aceptar Poliza");
+        buttomAceptarPolizas.setBackground(new java.awt.Color(255, 255, 0));
+        buttomAceptarPolizas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttomAceptarPolizas.setForeground(new java.awt.Color(0, 51, 153));
+        buttomAceptarPolizas.setText("Aceptar Poliza");
+        buttomAceptarPolizas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttomAceptarPolizasActionPerformed(evt);
+            }
+        });
 
-        jButton6.setBackground(new java.awt.Color(255, 255, 0));
-        jButton6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(0, 51, 153));
-        jButton6.setText("Rechazar Poliza");
+        buttomRechazarPolizas.setBackground(new java.awt.Color(255, 255, 0));
+        buttomRechazarPolizas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        buttomRechazarPolizas.setForeground(new java.awt.Color(0, 51, 153));
+        buttomRechazarPolizas.setText("Rechazar Poliza");
+        buttomRechazarPolizas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttomRechazarPolizasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -311,17 +364,17 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttomRechazarPolizas, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttomAceptarPolizas, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttomAceptarPolizas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttomRechazarPolizas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -333,14 +386,12 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(358, 358, 358)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttomSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,14 +399,13 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttomSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -364,9 +414,24 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-        Dlg_BuscarCuenta ndlg = new Dlg_BuscarCuenta(this, rootPaneCheckingEnabled);
-        ndlg.setVisible(true);
+        if (txtbuscarCuenta.getText().length() > 0) {
+            try {
+                if (ControladorTxt.existeCuenta(txtbuscarCuenta.getText())) {
+                    // TODO add your handling code here:
+                    Dlg_BuscarCuenta ndlg = new Dlg_BuscarCuenta(this, rootPaneCheckingEnabled, txtbuscarCuenta.getText());
+                    ndlg.setVisible(true);
+                    txtbuscarCuenta.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(null, "El numero de cuenta bancaria que digito no existe"
+                            + "\nCompruebe los datos ingresados", "ERROR", ERROR_MESSAGE);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Frm_Admin_Creditos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe ingresar el numero de cuenta a buscar", "WARNING", WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -385,6 +450,91 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_cerrarSesionActionPerformed
 
+    private void buttomSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomSeleccionarActionPerformed
+        int fila = jTable1.getSelectedRow();
+        if (fila >= 0) {
+            textCuenta.setText(jTable1.getValueAt(fila, 0).toString());
+            textnombreTitular.setText(jTable1.getValueAt(fila, 1).toString());
+            txtDireccion.setText(jTable1.getValueAt(fila, 2).toString());
+            textMonto.setText(jTable1.getValueAt(fila, 3).toString());
+            textTiempo.setText(jTable1.getValueAt(fila, 4).toString());
+            textTasa.setText("15%");
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fila");
+        }
+    }//GEN-LAST:event_buttomSeleccionarActionPerformed
+
+    private void txtbuscarCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarCuentaKeyTyped
+        char car = evt.getKeyChar();
+
+        if (((!Character.isDigit(car))) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros", "ERROR", WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtbuscarCuentaKeyTyped
+
+    private void buttomAceptarPolizasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomAceptarPolizasActionPerformed
+        try {
+            if (textCuenta.getText().length() > 0 && textMonto.getText().length() > 0 && textTiempo.getText().length() > 0 && textTasa.getText().length() > 0 && textnombreTitular.getText().length() > 0 && txtDireccion.getText().length() > 0) {
+                JOptionPane.showMessageDialog(null, "La poliza ha sido guardada con exito", "INFORMACION", INFORMATION_MESSAGE);
+                ControladorTxt.cuentaBancariaPolizas(textCuenta.getText());
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una cuenta en la tabla", "WARNING", WARNING_MESSAGE);
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Admin_Poliza.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_buttomAceptarPolizasActionPerformed
+
+    private void buttomRechazarPolizasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomRechazarPolizasActionPerformed
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_buttomRechazarPolizasActionPerformed
+
+    private void limpiarCampos() {
+        textCuenta.setText("");
+        textMonto.setText("");
+        textTiempo.setText("");
+        textTasa.setText("");
+        textnombreTitular.setText("");
+        txtDireccion.setText("");
+    }
+
+//    private void cargarPrestamos() {
+//        txt txt = new txt();
+//
+//        try {
+//            poliza = txt.leer();
+//
+//            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+//
+//            for (Prestamo pr : prestamos) {
+//                model.addRow(crearFilaTabla(pr));
+//            }
+//        } catch (IOException e) {
+////            JOptionPane.showMessageDialog(this, "Error al abrir el archivo. " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        } catch (ParseException e) {
+//            JOptionPane.showMessageDialog(this, "El archivo no tiene el formato de fechas correcto. " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
+//    private Object[] crearFilaTabla(Prestamo pr) {
+//        return new Object[]{
+//            pr.getCuentaBancaria().getNum_Cuenta(),
+//            pr.getMonto_final(),
+//            pr.getCuota_mensual(),
+//            pr.getTasa(),
+//            dateFormat.format(pr.getFecha_inicio_prestamo()),
+//            dateFormat.format(pr.getFecha_final_prestamo())
+//        };
+//    }
     /**
      * @param args the command line arguments
      */
@@ -422,10 +572,10 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cerrarSesion;
+    private javax.swing.JButton buttomAceptarPolizas;
+    private javax.swing.JButton buttomRechazarPolizas;
+    private javax.swing.JButton buttomSeleccionar;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -444,12 +594,12 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField textCuenta;
+    private javax.swing.JTextField textMonto;
+    private javax.swing.JTextField textTasa;
+    private javax.swing.JTextField textTiempo;
+    private javax.swing.JTextField textnombreTitular;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtbuscarCuenta;
     // End of variables declaration//GEN-END:variables
 }

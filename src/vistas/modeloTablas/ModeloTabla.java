@@ -27,7 +27,6 @@ public class ModeloTabla extends AbstractTableModel {
     }
 
   
-    
     public Object[] getLista() {
         return lista;
     }

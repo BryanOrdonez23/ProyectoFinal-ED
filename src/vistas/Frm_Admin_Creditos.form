@@ -232,21 +232,22 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Component id="textInicio" min="-2" pref="151" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="textFin" min="-2" pref="151" max="-2" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="textCuenta" min="-2" pref="150" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txtDireccion" min="-2" pref="151" max="-2" attributes="0"/>
+                              <Component id="txtnombreTitular" min="-2" pref="151" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
@@ -264,10 +265,10 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="textCuota" min="-2" pref="66" max="-2" attributes="0"/>
+                          <Component id="txtCredito" min="-2" pref="66" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -283,14 +284,14 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtnombreTitular" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textCuota" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCredito" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textFin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="textTasa" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -309,7 +310,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Fecha inicio:"/>
+            <Property name="text" type="java.lang.String" value="Nombre del titular"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -323,7 +324,7 @@
             <Property name="text" type="java.lang.String" value="# de cuenta:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textInicio">
+        <Component class="javax.swing.JTextField" name="txtnombreTitular">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -346,10 +347,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Cuota mensual:"/>
+            <Property name="text" type="java.lang.String" value="Duraci&#xf3;n del cr&#xe9;dito"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textCuota">
+        <Component class="javax.swing.JTextField" name="txtCredito">
         </Component>
         <Component class="javax.swing.JTextField" name="textCuenta">
         </Component>
@@ -374,10 +375,10 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Fecha fin:"/>
+            <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="textFin">
+        <Component class="javax.swing.JTextField" name="txtDireccion">
         </Component>
       </SubComponents>
     </Container>
@@ -398,8 +399,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jButton6" min="-2" pref="164" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="164" max="-2" attributes="0"/>
+                      <Component id="buttomRechazarPrestamo" min="-2" pref="164" max="-2" attributes="0"/>
+                      <Component id="buttomAceptarPrestamo" min="-2" pref="164" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
               </Group>
@@ -409,16 +410,16 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Component id="buttomAceptarPrestamo" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
-                  <Component id="jButton6" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="buttomRechazarPrestamo" min="-2" pref="33" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="buttomAceptarPrestamo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="ff" red="ff" type="rgb"/>
@@ -432,10 +433,10 @@
             <Property name="text" type="java.lang.String" value="Aceptar Creditto"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttomAceptarPrestamoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="buttomRechazarPrestamo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="ff" red="ff" type="rgb"/>
@@ -464,6 +465,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Seleccionar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel8">
       <Properties>
@@ -489,9 +493,9 @@
                           <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jTextField9" min="-2" pref="185" max="-2" attributes="0"/>
+                          <Component id="txtbuscarCuenta" min="-2" pref="185" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttomBuscar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="257" max="32767" attributes="0"/>
@@ -504,8 +508,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtbuscarCuenta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttomBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="18" max="32767" attributes="0"/>
                   <Component id="jButton10" min="-2" pref="33" max="-2" attributes="0"/>
@@ -525,12 +529,12 @@
             <Property name="text" type="java.lang.String" value="Numero de Cuenta: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField9">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="#cuenta"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="txtbuscarCuenta">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtbuscarCuentaKeyTyped"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton9">
+        <Component class="javax.swing.JButton" name="buttomBuscar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="13" style="0"/>
@@ -538,7 +542,7 @@
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton9ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttomBuscarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton10">

@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
+
 /**
  *
  * @author mac
@@ -29,15 +30,16 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     Controlador_Inicio_Sesion control = new Controlador_Inicio_Sesion();
     txt controltxt = new txt();
     int intentos = 0;
+
     /**
      * Creates new form Frm_Login_Cliente
      */
     public Frm_Login_Cliente() {
         initComponents();
-     
-         setLocationRelativeTo(null);
+
+        setLocationRelativeTo(null);
         setResizable(false);
-         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         ImageIcon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
         Icon fondo1 = new ImageIcon(imagen2.getImage().getScaledInstance(btn_ver.getWidth(), btn_ver.getHeight(), Image.SCALE_DEFAULT));
@@ -220,7 +222,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarActionPerformed
-          int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Regresar a la pagina Principal?", "YES-NO", YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Regresar a la pagina Principal?", "YES-NO", YES_NO_OPTION);
         if (opcion == 0) {
             Frm_Principal_Info fpi = new Frm_Principal_Info();
             fpi.setVisible(true);
@@ -230,7 +232,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_regresarActionPerformed
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
-       if (txt_usuario.getText().length() > 0 && String.valueOf(txt_contra.getPassword()).length() > 0) {
+        if (txt_usuario.getText().length() > 0 && String.valueOf(txt_contra.getPassword()).length() > 0) {
             try {
                 if (control.InicioSesionCliente(txt_usuario.getText(), String.valueOf(txt_contra.getPassword()))) {
 

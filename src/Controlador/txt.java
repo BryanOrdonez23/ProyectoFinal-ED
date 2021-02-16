@@ -12,6 +12,8 @@ import Modelo.Persona;
 import Modelo.Poliza;
 import Modelo.Prestamo;
 import Modelo.Rol;
+import Modelo.SolicitudPoliza;
+import Modelo.SolicitudPrestamo;
 import Modelo.Transaccion;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -46,6 +48,8 @@ public class txt {
     File archivo_Polizas = new File("Polizas.txt");
     File archivo_Prestamo = new File("Prestamos.txt");
     File archivo_Transacciones = new File("Transacciones.txt");
+    File archivo_SolicitudPrestamo = new File("Solicitudes_prestamos.txt");
+    File archivo_SolicitudPoliza = new File("Solicitud_poliza.txt");
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
@@ -93,7 +97,7 @@ public class txt {
      */
     public void guardar_PersonaTxt(Persona p) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Persona, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Persona, true)))) {
                 String fila = p.getCedula() + "," + p.getRol().getNombreRol() + "," + p.getCorrecoElectronico() + "," + p.getNombre()
                         + "," + p.getTelefono() + "," + p.getEdad() + "," + p.getDireccion();
 
@@ -117,7 +121,7 @@ public class txt {
      */
     public void guardar_CuentaUsuarioTxt(Persona p, String contra) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CUsuario, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CUsuario, true)))) {
                 String fila = p.getCedula() + "," + p.getCorrecoElectronico() + "," + contra;
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -137,7 +141,7 @@ public class txt {
      */
     public void guardar_CuentaEmpleadoTxt(String rol, String usuario, String contra) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CEmpleados, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CEmpleados, true)))) {
                 String fila = rol + "," + usuario + "," + contra;
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -158,7 +162,7 @@ public class txt {
      */
     public void guardar_CuentaBancariaTxt(Persona p, CuentaBancaria cb) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CBancaria, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_CBancaria, true)))) {
                 String fila = p.getCedula() + "," + cb.getTipoCuenta() + "," + cb.getNum_Cuenta() + "," + cb.getSaldo()
                         + "," + cb.isPoliza_yn() + "," + cb.isPrestamo_yn();
                 //1 cuenta, 2 tipo 3 numeroCuenta 4 Saldo, 5 poliza, 6 prestamo
@@ -181,7 +185,7 @@ public class txt {
      */
     public void guardar_PrestamosTxt(Prestamo pre, CuentaBancaria cb) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Prestamo, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Prestamo, true)))) {
                 String fila = cb.getNum_Cuenta() + "," + pre.getMonto_final() + "," + pre.getCuota_mensual() + ", " + pre.getFecha_inicio_prestamo() + ", " + pre.getFecha_final_prestamo();
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -201,7 +205,7 @@ public class txt {
      */
     public void guardar_PolizasTxt(Poliza pol, CuentaBancaria cb) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Polizas, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Polizas, true)))) {
                 String fila = cb.getNum_Cuenta() + ", " + pol.getMonto_poliza() + ", " + pol.getInteres_poliza() + ", " + pol.getFehca_inicio_poliza() + ", " + pol.getFehca_final_poliza();
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -222,7 +226,7 @@ public class txt {
      */
     public void guardar_TransaccionesTxt(Transaccion tra) {
         try {
-            try (BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Transacciones, true)))) {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_Transacciones, true)))) {
                 String fila = tra.getExternal_NumCuenta() + ", " + tra.getTipo_trans() + ", " + tra.getMonto_trans() + ", " + tra.getFecha_trans();
                 Fescribe.write(fila);
                 Fescribe.write("\n");
@@ -492,7 +496,7 @@ public class txt {
      */
     public boolean existeCuenta(String nroCuenta) throws FileNotFoundException, IOException {
         boolean bol = false;
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -514,7 +518,7 @@ public class txt {
     public List<Prestamo> leerPrestamos() throws IOException, ParseException {
         List<Prestamo> lista = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(archivo_Prestamo))) {
+        try ( BufferedReader reader = new BufferedReader(new FileReader(archivo_Prestamo))) {
             String linea;
 
             while ((linea = reader.readLine()) != null) {
@@ -726,7 +730,7 @@ public class txt {
         boolean b = false;
         String cedu = "";
         String ctr = "";
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario))) {
             String linea = "";
 
             String us = "";
@@ -761,7 +765,7 @@ public class txt {
         boolean bol = false;
         int i = 0;
         Object[] lista = new Object[ObtenerNumeroRegistros()];
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -790,7 +794,7 @@ public class txt {
      */
     public int ObtenerNumeroRegistros() throws FileNotFoundException, IOException {
         int c = 0;
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 c++;
@@ -810,7 +814,7 @@ public class txt {
     public Object[] ListadoTransacciones(String ncuenta) throws FileNotFoundException, IOException {
         int i = 0;
         Object[] lista = new Object[ObtenerNumeroRegistrosT(ncuenta)];
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_Transacciones))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_Transacciones))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -839,7 +843,7 @@ public class txt {
      */
     public int ObtenerNumeroRegistrosT(String ncuenta) throws FileNotFoundException, IOException {
         int c = 0;
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_Transacciones))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_Transacciones))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -863,7 +867,7 @@ public class txt {
         boolean bol = false;
         int i = 0;
         String[] lista = new String[ObtenerNumeroRegistros() - 1];
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -924,7 +928,7 @@ public class txt {
         boolean bol = false;
         int i = 0;
         String[] lista = new String[ObtenerNumeroRegistros()];
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CUsuario))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -970,16 +974,18 @@ public class txt {
             System.out.println(ex.getMessage());
         }
     }
+
     /**
      * Elimina una persona de los registros.
+     *
      * @param cedula
      * @return
-     * @throws IOException 
+     * @throws IOException
      */
     public String[] eliminarPersonas(String cedula) throws IOException {
         int i = 0;
         String[] lista = new String[ObtenerNumeroRegistros()];
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_Persona))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_Persona))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -1040,7 +1046,7 @@ public class txt {
      */
     public boolean existeCuentaCedula(String cedula) throws FileNotFoundException, IOException {
         boolean bol = false;
-        try (BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria))) {
             String linea = "";
             while ((linea = leer.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(linea, ",");
@@ -1057,6 +1063,304 @@ public class txt {
             }
         }
         return bol;
+    }
+
+    /**
+     * Metodo para buscar la direccion de la persona por medio del numero de
+     * cedula en el archivo de persona
+     *
+     * @param cedula
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public String buscarDireccion(String cedula) throws FileNotFoundException, IOException {
+        String direccion = "";
+        BufferedReader leer = new BufferedReader(new FileReader(archivo_Persona));
+        String linea = "";
+        while ((linea = leer.readLine()) != null) {
+            StringTokenizer st = new StringTokenizer(linea, ",");
+            String uno_ced = st.nextToken();
+            String dos_tipo = st.nextToken();
+            String tres_correoElectronico = st.nextToken();
+            String cuatro_nombre = st.nextToken();
+            String cinco_telefono = st.nextToken();
+            String seis_edad = st.nextToken();
+            String siete_direccion = st.nextToken();
+            if (cedula.equals(uno_ced)) {
+                direccion = siete_direccion;
+            }
+        }
+        leer.close();
+        return direccion;
+    }
+
+    /**
+     * Metodo para guardar la solicitud de un prestamo en un archivo txt
+     *
+     * @param cuentaBancara
+     * @param nombreTitular
+     * @param direccion
+     * @param montoCredito
+     * @param duracionCredito
+     * @param fechaEmision
+     */
+    public void guardar_SolicitudPrestamo(String cuentaBancara, String nombreTitular, String direccion, String montoCredito, String duracionCredito, String fechaEmision) {
+        try {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_SolicitudPrestamo, true)))) {
+                String fila = cuentaBancara + "," + nombreTitular + "," + direccion + "," + montoCredito + "," + duracionCredito + "," + fechaEmision;
+                Fescribe.write(fila);
+                Fescribe.write("\n");
+                System.out.println("El producto ha sido insertado en la base de datos");
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    /**
+     * Metodo para guardar la solicitud de una poliza en un archivo txt
+     *
+     * @param cuentaBancara
+     * @param nombreTitular
+     * @param direccion
+     * @param montoCredito
+     * @param duracionCredito
+     * @param fechaEmision
+     */
+    public void guardar_SolicitudPoliza(String cuentaBancara, String nombreTitular, String direccion, String montoCredito, String duracionCredito, String fechaEmision) {
+        try {
+            try ( BufferedWriter Fescribe = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(archivo_SolicitudPoliza, true)))) {
+                String fila = cuentaBancara + "," + nombreTitular + "," + direccion + "," + montoCredito + "," + duracionCredito + "," + fechaEmision;
+                Fescribe.write(fila);
+                Fescribe.write("\n");
+                System.out.println("El producto ha sido insertado en la base de datos");
+            }
+        } catch (IOException e) {
+            System.err.println(e);
+        }
+    }
+
+    /**
+     * Metodo para obtener las solicitudes de los prestamos
+     *
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public int ObtenerNumeroSolicitudesPrestamos() throws FileNotFoundException, IOException {
+        int c = 0;
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_SolicitudPrestamo))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                c++;
+            }
+        }
+        return c;
+    }
+
+    /**
+     * Metodo para guardar las solicitudes de prestamos en un arreglo de objetos
+     *
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public Object[] ListadoSolicitudesPrestamos() throws FileNotFoundException, IOException {
+        int i = 0;
+        Object[] lista = new Object[ObtenerNumeroSolicitudesPrestamos()];
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_SolicitudPrestamo))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                String uno_numeroCedula = st.nextToken();
+                String dos_nombre = st.nextToken();
+                String tres_lugar = st.nextToken();
+                String cuatro_montoCredito = st.nextToken();
+                String quinto_tiempo = st.nextToken();
+                String sexto_fechaEmision = st.nextToken();
+                SolicitudPrestamo obj = new SolicitudPrestamo(uno_numeroCedula, dos_nombre, tres_lugar, cuatro_montoCredito, quinto_tiempo, sexto_fechaEmision);
+                lista[i] = obj;
+                i++;
+                obj = null;
+
+            }
+        }
+        return lista;
+    }
+
+    /**
+     * Metodo para obtener las solicitudes de las polizas
+     *
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public int ObtenerNumeroSolicitudesPolizas() throws FileNotFoundException, IOException {
+        int c = 0;
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_SolicitudPoliza))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                c++;
+            }
+        }
+        return c;
+    }
+
+    /**
+     * Metodo para guardar las solicitudes de polizas en un arreglo de objetos
+     *
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public Object[] ListadoSolicitudesPolizas() throws FileNotFoundException, IOException {
+        int i = 0;
+        Object[] lista = new Object[ObtenerNumeroSolicitudesPolizas()];
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_SolicitudPoliza))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                String uno_numeroCedula = st.nextToken();
+                String dos_nombre = st.nextToken();
+                String tres_lugar = st.nextToken();
+                String cuatro_montoCredito = st.nextToken();
+                String quinto_tiempo = st.nextToken();
+                String sexto_fechaEmision = st.nextToken();
+                SolicitudPoliza obj = new SolicitudPoliza(uno_numeroCedula, dos_nombre, tres_lugar, cuatro_montoCredito, quinto_tiempo, sexto_fechaEmision);
+                lista[i] = obj;
+                i++;
+                obj = null;
+
+            }
+        }
+        return lista;
+    }
+
+    /**
+     * Metodo para actualizar si la cuenta bancaria de un cliente tiene
+     * prestamos 
+     *
+     * @param cuentaBancaria
+     * @param tipo_Pre_Pol
+     * @throws IOException
+     */
+    public void cuentaBancariaPrestamos(String cuentaBancaria) throws IOException {
+        BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria));
+        //Dar limite al arreglo dependiendo de el numero de cuentas registradas
+        BufferedReader ler = new BufferedReader(new FileReader(archivo_CBancaria));
+        boolean cambioPre = false;
+        String linea = "";
+        String le = "";
+        System.out.println("ss");
+        int i = 0;
+        //   String[] l;
+        int j = 0;
+        while ((le = ler.readLine()) != null) {
+            i++;
+            // System.out.println("i"+i);
+        }
+        String[] l = new String[i];
+        while ((linea = leer.readLine()) != null) {
+
+            /*  cedula  tipo_Cuenta  Num_Cuenta  Saldo  poliza  prestamo */
+            StringTokenizer st = new StringTokenizer(linea, ",");
+            String cedula = st.nextToken();
+            String tipo_Cuenta = st.nextToken();
+            String num_Cuenta = st.nextToken();
+            String Saldo = st.nextToken();
+            String poliza = st.nextToken();
+            String prestamo = st.nextToken();
+
+            if (cuentaBancaria.equals(num_Cuenta)) {
+                linea = null;
+                cambioPre = true;
+
+                linea = cedula + "," + tipo_Cuenta + "," + num_Cuenta + "," + Saldo + "," + poliza + "," + cambioPre;
+            }
+            l[j] = linea;
+            System.out.println("lin " + l[j]);
+            j++;
+
+        }
+        grabar_txt_actualizarPrestamos_Polizas(l);
+        leer.close();
+        // return c;
+    }
+
+    /**
+     * Metodo para actualizar si la cuenta bancaria de un cliente tiene
+     * polizas
+     * @param cuentaBancaria
+     * @throws IOException 
+     */
+    public void cuentaBancariaPolizas(String cuentaBancaria) throws IOException {
+        BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria));
+        //Dar limite al arreglo dependiendo de el numero de cuentas registradas
+        BufferedReader ler = new BufferedReader(new FileReader(archivo_CBancaria));
+        boolean cambioPol = false;
+        String linea = "";
+        String le = "";
+        System.out.println("ss");
+        int i = 0;
+        //   String[] l;
+        int j = 0;
+        while ((le = ler.readLine()) != null) {
+            i++;
+            // System.out.println("i"+i);
+        }
+        String[] l = new String[i];
+        while ((linea = leer.readLine()) != null) {
+
+            /*  cedula  tipo_Cuenta  Num_Cuenta  Saldo  poliza  prestamo */
+            StringTokenizer st = new StringTokenizer(linea, ",");
+            String cedula = st.nextToken();
+            String tipo_Cuenta = st.nextToken();
+            String num_Cuenta = st.nextToken();
+            String Saldo = st.nextToken();
+            String poliza = st.nextToken();
+            String prestamo = st.nextToken();
+
+            if (cuentaBancaria.equals(num_Cuenta)) {
+                linea = null;
+                cambioPol = true;
+                linea = cedula + "," + tipo_Cuenta + "," + num_Cuenta + "," + Saldo + "," + cambioPol + "," + prestamo;
+            }
+            l[j] = linea;
+            System.out.println("lin " + l[j]);
+            j++;
+
+        }
+        grabar_txt_actualizarPrestamos_Polizas(l);
+        leer.close();
+        // return c;
+    }
+
+    /**
+     * Metodo para sobreescribe el txt en base a las madificaciones del metodo
+     * cuentaBancariaPrestamos_Polizas
+     *
+     * @param linea
+     */
+    public void grabar_txt_actualizarPrestamos_Polizas(String[] linea) {
+        FileWriter fws;
+        PrintWriter pw;
+
+        try {
+            fws = new FileWriter(archivo_CBancaria);
+            pw = new PrintWriter(fws);
+            // pw = new PrintWriter( new FileWriter("Numero.txt"));
+            for (int i = 0; i < linea.length; i++) {
+                String acumulada = linea[i];
+                pw.println(acumulada);
+            }
+
+            //   pw.println(linea);
+            pw.close();
+        } catch (IOException ex) {
+            System.out.println("Error al grabar archivo: " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
     }
 
 }

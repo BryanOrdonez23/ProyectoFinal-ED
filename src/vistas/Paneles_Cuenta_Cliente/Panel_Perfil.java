@@ -32,7 +32,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
      */
     public Panel_Perfil() {
         initComponents();
-        
+
         limpiar();
 
         ImageIcon verNuevaContra = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
@@ -51,19 +51,19 @@ public class Panel_Perfil extends javax.swing.JPanel {
         this.repaint();
 
         panel_cambioContrasena.setVisible(false);
-        
+
     }
 
     public void CargarData(String cedula) throws IOException {
         Object[] obj = controltxt.BusquedaCuentasCedula(cedula);
         CuentaBancaria c = (CuentaBancaria) obj[0];
         Persona p = (Persona) obj[1];
-        lbl_nombres.setText(p.getNombre());        
+        lbl_nombres.setText(p.getNombre());
         lbl_nro_cuenta.setText(c.getNum_Cuenta());
         lbl_edad.setText(p.getEdad());
         lbl_nmro.setText(c.getNum_Cuenta());
         lbl_cedula.setText(p.getCedula());
-        lbl_direccion.setText(p.getDireccion());       
+        lbl_direccion.setText(p.getDireccion());
     }
 
     /**
@@ -369,7 +369,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
     private void txt_ContraAnteriorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ContraAnteriorKeyTyped
         char car = evt.getKeyChar();
 
-        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE)|| (car == (char) KeyEvent.VK_SPACE)) {
+        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
             evt.consume();
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
@@ -379,7 +379,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
     private void txt_ContraNuevaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_ContraNuevaKeyTyped
         char car = evt.getKeyChar();
 
-        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE)|| (car == (char) KeyEvent.VK_SPACE) ) {
+        if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
             evt.consume();
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
@@ -392,7 +392,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
         if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios",  "AVISO", WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txt_ConfirmaContraKeyTyped
 
@@ -407,18 +407,18 @@ public class Panel_Perfil extends javax.swing.JPanel {
     private void btnT_CCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnT_CCActionPerformed
         SeleccionarButton_ConfirmarContra();
     }//GEN-LAST:event_btnT_CCActionPerformed
-  public void limpiar() {
+    public void limpiar() {
         txt_ConfirmaContra.setText("");
         txt_ContraAnterior.setText("");
         txt_ContraNueva.setText("");
-       txt_ConfirmaContra.setBackground(Color.white);
+        txt_ConfirmaContra.setBackground(Color.white);
         txt_ContraAnterior.setBackground(Color.white);
         txt_ContraNueva.setBackground(Color.white);
     }
-  
-   /**
-     *Usando un toggle botton, seteamos un icono que denote que se quiere ver la contraseña
-     * y viseversa de la Anterior contraseña
+
+    /**
+     * Usando un toggle botton, seteamos un icono que denote que se quiere ver
+     * la contraseña y viseversa de la Anterior contraseña
      */
     private void SeleccionarButton_AnteriorC() {
         if (btnT_CA.isSelected()) {
@@ -437,9 +437,10 @@ public class Panel_Perfil extends javax.swing.JPanel {
         }
 
     }
-     /**
-     *Usando un toggle botton, seteamos un icono que denote que se quiere ver la contraseña
-     * y viseversa de la confirmacion de la contraseña
+
+    /**
+     * Usando un toggle botton, seteamos un icono que denote que se quiere ver
+     * la contraseña y viseversa de la confirmacion de la contraseña
      */
     private void SeleccionarButton_ConfirmarContra() {
         if (btnT_CC.isSelected()) {
@@ -460,8 +461,8 @@ public class Panel_Perfil extends javax.swing.JPanel {
     }
 
     /**
-     *Usando un toggle botton, seteamos un icono que denote que se quiere ver la contraseña
-     * y viseversa de la Nueva contraseña
+     * Usando un toggle botton, seteamos un icono que denote que se quiere ver
+     * la contraseña y viseversa de la Nueva contraseña
      */
     private void SeleccionarT() {
         if (btnT_newC.isSelected()) {
@@ -488,7 +489,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
     private void Seleccionar() {
         if (btn_Toggle_CambiarContra.isSelected()) {
             panel_cambioContrasena.setVisible(true);
-           
+
         } else {
             panel_cambioContrasena.setVisible(false);
         }

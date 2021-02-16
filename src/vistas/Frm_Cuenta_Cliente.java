@@ -32,7 +32,6 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
     public String getCedulap() {
         return cedulap;
     }
@@ -40,7 +39,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     /**
      * Creates new form Frm_Cuenta_Cliente
      */
-    public void setCedulap(String cedulap) {    
+    public void setCedulap(String cedulap) {
         this.cedulap = cedulap;
     }
 
@@ -333,7 +332,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_transferencia.setVisible(true);
             panel_contenedor.add(p_transferencia);
             p_transferencia.CargarData(getCedulap());
-             p_transferencia.limpiar();
+            p_transferencia.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -341,15 +340,28 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_TransferenciaMousePressed
 
     private void btn_sol_PolizaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sol_PolizaMousePressed
-        todo_False();
-        p_solicitar_poliza.setVisible(true);
-        panel_contenedor.add(p_solicitar_poliza);
+        try {
+            todo_False();
+            p_solicitar_poliza.setVisible(true);
+            panel_contenedor.add(p_solicitar_poliza);
+            p_solicitar_poliza.CargarData(getCedulap());
+            p_solicitar_poliza.limpiar();
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_sol_PolizaMousePressed
 
     private void btn_sol_PrestamoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_sol_PrestamoMousePressed
-        todo_False();
-        p_solicitar_prestamo.setVisible(true);
-        panel_contenedor.add(p_solicitar_prestamo);
+        try {
+            todo_False();
+            p_solicitar_prestamo.setVisible(true);
+            panel_contenedor.add(p_solicitar_prestamo);
+            p_solicitar_prestamo.CargarData(getCedulap());
+            p_solicitar_prestamo.limpiar();
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_btn_sol_PrestamoMousePressed
 
     private void btn_mi_PerfilMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_mi_PerfilMousePressed
@@ -358,7 +370,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_perfil.setVisible(true);
             panel_contenedor.add(p_perfil);
             p_perfil.CargarData(getCedulap());
-               p_perfil.limpiar();
+            p_perfil.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -370,7 +382,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_transaccion_dep.setVisible(true);
             panel_contenedor.add(p_transaccion_dep);
             p_transaccion_dep.CargarData(cedulap);
-                p_transaccion_dep.limpiar();
+            p_transaccion_dep.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -383,7 +395,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
             p_transaccion_ret.setVisible(true);
             panel_contenedor.add(p_transaccion_ret);
             p_transaccion_ret.CargarData(cedulap);
-              p_transaccion_ret.limpiar();
+            p_transaccion_ret.limpiar();
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -401,12 +413,12 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_TransaccionesActionPerformed
 
     private void btn_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionActionPerformed
-         int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Cerrar Sesion?", "YES-NO", YES_NO_OPTION);
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Cerrar Sesion?", "YES-NO", YES_NO_OPTION);
         if (opcion == 0) {
             Frm_Principal_Info frm_Principal_Info = new Frm_Principal_Info();
             frm_Principal_Info.setVisible(true);
             this.dispose();
-        } 
+        }
     }//GEN-LAST:event_btn_cerrar_sesionActionPerformed
 
     private void btn_cerrar_sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseEntered

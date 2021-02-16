@@ -5,11 +5,27 @@
  */
 package vistas.Paneles_Cuenta_Cliente;
 
+import Controlador.txt;
+import Modelo.CuentaBancaria;
+import Modelo.Persona;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+
 /**
  *
  * @author mac
  */
 public class Panel_solicitar_poliza extends javax.swing.JPanel {
+
+    txt controlTxt = new txt();
 
     /**
      * Creates new form Panel_solicitar_poliza
@@ -28,13 +44,13 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
     private void initComponents() {
 
         txt_monto_prestamo = new javax.swing.JTextField();
-        btn_ok = new javax.swing.JButton();
+        buttomEnviar = new javax.swing.JButton();
         txt_tiempo_devolucion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
         lbl_cedula = new javax.swing.JLabel();
         lbl_nombres = new javax.swing.JLabel();
@@ -44,9 +60,20 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         lbl_nro_cuenta = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lbl_fecha = new javax.swing.JLabel();
 
-        btn_ok.setText("ENVIAR");
+        txt_monto_prestamo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_monto_prestamoKeyTyped(evt);
+            }
+        });
+
+        buttomEnviar.setText("ENVIAR");
+        buttomEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttomEnviarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Tiempo de Devolución:");
 
@@ -54,9 +81,9 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
 
         jLabel6.setText("Cedula:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcion);
 
         jLabel3.setText("Descripción:");
 
@@ -106,7 +133,7 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
 
         jLabel8.setText("Fecha de Emision");
 
-        jLabel9.setText("------");
+        lbl_fecha.setText("------");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -138,11 +165,11 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(lbl_cedula)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
+                .addComponent(lbl_fecha)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(451, 451, 451)
-                .addComponent(btn_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttomEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,7 +189,7 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(txt_monto_prestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(lbl_fecha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -175,14 +202,66 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_ok)
+                .addComponent(buttomEnviar)
                 .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttomEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomEnviarActionPerformed
+        if (!txt_monto_prestamo.getText().equals("")) {
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea solicitar esta poliza?", "YES-NO", YES_NO_OPTION);
+            if (opcion == 0) {
+                try {
+                    String direccion = controlTxt.buscarDireccion(lbl_cedula.getText());
+                    controlTxt.guardar_SolicitudPoliza(lbl_nro_cuenta.getText(), lbl_nombres.getText(), direccion, txt_monto_prestamo.getText(), txt_tiempo_devolucion.getText(), lbl_fecha.getText());
+                    limpiar();
+                } catch (IOException ex) {
+                    Logger.getLogger(Panel_solicitar_prestamo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Su solicitud de poliza ha sido cancelada, con exito!", "Info", INFORMATION_MESSAGE);
+                limpiar();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe llenar el campo para realizar el prestamo", "WARNING", WARNING_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_buttomEnviarActionPerformed
+
+    private void txt_monto_prestamoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_monto_prestamoKeyTyped
+        char car = evt.getKeyChar();
+
+        if (((!Character.isDigit(car))) && (txt_monto_prestamo.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
+        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_monto_prestamoKeyTyped
+
+    public void CargarData(String cedula) throws IOException {
+        Object[] obj = controlTxt.BusquedaCuentasCedula(cedula);
+        CuentaBancaria c = (CuentaBancaria) obj[0];
+        Persona p = (Persona) obj[1];
+        lbl_nombres.setText(p.getNombre());
+        lbl_cedula.setText(cedula);
+        lbl_fecha.setText(new Date().toString());
+        lbl_nro_cuenta.setText(c.getNum_Cuenta());
+    }
+
+    public void limpiar() {
+        txt_monto_prestamo.setText("");
+        txt_tiempo_devolucion.setText("");
+        txtDescripcion.setText("");
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_ok;
+    private javax.swing.JButton buttomEnviar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -191,13 +270,13 @@ public class Panel_solicitar_poliza extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbl_cedula;
+    private javax.swing.JLabel lbl_fecha;
     private javax.swing.JLabel lbl_nombres;
     private javax.swing.JLabel lbl_nro_cuenta;
+    private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txt_monto_prestamo;
     private javax.swing.JTextField txt_tiempo_devolucion;
     // End of variables declaration//GEN-END:variables
