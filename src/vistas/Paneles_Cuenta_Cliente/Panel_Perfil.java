@@ -172,16 +172,16 @@ public class Panel_Perfil extends javax.swing.JPanel {
 
         jLabel9.setText("Contraseña Anterior:");
         panel_cambioContrasena.add(jLabel9);
-        jLabel9.setBounds(20, 30, 140, 16);
+        jLabel9.setBounds(20, 30, 140, 13);
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Nueva Contraseña:");
         panel_cambioContrasena.add(jLabel10);
-        jLabel10.setBounds(220, 30, 130, 16);
+        jLabel10.setBounds(220, 30, 130, 13);
 
         jLabel11.setText("Confirma Contraseña:");
         panel_cambioContrasena.add(jLabel11);
-        jLabel11.setBounds(210, 70, 137, 16);
+        jLabel11.setBounds(210, 70, 99, 13);
 
         btn_guardarCambio.setText("Guardar Cambios");
         btn_guardarCambio.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +190,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             }
         });
         panel_cambioContrasena.add(btn_guardarCambio);
-        btn_guardarCambio.setBounds(440, 100, 140, 29);
+        btn_guardarCambio.setBounds(440, 100, 140, 21);
 
         txt_ContraAnterior.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -198,7 +198,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             }
         });
         panel_cambioContrasena.add(txt_ContraAnterior);
-        txt_ContraAnterior.setBounds(20, 60, 130, 26);
+        txt_ContraAnterior.setBounds(20, 60, 130, 19);
 
         txt_ContraNueva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -206,7 +206,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             }
         });
         panel_cambioContrasena.add(txt_ContraNueva);
-        txt_ContraNueva.setBounds(360, 30, 160, 26);
+        txt_ContraNueva.setBounds(360, 30, 160, 19);
 
         txt_ConfirmaContra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -214,7 +214,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             }
         });
         panel_cambioContrasena.add(txt_ConfirmaContra);
-        txt_ConfirmaContra.setBounds(360, 70, 160, 26);
+        txt_ConfirmaContra.setBounds(360, 70, 160, 19);
 
         btnT_newC.setBorderPainted(false);
         btnT_newC.setContentAreaFilled(false);

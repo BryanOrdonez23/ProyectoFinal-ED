@@ -479,6 +479,8 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
             if (textCuenta.getText().length() > 0 && textMonto.getText().length() > 0 && textTiempo.getText().length() > 0 && textTasa.getText().length() > 0 && textnombreTitular.getText().length() > 0 && txtDireccion.getText().length() > 0) {
                 JOptionPane.showMessageDialog(null, "La poliza ha sido guardada con exito", "INFORMACION", INFORMATION_MESSAGE);
                 ControladorTxt.cuentaBancariaPolizas(textCuenta.getText());
+                ControladorTxt.ActualizarSolicitudesPolizas(ControladorTxt.eliminarSolicitudesPolizas(textCuenta.getText()));
+                cargarTabla();
                 limpiarCampos();
             } else {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una cuenta en la tabla", "WARNING", WARNING_MESSAGE);
@@ -492,11 +494,14 @@ public class Frm_Admin_Poliza extends javax.swing.JFrame {
     }//GEN-LAST:event_buttomAceptarPolizasActionPerformed
 
     private void buttomRechazarPolizasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomRechazarPolizasActionPerformed
-        
-        
-        
-        
-        
+        try {
+            JOptionPane.showMessageDialog(null, "La solicitud de poliza ha sido rechazada con exito", "INFORMACION", INFORMATION_MESSAGE);
+            ControladorTxt.ActualizarSolicitudesPolizas(ControladorTxt.eliminarSolicitudesPolizas(textCuenta.getText()));
+            cargarTabla();
+            limpiarCampos();
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Admin_Poliza.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buttomRechazarPolizasActionPerformed
 
     private void limpiarCampos() {

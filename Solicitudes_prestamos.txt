@@ -1,1 +1,2 @@
-1234567890,Bryan Jaramillo,catamayo,1200,5,MonFeb15 23:20:11EST2021
+111111111,Jean Agreda,Loja,5600,6,Tue Feb 16 14:02:09 EST 2021
+1139285413,Juan Merino,Loja,6789,4,Tue Feb 16 14:03:05 EST 2021

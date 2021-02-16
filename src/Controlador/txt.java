@@ -1239,7 +1239,7 @@ public class txt {
 
     /**
      * Metodo para actualizar si la cuenta bancaria de un cliente tiene
-     * prestamos 
+     * prestamos
      *
      * @param cuentaBancaria
      * @param tipo_Pre_Pol
@@ -1289,10 +1289,10 @@ public class txt {
     }
 
     /**
-     * Metodo para actualizar si la cuenta bancaria de un cliente tiene
-     * polizas
+     * Metodo para actualizar si la cuenta bancaria de un cliente tiene polizas
+     *
      * @param cuentaBancaria
-     * @throws IOException 
+     * @throws IOException
      */
     public void cuentaBancariaPolizas(String cuentaBancaria) throws IOException {
         BufferedReader leer = new BufferedReader(new FileReader(archivo_CBancaria));
@@ -1356,6 +1356,108 @@ public class txt {
             }
 
             //   pw.println(linea);
+            pw.close();
+        } catch (IOException ex) {
+            System.out.println("Error al grabar archivo: " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String[] eliminarSolicitudesPrestamo(String cuenta) throws IOException {
+        int i = 0;
+        String[] lista = new String[ObtenerNumeroSolicitudesPrestamos()];
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_SolicitudPrestamo))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                String uno_cuenta = st.nextToken();
+                String dos_rol = st.nextToken();
+                String tres_direccion = st.nextToken();
+                String cuatro_monto = st.nextToken();
+                String quinto_duracion = st.nextToken();
+                String sexto_fechaEmision = st.nextToken();
+
+                if (!(cuenta.equals(uno_cuenta))) {
+                    lista[i] = uno_cuenta + "," + dos_rol + "," + tres_direccion + "," + cuatro_monto + "," + quinto_duracion
+                            + "," + sexto_fechaEmision;
+                    i++;
+                } else {
+                    linea = null;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(txt.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(txt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+
+    public void ActualizarSolicitudesPrestamo(String[] linea) {
+        FileWriter fws;
+        PrintWriter pw;
+        try {
+            fws = new FileWriter(archivo_SolicitudPrestamo);
+            pw = new PrintWriter(fws);
+            // pw = new PrintWriter( new FileWriter("Numero.txt"));
+            for (int i = 0; i < linea.length; i++) {
+                if (linea[i] != null) {
+                    String acumulada = linea[i];
+                    pw.println(acumulada);
+                }
+
+            }
+            pw.close();
+        } catch (IOException ex) {
+            System.out.println("Error al grabar archivo: " + ex.getMessage());
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String[] eliminarSolicitudesPolizas(String cuenta) throws IOException {
+        int i = 0;
+        String[] lista = new String[ObtenerNumeroSolicitudesPrestamos()];
+        try ( BufferedReader leer = new BufferedReader(new FileReader(archivo_SolicitudPoliza))) {
+            String linea = "";
+            while ((linea = leer.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, ",");
+                String uno_cuenta = st.nextToken();
+                String dos_rol = st.nextToken();
+                String tres_direccion = st.nextToken();
+                String cuatro_monto = st.nextToken();
+                String quinto_duracion = st.nextToken();
+                String sexto_fechaEmision = st.nextToken();
+
+                if (!(cuenta.equals(uno_cuenta))) {
+                    lista[i] = uno_cuenta + "," + dos_rol + "," + tres_direccion + "," + cuatro_monto + "," + quinto_duracion
+                            + "," + sexto_fechaEmision;
+                    i++;
+                } else {
+                    linea = null;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(txt.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(txt.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+
+    public void ActualizarSolicitudesPolizas(String[] linea) {
+        FileWriter fws;
+        PrintWriter pw;
+        try {
+            fws = new FileWriter(archivo_SolicitudPoliza);
+            pw = new PrintWriter(fws);
+            // pw = new PrintWriter( new FileWriter("Numero.txt"));
+            for (int i = 0; i < linea.length; i++) {
+                if (linea[i] != null) {
+                    String acumulada = linea[i];
+                    pw.println(acumulada);
+                }
+
+            }
             pw.close();
         } catch (IOException ex) {
             System.out.println("Error al grabar archivo: " + ex.getMessage());

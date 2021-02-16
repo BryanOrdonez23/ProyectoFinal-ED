@@ -21,6 +21,10 @@ public class Pila {
         this.tamano = tamano;
     }
 
+    public Pila() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public boolean estaVacia() {
         return (this.cabecera == null);
     }

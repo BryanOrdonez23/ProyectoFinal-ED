@@ -1,13 +1,13 @@
 package Controlador;
 
+import Controlador.Pilas.Pila;
 import Modelo.Prestamo;
 import Modelo.Pago;
 import Controlador.listaSA.ListaSimpleAvanzada;
 
-
 public class Controlador_Pago { // trabajar con cola o pila
 
-    private ListaSimpleAvanzada listaPrestamos = new ListaSimpleAvanzada();
+    private Pila listaPrestamos = new Pila();
     private Prestamo prestamo = new Prestamo();
     private Pago pagos = new Pago();
 
@@ -73,16 +73,15 @@ public class Controlador_Pago { // trabajar con cola o pila
 //        }
 //        return band;
 //    }
-
     public void setPagos(Pago pagos) {
         this.pagos = pagos;
     }
 
-    public ListaSimpleAvanzada getListaPagos() {
+    public Pila getListaPagos() {
         return listaPrestamos;
     }
 
-    public void setListaPagos(ListaSimpleAvanzada listaPagos) {
+    public void setListaPagos(Pila listaPagos) {
         this.listaPrestamos = listaPagos;
     }
 

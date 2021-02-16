@@ -21,6 +21,7 @@ import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.JOptionPane.*;
+import Controlador.Controlador_Pago;
 
 /**
  *
@@ -289,6 +290,11 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
         buttomRechazarPrestamo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttomRechazarPrestamo.setForeground(new java.awt.Color(0, 51, 153));
         buttomRechazarPrestamo.setText("Rechazar Credito");
+        buttomRechazarPrestamo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttomRechazarPrestamoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -453,11 +459,12 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
     }//GEN-LAST:event_buttomBuscarActionPerformed
 
     private void buttomAceptarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomAceptarPrestamoActionPerformed
-     
-          try {
+        try {
             if (textCuenta.getText().length() > 0 && textMonto.getText().length() > 0 && txtCredito.getText().length() > 0 && textTasa.getText().length() > 0 && txtnombreTitular.getText().length() > 0 && txtDireccion.getText().length() > 0) {
                 JOptionPane.showMessageDialog(null, "El prestamo ha sido guardada con exito", "INFORMACION", INFORMATION_MESSAGE);
                 ControladorTxt.cuentaBancariaPrestamos(textCuenta.getText());
+                ControladorTxt.ActualizarSolicitudesPrestamo(ControladorTxt.eliminarSolicitudesPrestamo(textCuenta.getText()));
+                cargarTabla();
                 limpiarCampos();
             } else {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una cuenta en la tabla", "WARNING", WARNING_MESSAGE);
@@ -466,7 +473,7 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Frm_Admin_Poliza.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_buttomAceptarPrestamoActionPerformed
 
     private void btn_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrarSesionActionPerformed
@@ -502,6 +509,17 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros", "ERROR", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtbuscarCuentaKeyTyped
+
+    private void buttomRechazarPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomRechazarPrestamoActionPerformed
+        try {
+            JOptionPane.showMessageDialog(null, "La solicitud de prestamo ha sido rechazada con exito", "INFORMACION", INFORMATION_MESSAGE);
+            ControladorTxt.ActualizarSolicitudesPrestamo(ControladorTxt.eliminarSolicitudesPrestamo(textCuenta.getText()));
+            cargarTabla();
+            limpiarCampos();
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_Admin_Creditos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buttomRechazarPrestamoActionPerformed
 
     private void limpiarCampos() {
         textCuenta.setText("");
