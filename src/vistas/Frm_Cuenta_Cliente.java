@@ -420,7 +420,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
     private void btn_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionActionPerformed
         int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Cerrar Sesion?", "YES-NO", YES_NO_OPTION);
         if (opcion == 0) {
-            Frm_Principal_Info frm_Principal_Info = new Frm_Principal_Info();
+            Pagina_Inicio frm_Principal_Info = new Pagina_Inicio();
             frm_Principal_Info.setVisible(true);
             this.dispose();
         }
