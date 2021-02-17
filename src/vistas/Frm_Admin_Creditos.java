@@ -5,8 +5,7 @@
  */
 package vistas;
 
-import Controlador.txt;
-import Modelo.CuentaBancaria;
+
 import Modelo.Prestamo;
 import java.io.IOException;
 import java.text.ParseException;
@@ -21,7 +20,7 @@ import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.JOptionPane.*;
-import Controlador.Controlador_Pago;
+import java.awt.Color;
 
 /**
  *
@@ -150,7 +149,19 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
 
         btn_cerrarSesion.setBackground(new java.awt.Color(255, 255, 51));
         btn_cerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        btn_cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
         btn_cerrarSesion.setText("Cerrar Sesion");
+        btn_cerrarSesion.setBorderPainted(false);
+        btn_cerrarSesion.setContentAreaFilled(false);
+        btn_cerrarSesion.setFocusPainted(false);
+        btn_cerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_cerrarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_cerrarSesionMouseExited(evt);
+            }
+        });
         btn_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cerrarSesionActionPerformed(evt);
@@ -165,11 +176,11 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 571, Short.MAX_VALUE)
                 .addComponent(btn_cerrarSesion)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(289, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(269, 269, 269))
         );
@@ -178,15 +189,12 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(28, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_cerrarSesion)
-                .addContainerGap())
+                    .addComponent(jLabel3)
+                    .addComponent(btn_cerrarSesion))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informacion del Credito Solicitado", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -280,6 +288,7 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
         buttomAceptarPrestamo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttomAceptarPrestamo.setForeground(new java.awt.Color(0, 51, 153));
         buttomAceptarPrestamo.setText("Aceptar Creditto");
+        buttomAceptarPrestamo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttomAceptarPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttomAceptarPrestamoActionPerformed(evt);
@@ -290,6 +299,7 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
         buttomRechazarPrestamo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttomRechazarPrestamo.setForeground(new java.awt.Color(0, 51, 153));
         buttomRechazarPrestamo.setText("Rechazar Credito");
+        buttomRechazarPrestamo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttomRechazarPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttomRechazarPrestamoActionPerformed(evt);
@@ -310,17 +320,18 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(buttomAceptarPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(buttomRechazarPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton4.setBackground(new java.awt.Color(0, 153, 51));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Seleccionar");
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -341,6 +352,7 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
 
         buttomBuscar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         buttomBuscar.setText("Buscar");
+        buttomBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttomBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttomBuscarActionPerformed(evt);
@@ -351,6 +363,7 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
         jButton10.setText("Listado de Cuentas");
+        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -412,19 +425,16 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -520,6 +530,14 @@ public class Frm_Admin_Creditos extends javax.swing.JFrame {
             Logger.getLogger(Frm_Admin_Creditos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buttomRechazarPrestamoActionPerformed
+
+    private void btn_cerrarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarSesionMouseEntered
+           btn_cerrarSesion.setForeground(Color.CYAN);
+    }//GEN-LAST:event_btn_cerrarSesionMouseEntered
+
+    private void btn_cerrarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrarSesionMouseExited
+        btn_cerrarSesion.setForeground(Color.WHITE);
+    }//GEN-LAST:event_btn_cerrarSesionMouseExited
 
     private void limpiarCampos() {
         textCuenta.setText("");

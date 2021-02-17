@@ -7,7 +7,6 @@ package Controlador;
 
 import Controlador.Pilas.Pila;
 import Modelo.CuentaBancaria;
-import Modelo.CuentaUsuario;
 import Modelo.Persona;
 import Modelo.Poliza;
 import Modelo.Prestamo;
@@ -117,7 +116,7 @@ public class txt {
      * persona como valor de referencia a la Cuenta de Usuario
      *
      * @param p
-     * @param cu
+     * @param contra
      */
     public void guardar_CuentaUsuarioTxt(Persona p, String contra) {
         try {
@@ -222,7 +221,6 @@ public class txt {
      * respectivo informe en el archivo de texto
      *
      * @param tra
-     * @param cb
      */
     public void guardar_TransaccionesTxt(Transaccion tra) {
         try {
@@ -240,10 +238,10 @@ public class txt {
 //1 cuenta, 2 tipo 3 numeroCuenta 4 Saldo, 5 poliza, 6 prestamo
 
     /**
-     *
-     * @param NumeroCuenta
-     * @return los objetos persona y cunta bancaria encontrados con el criterio
+     * los objetos persona y cunta bancaria encontrados con el criterio
      * de busqueda de un numero de cuenta bancaria
+     * @param NumeroCuenta
+     * @return
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -256,8 +254,8 @@ public class txt {
         while ((linea = leer.readLine()) != null) {
             StringTokenizer st = new StringTokenizer(linea, ",");
             String uno_ced = st.nextToken();
-            String dos_tipo = st.nextToken().toString();
-            String tres_numeroCuenta = st.nextToken().toString();
+            String dos_tipo = st.nextToken();
+            String tres_numeroCuenta = st.nextToken();
             String cuatro_Saldo = st.nextToken();
             String cinco_poliza = st.nextToken();
             String seis_prestamo = st.nextToken();
@@ -289,10 +287,10 @@ public class txt {
     }
 
     /**
-     *
-     * @param cedula
-     * @return los objetos persona y cunta bancaria encontrados con el criterio
+     *los objetos persona y cunta bancaria encontrados con el criterio
      * de busqueda de una cedula
+     * @param cedula
+     * @return 
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -305,8 +303,8 @@ public class txt {
         while ((linea = leer.readLine()) != null) {
             StringTokenizer st = new StringTokenizer(linea, ",");
             String uno_ced = st.nextToken();
-            String dos_tipo = st.nextToken().toString();
-            String tres_numeroCuenta = st.nextToken().toString();
+            String dos_tipo = st.nextToken();
+            String tres_numeroCuenta = st.nextToken();
             String cuatro_Saldo = st.nextToken();
             String cinco_poliza = st.nextToken();
             String seis_prestamo = st.nextToken();
@@ -338,9 +336,10 @@ public class txt {
     }
 
     /**
-     *
-     * @param cedula
-     * @return Busco el numero de cedula del usuario que ingreso al sistema
+     *Busca el numero de cedula del usuario que ingreso al sistema
+     * @param us
+     * @param contr
+     * @return 
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -351,8 +350,8 @@ public class txt {
         while ((linea = leer.readLine()) != null) {
             StringTokenizer st = new StringTokenizer(linea, ",");
             String uno_ced = st.nextToken();
-            String usuario = st.nextToken().toString();
-            String contrasena = st.nextToken().toString();
+            String usuario = st.nextToken();
+            String contrasena = st.nextToken();
             if (us.equals(usuario) && contr.equals(contrasena)) {
                 aux = uno_ced;
             }
@@ -1126,7 +1125,7 @@ public class txt {
      * @param direccion
      * @param montoCredito
      * @param duracionCredito
-     * @param fechaEmision
+     * @param fechaEmision 
      */
     public void guardar_SolicitudPoliza(String cuentaBancara, String nombreTitular, String direccion, String montoCredito, String duracionCredito, String fechaEmision) {
         try {
@@ -1242,7 +1241,6 @@ public class txt {
      * prestamos
      *
      * @param cuentaBancaria
-     * @param tipo_Pre_Pol
      * @throws IOException
      */
     public void cuentaBancariaPrestamos(String cuentaBancaria) throws IOException {
@@ -1362,7 +1360,12 @@ public class txt {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Elimina las solicitudes rechazadas y aceptadas del txt de las solicitudes de prestamos, para evitar posibles confusiones
+     * @param cuenta
+     * @return
+     * @throws IOException 
+     */
     public String[] eliminarSolicitudesPrestamo(String cuenta) throws IOException {
         int i = 0;
         String[] lista = new String[ObtenerNumeroSolicitudesPrestamos()];
@@ -1392,7 +1395,11 @@ public class txt {
         }
         return lista;
     }
-
+    /**
+     * Actualiza las solicitudes de prestamo, sobreescribiendo en el mismo archivo
+     * sin las solicitudes eliminadas
+     * @param linea 
+     */
     public void ActualizarSolicitudesPrestamo(String[] linea) {
         FileWriter fws;
         PrintWriter pw;
@@ -1413,7 +1420,12 @@ public class txt {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Elimina las solicitudes rechazadas y aceptadas del txt de las solicitudes de polizas , para evitar posibles confusiones
+     * @param cuenta
+     * @return
+     * @throws IOException 
+     */
     public String[] eliminarSolicitudesPolizas(String cuenta) throws IOException {
         int i = 0;
         String[] lista = new String[ObtenerNumeroSolicitudesPrestamos()];
@@ -1443,7 +1455,11 @@ public class txt {
         }
         return lista;
     }
-
+    /**
+     * Actualiza las solicitudes de polizas, sobreescribiendo en el mismo archivo
+     * sin las solicitudes eliminadas
+     * @param linea 
+     */
     public void ActualizarSolicitudesPolizas(String[] linea) {
         FileWriter fws;
         PrintWriter pw;

@@ -126,6 +126,7 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
 
         lblNroCuenta.setForeground(new java.awt.Color(255, 255, 255));
         lblNroCuenta.setText("--------");
+        lblNroCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setText("Nro Cuenta:");
 
@@ -173,6 +174,7 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
         jLabel5.setText("Nombres:");
 
         btn_ok.setText("OK");
+        btn_ok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_ok.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_okActionPerformed(evt);
@@ -198,7 +200,7 @@ public class Panel_trans_retiro extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(txt_monto_retiro, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addGap(178, 178, 178))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)

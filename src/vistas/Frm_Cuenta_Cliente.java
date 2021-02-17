@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import vistas.Paneles_Cuenta_Cliente.Panel_Estado_Cuenta;
@@ -45,10 +46,12 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
     public Frm_Cuenta_Cliente(String cedula) {
         initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/sslogo.png")).getImage());
         this.setLocationRelativeTo(this);
         panel_contenedor.add(p_inicio);
         try {
             p_inicio.CargarData(cedula);
+            
         } catch (IOException ex) {
             Logger.getLogger(Frm_Cuenta_Cliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,12 +109,13 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cooperativa de Ahorro y Credito cacic");
+        jLabel1.setText("Cooperativa de Ahorro y Credito CACIC");
 
         btn_cerrar_sesion.setForeground(new java.awt.Color(255, 255, 255));
         btn_cerrar_sesion.setText("Cerrar Sesion");
         btn_cerrar_sesion.setBorderPainted(false);
         btn_cerrar_sesion.setContentAreaFilled(false);
+        btn_cerrar_sesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_cerrar_sesion.setFocusable(false);
         btn_cerrar_sesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -156,7 +160,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_EstadoCuenta.setBackground(new java.awt.Color(133, 142, 229));
         btn_EstadoCuenta.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_EstadoCuenta.setText("Ver Cuenta");
-        btn_EstadoCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_EstadoCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_EstadoCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_EstadoCuentaMousePressed(evt);
@@ -166,7 +170,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_Transferencia.setBackground(new java.awt.Color(133, 142, 229));
         btn_Transferencia.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_Transferencia.setText("Transferencia");
-        btn_Transferencia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Transferencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Transferencia.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_TransferenciaMousePressed(evt);
@@ -176,7 +180,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_sol_Poliza.setBackground(new java.awt.Color(133, 142, 229));
         btn_sol_Poliza.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_sol_Poliza.setText("Solicitar Poliza");
-        btn_sol_Poliza.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_sol_Poliza.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_sol_Poliza.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_sol_PolizaMousePressed(evt);
@@ -186,7 +190,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_sol_Prestamo.setBackground(new java.awt.Color(133, 142, 229));
         btn_sol_Prestamo.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_sol_Prestamo.setText("Solicitar Prestamo");
-        btn_sol_Prestamo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_sol_Prestamo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_sol_Prestamo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_sol_PrestamoMousePressed(evt);
@@ -196,7 +200,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_mi_Perfil.setBackground(new java.awt.Color(133, 142, 229));
         btn_mi_Perfil.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_mi_Perfil.setText("Mi perfil");
-        btn_mi_Perfil.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_mi_Perfil.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_mi_Perfil.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_mi_PerfilMousePressed(evt);
@@ -205,7 +209,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
         btn_Trans_dep.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_Trans_dep.setText("Deposito");
-        btn_Trans_dep.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Trans_dep.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Trans_dep.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_Trans_depMousePressed(evt);
@@ -214,7 +218,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
 
         btn_Trans_ret.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_Trans_ret.setText("Retiro");
-        btn_Trans_ret.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_Trans_ret.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Trans_ret.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_Trans_retMousePressed(evt);
@@ -240,6 +244,7 @@ public class Frm_Cuenta_Cliente extends javax.swing.JFrame {
         btn_Transacciones.setBackground(new java.awt.Color(133, 142, 229));
         btn_Transacciones.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         btn_Transacciones.setText("Transacciones");
+        btn_Transacciones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Transacciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_TransaccionesActionPerformed(evt);

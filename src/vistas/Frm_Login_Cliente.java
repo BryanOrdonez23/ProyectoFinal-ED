@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -36,7 +35,9 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
      */
     public Frm_Login_Cliente() {
         initComponents();
-
+        this.setTitle("Login Cliente");
+        //this.setIconImage(new ImageIcon(getClass().getResource("/Imagenes/sslogo.png")).getImage());
+       
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -44,6 +45,16 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         ImageIcon imagen2 = new ImageIcon(getClass().getResource("/Imagenes/ojo.png"));
         Icon fondo1 = new ImageIcon(imagen2.getImage().getScaledInstance(btn_ver.getWidth(), btn_ver.getHeight(), Image.SCALE_DEFAULT));
         btn_ver.setIcon(fondo1);
+        this.repaint();
+        
+          ImageIcon atras = new ImageIcon(getClass().getResource("/Imagenes/atras.png"));
+        Icon fondoat = new ImageIcon(atras.getImage().getScaledInstance(20,15, Image.SCALE_DEFAULT));
+        btn_regresar.setIcon(fondoat);
+        this.repaint();
+    
+        ImageIcon adelante = new ImageIcon(getClass().getResource("/Imagenes/adelante.png"));
+        Icon fondoad = new ImageIcon(adelante.getImage().getScaledInstance(20, 15, Image.SCALE_DEFAULT));
+        btn_entrar.setIcon(fondoad);
         this.repaint();
     }
 
@@ -59,7 +70,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_logo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -75,17 +86,20 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(133, 142, 229));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Usuario:");
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Contraseña:");
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("logo Coop");
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        lbl_logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/sslogo.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 3, 13)); // NOI18N
-        jLabel4.setText("Programando tu futuro...    LEMA");
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Programando tu futuro...");
 
         jPanel2.setBackground(new java.awt.Color(40, 59, 224));
 
@@ -112,6 +126,9 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         );
 
         btn_entrar.setText("Entrar");
+        btn_entrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_entrar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btn_entrar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btn_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_entrarActionPerformed(evt);
@@ -119,6 +136,8 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         });
 
         btn_regresar.setText("Regresar");
+        btn_regresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_regresar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btn_regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_regresarActionPerformed(evt);
@@ -131,11 +150,13 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
             }
         });
 
+        lbl_mensajewarning.setForeground(new java.awt.Color(255, 255, 255));
         lbl_mensajewarning.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_mensajewarning.setText("Señor Usuario cuenta,con 3 intentos para ingresar a su cuenta");
+        lbl_mensajewarning.setText("Señor Usuario cuenta con 3 intentos para ingresar a su cuenta");
 
         btn_ver.setBorderPainted(false);
         btn_ver.setContentAreaFilled(false);
+        btn_ver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_ver.setFocusPainted(false);
         btn_ver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,29 +181,26 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
                         .addGap(15, 15, 15)
                         .addComponent(lbl_mensajewarning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btn_regresar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btn_entrar))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(jLabel1))
-                                        .addGap(32, 32, 32)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_ver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(23, 23, 23)
+                        .addComponent(lbl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btn_regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btn_entrar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel1))
+                                    .addGap(32, 32, 32)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txt_contra, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btn_ver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -191,10 +209,14 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbl_logo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btn_ver, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -208,12 +230,11 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_regresar)
-                            .addComponent(btn_entrar))))
-                .addGap(19, 19, 19)
-                .addComponent(jLabel4)
+                            .addComponent(btn_entrar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_mensajewarning)
-                .addGap(12, 12, 12))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -306,14 +327,14 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
 
                 }
                 if (intentos == 1) {
-                    lbl_mensajewarning.setText("Señor Usuario, cuenta con 2 intentos para ingresar a su cuenta");
+                    lbl_mensajewarning.setText("Señor Usuario cuenta con 2 intentos para ingresar a su cuenta");
                 }
                 if (intentos == 2) {
-                    lbl_mensajewarning.setText("Señor Usuario, cuenta con 1 intento para ingresar a su cuenta");
+                    lbl_mensajewarning.setText("Señor Usuario cuenta con 1 intento para ingresar a su cuenta");
                 }
                 if (intentos == 3) {
                     JOptionPane.showMessageDialog(null, "Se ha quedado sin intentos\nEspere el tiempo indicado", "INFO", INFORMATION_MESSAGE);
-                    lbl_mensajewarning.setText("Señor Usuario cuenta,con 1 intentos para ingresar a su cuenta");
+                    lbl_mensajewarning.setText("Señor Usuario cuenta con 1 intentos para ingresar a su cuenta");
                 }
                 if (intentos >= 3) {
                     limpiar();
@@ -343,7 +364,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) para el usuario\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
+           // JOptionPane.showMessageDialog(null, "No se puede usar comas (,) para el usuario\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txt_usuarioKeyTyped
 
@@ -357,7 +378,7 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
         if ((car == ',') && (car != (char) KeyEvent.VK_BACK_SPACE) || (car == (char) KeyEvent.VK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
+          //  JOptionPane.showMessageDialog(null, "No se puede usar comas (,) en la clave\nTampoco se permite el ingreso de espacios", "AVISO", WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txt_contraKeyTyped
     private void limpiar() {
@@ -461,13 +482,16 @@ public class Frm_Login_Cliente extends javax.swing.JFrame {
     private javax.swing.JToggleButton btn_ver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbl_logo;
     private javax.swing.JLabel lbl_mensajewarning;
     private javax.swing.JPasswordField txt_contra;
     private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
+
+ 
+
 }

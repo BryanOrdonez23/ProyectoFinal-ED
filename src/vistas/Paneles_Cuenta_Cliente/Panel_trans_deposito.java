@@ -115,6 +115,7 @@ public class Panel_trans_deposito extends javax.swing.JPanel {
 
         lblNroCuenta.setForeground(new java.awt.Color(255, 255, 255));
         lblNroCuenta.setText("--------");
+        lblNroCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -144,6 +145,7 @@ public class Panel_trans_deposito extends javax.swing.JPanel {
         );
 
         btn_ok.setText("OK");
+        btn_ok.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_ok.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btn_okMousePressed(evt);
@@ -190,7 +192,7 @@ public class Panel_trans_deposito extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(674, 674, 674)
                         .addComponent(btn_ok, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

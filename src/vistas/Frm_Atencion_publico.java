@@ -10,14 +10,14 @@ import Controlador.controlador_CB;
 import Controlador.txt;
 import Modelo.CuentaBancaria;
 import Modelo.Persona;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -58,14 +58,14 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btn_cerrar_sesion = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        btn_listadoCuentaB = new javax.swing.JButton();
+        btn_crearCuenta = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txt_nmroCuenta = new javax.swing.JTextField();
-        bttn_buscar = new javax.swing.JButton();
+        btn_buscar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -83,7 +83,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         txt_pres = new javax.swing.JTextField();
         txt_polisa = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_eliminarCuenta = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,12 +103,24 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("(Nombre del usuario)");
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 51));
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        jButton2.setText("Cerrar Sesion");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_cerrar_sesion.setBackground(new java.awt.Color(255, 255, 51));
+        btn_cerrar_sesion.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        btn_cerrar_sesion.setForeground(new java.awt.Color(255, 255, 255));
+        btn_cerrar_sesion.setText("Cerrar Sesion");
+        btn_cerrar_sesion.setBorderPainted(false);
+        btn_cerrar_sesion.setContentAreaFilled(false);
+        btn_cerrar_sesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_cerrar_sesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btn_cerrar_sesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_cerrar_sesionMouseExited(evt);
+            }
+        });
+        btn_cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_cerrar_sesionActionPerformed(evt);
             }
         });
 
@@ -121,7 +133,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btn_cerrar_sesion)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(243, 243, 243)
@@ -133,36 +145,35 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(11, 11, 11)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(28, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+                    .addComponent(jLabel3)
+                    .addComponent(btn_cerrar_sesion))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Solicitudes de cuentas nuevas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jButton8.setBackground(new java.awt.Color(255, 102, 0));
-        jButton8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Listado de Cuentas");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btn_listadoCuentaB.setBackground(new java.awt.Color(255, 102, 0));
+        btn_listadoCuentaB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_listadoCuentaB.setForeground(new java.awt.Color(255, 255, 255));
+        btn_listadoCuentaB.setText("Listado de Cuentas");
+        btn_listadoCuentaB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_listadoCuentaB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btn_listadoCuentaBActionPerformed(evt);
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(0, 153, 51));
-        jButton9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 255, 255));
-        jButton9.setText("+ Crear una cuenta");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btn_crearCuenta.setBackground(new java.awt.Color(0, 153, 51));
+        btn_crearCuenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_crearCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        btn_crearCuenta.setText("+ Crear una cuenta");
+        btn_crearCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_crearCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btn_crearCuentaActionPerformed(evt);
             }
         });
 
@@ -172,20 +183,20 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(307, Short.MAX_VALUE)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_crearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137)
-                .addComponent(jButton8)
+                .addComponent(btn_listadoCuentaB)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_crearCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8)
+                .addComponent(btn_listadoCuentaB)
                 .addContainerGap())
         );
 
@@ -202,11 +213,12 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             }
         });
 
-        bttn_buscar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        bttn_buscar.setText("Buscar");
-        bttn_buscar.addActionListener(new java.awt.event.ActionListener() {
+        btn_buscar.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        btn_buscar.setText("Buscar");
+        btn_buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bttn_buscarActionPerformed(evt);
+                btn_buscarActionPerformed(evt);
             }
         });
 
@@ -258,7 +270,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_nmroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bttn_buscar))
+                        .addComponent(btn_buscar))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +317,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_nmroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bttn_buscar))
+                    .addComponent(btn_buscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -339,13 +351,14 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.ABOVE_TOP, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(255, 102, 0));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Eliminar Cuenta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_eliminarCuenta.setBackground(new java.awt.Color(255, 102, 0));
+        btn_eliminarCuenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_eliminarCuenta.setForeground(new java.awt.Color(255, 255, 255));
+        btn_eliminarCuenta.setText("Eliminar Cuenta");
+        btn_eliminarCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_eliminarCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_eliminarCuentaActionPerformed(evt);
             }
         });
 
@@ -353,6 +366,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         btn_limpiar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_limpiar.setForeground(new java.awt.Color(255, 255, 255));
         btn_limpiar.setText("Limpiar");
+        btn_limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_limpiarActionPerformed(evt);
@@ -366,15 +380,15 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_eliminarCuenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_limpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_eliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(btn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(102, 102, 102))
@@ -390,7 +404,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -402,14 +416,12 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -417,24 +429,25 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btn_listadoCuentaBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listadoCuentaBActionPerformed
         // TODO add your handling code here:
         Dlg_ListadoCuentas nlist = new Dlg_ListadoCuentas(this, rootPaneCheckingEnabled);
         nlist.setVisible(true);
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btn_listadoCuentaBActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btn_crearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearCuentaActionPerformed
         // TODO add your handling code here:
         Dlg_Crear_newcuenta ncuenta = new Dlg_Crear_newcuenta(this, rootPaneCheckingEnabled);
         ncuenta.setVisible(true);
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btn_crearCuentaActionPerformed
 
-    private void bttn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttn_buscarActionPerformed
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
         try {
             Object[] aux = controltxt.BusquedaCuentas(txt_nmroCuenta.getText());
             CuentaBancaria cuenta = (CuentaBancaria) aux[0];
             Persona pers = (Persona) aux[1];
-            if (cuenta != null && pers != null) {
+            if (!txt_nmroCuenta.getText().equals("")) {
+                 if (cuenta != null && pers != null) {
                 txt_nmbreT.setText(pers.getNombre());
                 txt_cedula.setText(pers.getCedula());
                 txt_edad.setText(pers.getEdad());
@@ -444,17 +457,21 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
                 txt_polisa.setText(String.valueOf(cuenta.isPoliza_yn()));
                 txt_pres.setText(String.valueOf(cuenta.isPrestamo_yn()));
             } else {
-                JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria");
+                JOptionPane.showMessageDialog(null, "La cuenta bancaria no existe\n\tRevise los datos ingresados","ERROR",ERROR_MESSAGE);
             }
+            }else{
+                 JOptionPane.showMessageDialog(null, "Debe llenar el campo para poder buscar","AVISO",WARNING_MESSAGE);
+            }
+           
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Frm_Atencion_publico.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria");
+            JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria","ERROR",ERROR_MESSAGE);
         } catch (IOException ex) {
             Logger.getLogger(Frm_Atencion_publico.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria");
+            JOptionPane.showMessageDialog(null, "Error al encontrar cuenta bancaria","ERROR",ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_bttn_buscarActionPerformed
+    }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
         // TODO add your handling code here:
@@ -469,7 +486,7 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         txt_pres.setText("");
     }//GEN-LAST:event_btn_limpiarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_eliminarCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarCuentaActionPerformed
         try {
             // TODO add your handling code here:
             if (controltxt.existeCuenta(txt_nmroCuenta.getText()) && txt_nmroCuenta.getText().length() > 0) {
@@ -496,23 +513,19 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(Frm_Atencion_publico.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_eliminarCuentaActionPerformed
 
     private void txt_nmroCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nmroCuentaKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if (((!Character.isDigit(car))) && (txt_nmroCuenta.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+        if (((!Character.isDigit(car)))  && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
-        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-            getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros\ncon su punto decimal", "ERROR", ERROR_MESSAGE);
-        }
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar numeros", "ERROR", ERROR_MESSAGE);
+        } 
     }//GEN-LAST:event_txt_nmroCuentaKeyTyped
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionActionPerformed
         // TODO add your handling code here:
         int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Cerrar Sesion?", "YES-NO", YES_NO_OPTION);
         if (opcion == 0) {
@@ -520,7 +533,15 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
             loginAdmin.setVisible(true);
             this.dispose();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_cerrar_sesionActionPerformed
+
+    private void btn_cerrar_sesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseEntered
+    btn_cerrar_sesion.setForeground(Color.CYAN);
+    }//GEN-LAST:event_btn_cerrar_sesionMouseEntered
+
+    private void btn_cerrar_sesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_cerrar_sesionMouseExited
+      btn_cerrar_sesion.setForeground(Color.WHITE);
+    }//GEN-LAST:event_btn_cerrar_sesionMouseExited
 
     /**
      * @param args the command line arguments
@@ -559,12 +580,12 @@ public class Frm_Atencion_publico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_buscar;
+    private javax.swing.JButton btn_cerrar_sesion;
+    private javax.swing.JButton btn_crearCuenta;
+    private javax.swing.JButton btn_eliminarCuenta;
     private javax.swing.JButton btn_limpiar;
-    private javax.swing.JButton bttn_buscar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btn_listadoCuentaB;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

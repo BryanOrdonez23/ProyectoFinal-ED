@@ -5,6 +5,8 @@
  */
 package vistas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author usuario
@@ -16,6 +18,9 @@ public class Pagina_Inicio extends javax.swing.JFrame {
      */
     public Pagina_Inicio() {
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        
     }
 
     /**
@@ -37,12 +42,14 @@ public class Pagina_Inicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 255));
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel1.setBackground(new java.awt.Color(40, 59, 224));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setForeground(new java.awt.Color(51, 0, 255));
         jPanel1.setToolTipText("");
 
-        jLabel1.setFont(new java.awt.Font("Gill Sans Ultra Bold", 0, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("COOPERATIVA DE AHORRO Y CREDITO CACIC");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -51,21 +58,22 @@ public class Pagina_Inicio extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel2.setBackground(new java.awt.Color(133, 142, 229));
 
         visitante_bottom.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         visitante_bottom.setText("Publico en general");
+        visitante_bottom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         visitante_bottom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 visitante_bottomActionPerformed(evt);
@@ -74,6 +82,7 @@ public class Pagina_Inicio extends javax.swing.JFrame {
 
         personal_administrativo_bottom.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         personal_administrativo_bottom.setText("Personal Administrativo");
+        personal_administrativo_bottom.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         personal_administrativo_bottom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 personal_administrativo_bottomActionPerformed(evt);
@@ -81,6 +90,8 @@ public class Pagina_Inicio extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Seleccione una opción");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -88,22 +99,23 @@ public class Pagina_Inicio extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(visitante_bottom, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(personal_administrativo_bottom)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(visitante_bottom, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(personal_administrativo_bottom))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(94, 94, 94)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(17, 17, 17)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(personal_administrativo_bottom)
                     .addComponent(visitante_bottom))
@@ -129,11 +141,21 @@ public class Pagina_Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void visitante_bottomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_visitante_bottomActionPerformed
-        // TODO add your handling code here:
+     int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea escoger esta opcion?", "YES-NO", JOptionPane.YES_NO_OPTION);
+        if (opcion == 0) {
+          Frm_Principal_Info p_info = new Frm_Principal_Info();
+          p_info.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_visitante_bottomActionPerformed
 
     private void personal_administrativo_bottomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personal_administrativo_bottomActionPerformed
-        // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea escoger esta opcion?", "YES-NO", JOptionPane.YES_NO_OPTION);
+        if (opcion == 0) {
+          Login_Personal_Administrativo admin = new Login_Personal_Administrativo();
+           admin.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_personal_administrativo_bottomActionPerformed
 
     /**

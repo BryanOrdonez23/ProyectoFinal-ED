@@ -59,6 +59,8 @@ public class Panel_solicitar_prestamo extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         lbl_fecha = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(133, 142, 229));
+
         lbl_cedula.setText("--------------");
 
         lbl_nombres.setText("--------------");
@@ -75,6 +77,7 @@ public class Panel_solicitar_prestamo extends javax.swing.JPanel {
 
         lbl_nro_cuenta.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nro_cuenta.setText("--------");
+        lbl_nro_cuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -110,6 +113,7 @@ public class Panel_solicitar_prestamo extends javax.swing.JPanel {
         });
 
         buttomEnviar.setText("ENVIAR");
+        buttomEnviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttomEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttomEnviarActionPerformed(evt);

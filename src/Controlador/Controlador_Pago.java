@@ -3,7 +3,6 @@ package Controlador;
 import Controlador.Pilas.Pila;
 import Modelo.Prestamo;
 import Modelo.Pago;
-import Controlador.listaSA.ListaSimpleAvanzada;
 
 public class Controlador_Pago { // trabajar con cola o pila
 

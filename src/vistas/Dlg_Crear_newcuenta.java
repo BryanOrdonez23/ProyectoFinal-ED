@@ -232,6 +232,12 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(0, 0, 102));
         jLabel8.setText("# de cuenta:");
 
+        txt_numeroCuenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_numeroCuentaKeyTyped(evt);
+            }
+        });
+
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 0, 102));
         jLabel17.setText("Saldo incial:");
@@ -244,6 +250,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         });
 
         generar_nroCuenta.setText("Generar");
+        generar_nroCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         generar_nroCuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generar_nroCuentaActionPerformed(evt);
@@ -251,6 +258,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         });
 
         combo_tipoCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "AHORROS", "CORRIENTE" }));
+        combo_tipoCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -272,7 +280,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(combo_tipoCuenta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_numeroCuenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                            .addComponent(txt_numeroCuenta, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(18, 18, 18)
                         .addComponent(generar_nroCuenta)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -300,6 +308,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         btn_GuardarCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btn_GuardarCliente.setForeground(new java.awt.Color(255, 255, 255));
         btn_GuardarCliente.setText("Crear Cuenta");
+        btn_GuardarCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_GuardarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_GuardarClienteActionPerformed(evt);
@@ -310,6 +319,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 51, 153));
         jButton3.setText("Cerrar");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -439,11 +449,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         // TODO add your handling code here:
         char car = evt.getKeyChar();
 
-        if (((!Character.isDigit(car))) && (txt_edad.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-            getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
-        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+        if (((!Character.isDigit(car)))  && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
@@ -459,15 +465,11 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
         // TODO add your handling code here:
         char car = evt.getKeyChar();
 
-        if (((!Character.isDigit(car))) && (txt_telefono.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+        if (((!Character.isDigit(car)))  && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
-        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-            getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
-        }
+        } 
     }//GEN-LAST:event_txt_telefonoKeyTyped
 
     /**
@@ -478,11 +480,7 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
     private void txt_numeroCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numeroCedulaKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
-        if (((!Character.isDigit(car))) && (txt_numeroCedula.getText().contains(".")) && (car != (char) KeyEvent.VK_BACK_SPACE)) {
-            evt.consume();
-            getToolkit().beep();
-            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
-        } else if (((car < '0') || (car > '9')) && (car != '.') && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+        if (((!Character.isDigit(car)))  && (car != (char) KeyEvent.VK_BACK_SPACE)) {
             evt.consume();
             getToolkit().beep();
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
@@ -499,6 +497,15 @@ public class Dlg_Crear_newcuenta extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores alfabeticos", "ERROR", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void txt_numeroCuentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numeroCuentaKeyTyped
+       char car = evt.getKeyChar();
+        if (((!Character.isDigit(car)))  && (car != (char) KeyEvent.VK_BACK_SPACE)) {
+            evt.consume();
+            getToolkit().beep();
+            JOptionPane.showMessageDialog(null, "Solo se puede ingresar valores numericos", "ERROR", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_txt_numeroCuentaKeyTyped
 
     /**
      * @param args the command line arguments

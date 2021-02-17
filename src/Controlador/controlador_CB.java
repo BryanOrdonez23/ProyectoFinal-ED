@@ -7,7 +7,6 @@ package Controlador;
 
 import Controlador.listaSA.ListaSimpleAvanzada;
 import Modelo.CuentaBancaria;
-import Modelo.Persona;
 
 /**
  *
@@ -54,8 +53,8 @@ public class controlador_CB {
     }
 
     /**
-     * 
-     * @return el objeto CuentaBancaria clonado
+     * el objeto CuentaBancaria clonado
+     * @return 
      */
     public CuentaBancaria ClonarCB() {
         CuentaBancaria aux = new CuentaBancaria();

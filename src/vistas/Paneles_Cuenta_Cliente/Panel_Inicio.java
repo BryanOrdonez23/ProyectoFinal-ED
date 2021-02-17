@@ -8,7 +8,10 @@ package vistas.Paneles_Cuenta_Cliente;
 import Controlador.txt;
 import Modelo.CuentaBancaria;
 import Modelo.Persona;
+import java.awt.Image;
 import java.io.IOException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,13 +23,15 @@ public class Panel_Inicio extends javax.swing.JPanel {
      * Creates new form Panel_Inicio
      */
     public Panel_Inicio() {
-        initComponents();
+        initComponents();     
+       
     }
         public void CargarData(String cedula) throws IOException {
         Object[] obj = controltxt.BusquedaCuentasCedula(cedula);
         CuentaBancaria c = (CuentaBancaria) obj[0];
         Persona p = (Persona) obj[1];
         lbl_name_titular.setText(p.getNombre());
+
     }
 
 
@@ -41,40 +46,57 @@ public class Panel_Inicio extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         lbl_name_titular = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(133, 142, 229));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenido/a de nuevo:");
 
+        lbl_name_titular.setFont(new java.awt.Font("Lucida Grande", 3, 13)); // NOI18N
         lbl_name_titular.setForeground(new java.awt.Color(255, 255, 255));
         lbl_name_titular.setText("--------");
+
+        jPanel1.setBackground(new java.awt.Color(40, 59, 224));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 580, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(lbl_name_titular, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addComponent(lbl_name_titular, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(lbl_name_titular))
-                .addContainerGap(270, Short.MAX_VALUE))
+                .addGap(243, 243, 243)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_name_titular;
     // End of variables declaration//GEN-END:variables
 }

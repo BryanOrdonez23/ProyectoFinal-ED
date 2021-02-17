@@ -102,6 +102,8 @@ public class Panel_Perfil extends javax.swing.JPanel {
         btnT_CA = new javax.swing.JToggleButton();
         btnT_CC = new javax.swing.JToggleButton();
 
+        setBackground(new java.awt.Color(133, 142, 229));
+
         jPanel1.setBackground(new java.awt.Color(40, 59, 224));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -112,6 +114,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
 
         lbl_nro_cuenta.setForeground(new java.awt.Color(255, 255, 255));
         lbl_nro_cuenta.setText("--------");
+        lbl_nro_cuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,36 +164,39 @@ public class Panel_Perfil extends javax.swing.JPanel {
         lbl_edad.setText("-----------------------");
 
         btn_Toggle_CambiarContra.setText("Cambiar Contraseña");
+        btn_Toggle_CambiarContra.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_Toggle_CambiarContra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_Toggle_CambiarContraActionPerformed(evt);
             }
         });
 
+        panel_cambioContrasena.setBackground(new java.awt.Color(133, 139, 188));
         panel_cambioContrasena.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambio de Contraseña"));
         panel_cambioContrasena.setLayout(null);
 
         jLabel9.setText("Contraseña Anterior:");
         panel_cambioContrasena.add(jLabel9);
-        jLabel9.setBounds(20, 30, 140, 13);
+        jLabel9.setBounds(20, 30, 140, 16);
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Nueva Contraseña:");
         panel_cambioContrasena.add(jLabel10);
-        jLabel10.setBounds(220, 30, 130, 13);
+        jLabel10.setBounds(220, 30, 130, 16);
 
         jLabel11.setText("Confirma Contraseña:");
         panel_cambioContrasena.add(jLabel11);
-        jLabel11.setBounds(210, 70, 99, 13);
+        jLabel11.setBounds(210, 70, 137, 16);
 
         btn_guardarCambio.setText("Guardar Cambios");
+        btn_guardarCambio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btn_guardarCambio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarCambioActionPerformed(evt);
             }
         });
         panel_cambioContrasena.add(btn_guardarCambio);
-        btn_guardarCambio.setBounds(440, 100, 140, 21);
+        btn_guardarCambio.setBounds(440, 100, 140, 29);
 
         txt_ContraAnterior.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -198,7 +204,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             }
         });
         panel_cambioContrasena.add(txt_ContraAnterior);
-        txt_ContraAnterior.setBounds(20, 60, 130, 19);
+        txt_ContraAnterior.setBounds(20, 60, 130, 26);
 
         txt_ContraNueva.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -206,7 +212,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             }
         });
         panel_cambioContrasena.add(txt_ContraNueva);
-        txt_ContraNueva.setBounds(360, 30, 160, 19);
+        txt_ContraNueva.setBounds(360, 30, 160, 26);
 
         txt_ConfirmaContra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -214,7 +220,7 @@ public class Panel_Perfil extends javax.swing.JPanel {
             }
         });
         panel_cambioContrasena.add(txt_ConfirmaContra);
-        txt_ConfirmaContra.setBounds(360, 70, 160, 19);
+        txt_ConfirmaContra.setBounds(360, 70, 160, 26);
 
         btnT_newC.setBorderPainted(false);
         btnT_newC.setContentAreaFilled(false);

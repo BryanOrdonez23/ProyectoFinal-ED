@@ -85,7 +85,6 @@ public class Dlg_BuscarCuenta extends javax.swing.JDialog {
         txtSaldoActual = new javax.swing.JTextField();
         txtPrestamos = new javax.swing.JTextField();
         txtPolizas = new javax.swing.JTextField();
-        buttomImprimir = new javax.swing.JButton();
         buttomCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -206,15 +205,11 @@ public class Dlg_BuscarCuenta extends javax.swing.JDialog {
                 .addGap(21, 21, 21))
         );
 
-        buttomImprimir.setBackground(new java.awt.Color(255, 102, 0));
-        buttomImprimir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        buttomImprimir.setForeground(new java.awt.Color(255, 255, 255));
-        buttomImprimir.setText("Imprimir");
-
         buttomCerrar.setBackground(new java.awt.Color(0, 153, 51));
         buttomCerrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         buttomCerrar.setForeground(new java.awt.Color(255, 255, 255));
         buttomCerrar.setText("Cerrar");
+        buttomCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buttomCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttomCerrarActionPerformed(evt);
@@ -228,13 +223,11 @@ public class Dlg_BuscarCuenta extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(buttomImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124)
-                        .addComponent(buttomCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(buttomCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -243,9 +236,7 @@ public class Dlg_BuscarCuenta extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttomImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttomCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(buttomCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -302,7 +293,6 @@ public class Dlg_BuscarCuenta extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttomCerrar;
-    private javax.swing.JButton buttomImprimir;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

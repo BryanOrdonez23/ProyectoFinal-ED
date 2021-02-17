@@ -6,8 +6,7 @@
 package Controlador;
 import Controlador.listaSA.ListaSimpleAvanzada;
 import Modelo.Persona;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+
 
 /**
  *
@@ -37,8 +36,8 @@ public class Controlador_Per {
         this.lspersona = lspersona;
     }
     /**
-     *
-     * @return se clona persona - para que no se repita en todo la ultima persona guardada
+     * se clona persona - para que no se repita en todo la ultima persona guardada
+     * @return
      */
     public Persona clonar_Persona(){
        Persona p = new Persona();

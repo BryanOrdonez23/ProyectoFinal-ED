@@ -12,7 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -31,10 +31,10 @@ public class Controlador_Inicio_Sesion {
     }
 
     /**
-     *
+     *Retorna el rol de la persona
      * @param user Usuario para ingesar al sistema
      * @param password contraseña para ingresar al sistema
-     * @return Retorna el rol de la persona
+     * @return 
      */
     public String ValidarRolAcceso(String user, String password) {
         String Rol = Autenticar(user, password);
@@ -47,10 +47,10 @@ public class Controlador_Inicio_Sesion {
     }
 
     /**
-     *
+     *Obtiene el rol de la persona que quiera ingresar al sistema
      * @param usuario
      * @param contrasena
-     * @return Obtiene el rol de la persona que quiera ingresar al sistema
+     * @return 
      */
     public String Autenticar(String usuario, String contrasena) {
         String admin = "";
@@ -93,10 +93,10 @@ public class Controlador_Inicio_Sesion {
     }
 
     /**
-     *
+     *  Validamos el inicio de sesion de el empleado al sistema
      * @param usuario
      * @param contrasena
-     * @return Validamos el inicio de sesion de el empleado al sistema
+     * @return 
      * @throws FileNotFoundException
      * @throws IOException
      */
@@ -121,10 +121,10 @@ public class Controlador_Inicio_Sesion {
     }
 
     /**
-     *
+     * Validamos el inicio de sesion de el empleado al sistema
      * @param usuario
      * @param contrasena
-     * @return Validamos el inicio de sesion de el empleado al sistema
+     * @return
      * @throws FileNotFoundException
      * @throws IOException
      */

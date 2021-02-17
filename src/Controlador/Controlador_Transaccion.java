@@ -6,7 +6,6 @@
 package Controlador;
 
 import Controlador.listaSA.ListaSimpleAvanzada;
-import Controlador.listaSA.Nodo;
 import Modelo.Transaccion;
 
 /**

@@ -6,17 +6,13 @@
 package vistas;
 
 import Controlador.txt;
-import Modelo.CuentaBancaria;
 import java.io.IOException;
-import javax.swing.RowFilter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import vistas.modeloTablas.ModeloTabla;
 
@@ -133,6 +129,7 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Cerrar");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -203,6 +200,7 @@ public class Dlg_ListadoCuentas extends javax.swing.JDialog {
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                     Dlg_ListadoCuentas dialog = new Dlg_ListadoCuentas(new javax.swing.JFrame(), true);
                     dialog.addWindowListener(new java.awt.event.WindowAdapter() {
